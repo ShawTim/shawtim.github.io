@@ -1,0 +1,22 @@
+body {
+  background: #242424 !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+body > div {
+  margin: 20px;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+body > div > img {
+  width: 300px;
+}
+
+body > div > span {
+  margin: 10px;
+}
