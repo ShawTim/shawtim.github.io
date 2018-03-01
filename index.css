@@ -5,7 +5,7 @@ body {
   align-items: center;
 }
 
-body > div {
+.row {
   margin: 20px;
   background: #FFFFFF;
   display: flex;
@@ -13,10 +13,34 @@ body > div {
   align-items: center;
 }
 
-body > div > img {
+.grid {
+  display: block;
+  max-width: 1000px;
+  width: 100%;
+}
+
+.grid:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.grid-sizer {
+  margin: 10px;
   width: 300px;
 }
 
-body > div > span {
+.grid-item {
+  float: left;
+  background: #FFFFFF;
   margin: 10px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.grid-item img {
+  display: block;
+  max-width: 100%;
 }
