@@ -1,0 +1,179 @@
+@keyframes doge-come-from-right {
+  0% { transform: translate(200px, 0); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes doge-say-sth {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes btn-show {
+  0% { transform: scale(0); }
+  100% { transform: scale(1); }
+}
+
+.doge-slider {
+  position: fixed;
+  background-image: url(./doge.png);
+  background-size: 100px;
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  width: 200px;
+  height: 200px;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  cursor: pointer;
+  transform: translate(200px, 0);
+  animation: doge-come-from-right 2s 2s linear forwards;
+
+  .doge-text {
+    position: absolute;
+    writing-mode: tb;
+    color: white;
+    font-size: 24px;
+    font-family: "Courier New", Helvetica, Arial;
+    text-shadow: 0 0 2px #000000, 1px 0 2px #000000, 0 1px 2px #000000, 1px 1px 2px #000000, -1px 0 2px #000000, 0 -1px 2px #000000, -1px -1px 2px #000000, 1px -1px 2px #000000, -1px 1px 2px #000000;
+    left: 40px;
+    bottom: 10px;
+    opacity: 0;
+    animation: doge-say-sth 1s 4s linear forwards;
+  }
+
+  .doge-close {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    color: white;
+    border-radius: 50%;
+    border: 1px solid white;
+    width: 12px;
+    height: 12px;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    padding-top: 1px;
+    cursor: pointer;
+    transform: scale(0);
+    animation: btn-show 0.1s 5s forwards;
+  }
+}
+
+.doge-menu {
+
+  position: fixed;
+  right: 0;
+  bottom: 200px;
+
+  @keyframes cat-show {
+    0% { height: 0; }
+    100% { height: 90px; }
+  }
+
+  @keyframes cat-jump {
+    0% { height: 90px; }
+    10% { height: 80px; }
+    20% { height: 90px; bottom: 20px; }
+    100% { height: 90px; bottom: 60vh; }
+  }
+
+  .doge-cat-head {
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+    background-image: url(./cat.png);
+    background-size: 202px 90px;
+    background-repeat: no-repeat;
+    background-position: right top;
+    width: 202px;
+    height: 0px;
+    z-index: 100;
+    animation: cat-show 0.1s 0.3s forwards, cat-jump 2s 1s forwards;
+
+    .doge-cat-close {
+      position: absolute;
+      right: 0;
+      color: white;
+      border-radius: 50%;
+      border: 1px solid white;
+      width: 12px;
+      height: 12px;
+      background-color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      padding-top: 1px;
+      cursor: pointer;
+      transform: scale(0);
+      animation: btn-show 0.1s 3s forwards;
+    }
+  }
+
+  @keyframes menu-grow {
+    0% { height: 0; }
+    20% { height: 0; }
+    100% { height: 60vh; }
+  }
+
+  .doge-cat {
+    background-image: url(./cat_body.png);
+    background-size: 100%;
+    background-repeat: repeat;
+    background-position: right top;
+    position: absolute;
+    right: 20px;
+    width: 100px;
+    height: 0;
+    bottom: 20px;
+    overflow-y: auto;
+    z-index: 90;
+    animation: menu-grow 2s 1s forwards;
+  }
+
+  @keyframes hole-show {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+  }
+
+  .doge-hole {
+    width: 200px;
+    height: 40px;
+    background-color: black;
+    border-radius: 50%;
+    box-shadow: 0 0 5px 1px;
+    z-index: 50;
+    transform: scale(0);
+    animation: hole-show 0.3s 0s linear forwards;
+  }
+
+  .doge-hole-deep {
+    background-color: black;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 150px;
+    height: 10px;
+    margin: auto;
+    z-index: 200;
+    box-shadow: 0 0 10px 5px black;
+  }
+
+  .doge-menu-item {
+
+    padding-top: 20px;
+    text-align: center;
+
+    img {
+      width: 80px;
+      border-radius: 10px;
+      border: 2px solid black;
+    }
+  }
+}
+

@@ -1,0 +1,31 @@
+{
+  "name": "doge",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "webpack -p",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShawTim/shawtim.github.io"
+  },
+  "author": "ShawTim",
+  "license": "ISC",
+  "homepage": "https://shawtim.github.io",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
+    "copy-webpack-plugin": "^4.4.1",
+    "css-loader": "^0.28.9",
+    "html-loader": "^0.5.5",
+    "node-sass": "^4.7.2",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.20.1",
+    "tippy.js": "^2.5.0",
+    "url-loader": "^0.6.2",
+    "webpack": "^3.11.0"
+  },
+  "dependencies": {}
+}
