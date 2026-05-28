@@ -1,77 +1,451 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#">
-  <head>
-    <title>ShawTim's work</title>
-    <meta charset="utf8">
-    <link rel="shortcut icon" href="./Tie.jpg">
-    <link rel="stylesheet" type="text/css" href="./index.css"> 
-    <!--
-    <script src="./doge/doge.min.js"></script>
-    <script src="./js/masonry.pkgd.min.js"></script>
-    <script src="./js/imagesloaded.pkgd.min.js"></script>
-    -->
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-		<script>
-			(adsbygoogle = window.adsbygoogle || []).push({
-				google_ad_client: "ca-pub-6899345070228180",
-				enable_page_level_ads: true
-			});
-		</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShawTim Studio | AI Consultation, Creative Writing & Digital Agency</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
-/*
-      document.addEventListener("DOMContentLoaded", (e) => {
-        var grid = new Masonry(".grid", {
-          itemSelector: ".grid-item",
-          columnWidth: ".grid-sizer",
-          percentPosition: true
-        });
-        imagesLoaded(".grid-item", function() {
-          grid.layout();
-        });
-      });
-      */
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            dark: '#0a0a0c',
+                            card: '#121216',
+                            primary: '#c026d3', // Fuchsia
+                            secondary: '#06b6d4', // Cyan
+                            accent: '#10b981', // Emerald
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
     </script>
-  </head>
-  <body>
-    <div class="row">
-      <img src="./Tie.jpg"/>
-      <span>ShawTim</span>
-    </div>
-    <div>
-      <div class="grid">
-        <div class="grid-sizer"></div>
-        <div class="grid-item">
-          <img src="./ifc-roof.jpg"/>
-          <a href="https://shawtim.github.io/ifc-roof/">香港交易廣場天台生成器</a>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b1020;
+            background-image: radial-gradient(circle at 20% 20%, rgba(192,38,211,0.16), transparent 38%), radial-gradient(circle at 80% 0%, rgba(6,182,212,0.14), transparent 34%);
+            animation: bgPulse 12s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgPulse {
+            0% { background-position: 0% 0%, 100% 0%; }
+            100% { background-position: 10% 5%, 90% 5%; }
+        }
+
+        .text-glow {
+            text-shadow: 0 0 10px rgba(192, 38, 211, 0.5), 0 0 20px rgba(6, 182, 212, 0.3);
+            animation: textBreath 3s ease-in-out infinite;
+        }
+
+        @keyframes textBreath {
+            0%, 100% { text-shadow: 0 0 8px rgba(192,38,211,0.45), 0 0 18px rgba(6,182,212,0.25); }
+            50% { text-shadow: 0 0 14px rgba(192,38,211,0.75), 0 0 28px rgba(6,182,212,0.45); }
+        }
+
+        .border-glow {
+            transition: transform .36s cubic-bezier(.22,.61,.36,1), box-shadow .36s cubic-bezier(.22,.61,.36,1), border-color .36s ease;
+            will-change: transform, box-shadow;
+        }
+
+        .border-glow:hover {
+            box-shadow: 0 0 24px rgba(6, 182, 212, 0.25), 0 10px 30px rgba(0,0,0,.35);
+            border-color: rgba(6, 182, 212, 0.6);
+            transform: translateY(-6px);
+        }
+
+        .hero-parallax {
+            will-change: transform;
+            transition: transform .25s linear;
+        }
+
+        .shimmer-btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shimmer-btn::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -130%;
+            width: 34%;
+            height: 200%;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,.26), transparent);
+            transform: rotate(20deg);
+            transition: left .85s cubic-bezier(.22,.61,.36,1);
+            will-change: left;
+        }
+
+        .shimmer-btn:hover::after {
+            left: 150%;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(26px);
+            transition: opacity .7s ease, transform .7s ease;
+        }
+
+        .reveal.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .floating-dot {
+            animation: floatY 4s ease-in-out infinite;
+        }
+
+        @keyframes floatY {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        .tilt-card {
+            transform-style: preserve-3d;
+            transition: transform .26s cubic-bezier(.22,.61,.36,1);
+            will-change: transform;
+        }
+
+        .scanline::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: repeating-linear-gradient(to bottom, rgba(255,255,255,.03), rgba(255,255,255,.03) 1px, transparent 1px, transparent 3px);
+            mix-blend-mode: screen;
+            opacity: .35;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+        }
+    </style>
+</head>
+<body class="text-gray-100 min-h-screen selection:bg-cyan-500 selection:text-black">
+    <canvas id="fxCanvas" class="fixed inset-0 pointer-events-none z-[1] opacity-40"></canvas>
+    <div id="mouseGlow" class="fixed w-64 h-64 rounded-full pointer-events-none z-[2] opacity-0" style="background: radial-gradient(circle, rgba(6,182,212,.22) 0%, rgba(192,38,211,.12) 35%, transparent 70%); filter: blur(8px);"></div>
+
+    <!-- Header / Nav -->
+    <header class="border-b border-gray-800 bg-black/60 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-fuchsia-500 to-cyan-400 p-[2px] flex items-center justify-center shadow-[0_0_22px_rgba(6,182,212,.35),0_0_18px_rgba(192,38,211,.25)]">
+                    <img src="./img/logo.png" alt="Logo" class="w-full h-full object-cover rounded-lg bg-white/10 backdrop-blur-sm border border-white/20">
+                </div>
+                <span class="font-mono font-bold text-xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 to-cyan-400">SHAWT.IM</span>
+            </div>
+            <nav class="hidden md:flex space-x-8 text-sm font-medium text-gray-400">
+                <a href="#about" class="hover:text-cyan-400 transition-colors">About</a>
+                <a href="#services" class="hover:text-cyan-400 transition-colors">Services</a>
+                <a href="#portfolio" class="hover:text-cyan-400 transition-colors">Creative Works</a>
+                <a href="#contact" class="hover:text-cyan-400 transition-colors">Contact</a>
+            </nav>
+            <div>
+                <span class="hidden md:inline-flex items-center px-4 py-2 border border-cyan-500/30 rounded-full text-xs font-mono text-cyan-400 bg-cyan-500/5">
+                    <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse mr-2 floating-dot"></span>
+                    AI-Driven Agency
+                </span>
+            </div>
         </div>
-        <div class="grid-item">
-          <img src="./itdog-banner.png"/>
-          <a href="https://shawtim.github.io/itdog-banner/">IT狗年快樂揮春生成器</a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-[85vh] flex items-center justify-center overflow-hidden border-b border-gray-900">
+        <!-- Background Grid -->
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,#1f2937_1px,transparent_1px),linear-gradient(to_bottom,#1f2937_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-30"></div>
+        
+        <!-- Hero Image (Overlayed) -->
+        <div class="absolute inset-0 z-0">
+            <img src="./img/hero.png" alt="Hero Background" class="w-full h-full object-cover opacity-45 filter brightness-90 contrast-125 saturate-115 hero-parallax" id="heroImage">
+            <div class="absolute inset-0 bg-gradient-to-t from-cyber-dark/75 via-cyber-dark/45 to-transparent"></div>
         </div>
-        <div class="grid-item">
-          <img src="./grandpama-bless.jpg"/>
-          <a href="https://shawtim.github.io/grandpama-bless/">長輩圖生成器</a>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-4 text-center reveal">
+            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-6">
+                <span class="block text-gray-300">We Architect the Future of</span>
+                <span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 via-purple-500 to-cyan-500 text-glow">
+                    Creative Narrative & AI Intelligence
+                </span>
+            </h1>
+            <p class="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto mb-10 leading-relaxed font-light">
+                At <span class="text-fuchsia-400 font-semibold">ShawTim Studio</span>, we synthesize high-fidelity AI systems, transgressive creative writing, and next-generation influencer scaling into cohesive business leverage.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="#services" class="shimmer-btn w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-fuchsia-600 to-cyan-500 hover:from-fuchsia-500 hover:to-cyan-400 text-black font-bold rounded-lg transition-all transform hover:-translate-y-[2px] shadow-lg shadow-fuchsia-500/10">
+                    Explore Capabilities
+                </a>
+                <a href="#contact" class="w-full sm:w-auto px-8 py-4 bg-cyber-card hover:bg-gray-800 text-gray-300 font-medium rounded-lg border border-gray-800 hover:border-gray-700 transition-all font-mono">
+                    Initiate Consultation &gt;
+                </a>
+            </div>
         </div>
-        <div class="grid-item">
-          <img src="./itdog-slaughterhouse.png"/>
-          <a href="https://shawtim.github.io/itdog-slaughterhouse/">救救IT人行動</a>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 reveal">
+            <h2 class="text-xs font-mono uppercase tracking-widest text-cyan-400 mb-2">// CAPABILITIES</h2>
+            <p class="text-3xl sm:text-4xl font-bold text-gray-200">Our Triple-Helix Core</p>
         </div>
-        <div class="grid-item">
-          <img src="./you-are-gentleman.png"/>
-          <a href="https://shawtim.github.io/you-are-gentleman/">紳士模擬器 (HTML5布料技術處理研究)</a>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Service 1 -->
+            <div class="tilt-card bg-cyber-card border border-gray-900 rounded-2xl p-8 hover:border-fuchsia-500/40 transition-all duration-300 border-glow flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-xl bg-fuchsia-500/10 flex items-center justify-center text-fuchsia-400 text-2xl mb-6">
+                        ✍️
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-100">Creative Writing & Narrative Design</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed font-light">
+                        We write cyberpunk, high-concept, and highly immersive sci-fi narratives. Whether building custom universes, scriptwriting for complex campaign structures, or generating world-building IP, we deliver sharp, unforgettable copy.
+                    </p>
+                </div>
+                <div class="mt-8 pt-4 border-t border-gray-800/40 font-mono text-xs text-fuchsia-400">
+                    #Sci-Fi #WorldBuilding #IP-Generation
+                </div>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="tilt-card bg-cyber-card border border-gray-900 rounded-2xl p-8 hover:border-cyan-500/40 transition-all duration-300 border-glow flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 text-2xl mb-6">
+                        🤖
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-100">Enterprise AI Consultation</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed font-light">
+                        We design autonomous multi-agent AI networks. Our specialization includes integrating large language models (LLMs) with custom vector memory, structured workflow orchestration (Durable Agent Protocols), and complete development lifecycle automation.
+                    </p>
+                </div>
+                <div class="mt-8 pt-4 border-t border-gray-800/40 font-mono text-xs text-cyan-400">
+                    #AgenticAI #LLMOps #AutonomousWorkflows
+                </div>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="tilt-card bg-cyber-card border border-gray-900 rounded-2xl p-8 hover:border-emerald-500/40 transition-all duration-300 border-glow flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 text-2xl mb-6">
+                        ⚡
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-100">KOL & Influencer Incubation Agency</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed font-light">
+                        Scaling reach in the algorithmic era. We advise high-impact creators on cross-platform strategies (Patreon, Twitter, Discord), monetization blueprints, extreme cost-optimization of SaaS tech stacks, and algorithmic training.
+                    </p>
+                </div>
+                <div class="mt-8 pt-4 border-t border-gray-800/40 font-mono text-xs text-emerald-400">
+                    #KOL #Monetization #AlgorithmicGrowth
+                </div>
+            </div>
         </div>
-        <div class="grid-item">
-          <img src="./sorry-rich-can-do-everything.png"/>
-          <a href="https://shawtim.github.io/sorry-rich-can-do-everything/">sorry有錢真係可以為所欲為生成器</a>
+    </section>
+
+    <!-- Tech Stack / Philosophy -->
+    <section class="py-20 bg-black/40 border-y border-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-xs font-mono uppercase tracking-widest text-cyan-400 mb-2">// THE COGNITIVE ADVANTAGE</h2>
+                <h3 class="text-3xl font-bold text-gray-100 mb-6">Uncompromising AI Engineering + Soulful Creative Writing</h3>
+                <p class="text-gray-400 leading-relaxed font-light mb-6">
+                    We do not "vibe code." We architect predictable, robust systems. ShawTim Studio leverages custom MCP (Model Context Protocol) frameworks, multi-model parallel evaluation matrices (including Gemini, DeepSeek, and custom fine-tunes), and strict cost-efficiency principles.
+                </p>
+                <div class="grid grid-cols-2 gap-4 font-mono text-xs text-gray-500">
+                    <div class="flex items-center">
+                        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 mr-2"></span>
+                        Decentralized Memory Backends
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 mr-2"></span>
+                        Parallel Sage Consensus
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 mr-2"></span>
+                        Automated Asset Generation
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 mr-2"></span>
+                        Durable State Orchestration
+                    </div>
+                </div>
+            </div>
+            <div class="bg-cyber-card border border-gray-800 rounded-2xl p-6 font-mono text-xs text-cyan-300 overflow-x-auto shadow-2xl" id="terminalBox">
+                <div class="flex justify-between items-center mb-4 pb-2 border-b border-gray-800">
+                    <span class="text-gray-500">SYSTEM STATUS: OPERATIONAL</span>
+                    <span class="text-fuchsia-400 animate-pulse">● LIVE RUNTIME</span>
+                </div>
+                <p class="text-gray-500 mb-1">&gt; fetch_agents_state --detailed</p>
+                <p class="text-emerald-400">[INFO] Initiating connection to SAGE_CONSENSUS_ENGINE...</p>
+                <p class="text-gray-300">SAGE_1 (DeepSeek V4 Pro) : Order Flow Analysis -> COMPLETE (Confidence: 94%)</p>
+                <p class="text-gray-300">SAGE_2 (Gemini 3.5 Flash): Market Structure   -> COMPLETE (Confidence: 91%)</p>
+                <p class="text-gray-300">SAGE_3 (GPT-5.5)         : Risk Optimization  -> COMPLETE (Risk Tolerated)</p>
+                <p class="text-purple-400">[CIO] Synthesizing executive decision report: /workspace/crypto_divination_prediction.md</p>
+                <p class="text-gray-500 mt-4">&gt; get_active_narratives</p>
+                <p class="text-yellow-500">[STORY_74] State: PUBLISHED | Channel: WildDuckStudio</p>
+                <p class="text-cyan-400">[KOL_AGENCY] Analyzing Patreon Conversion Funnel... ROI: 312%</p>
+            </div>
         </div>
-        <div class="grid-item">
-          <img src="./buddha-style.png"/>
-          <a href="https://shawtim.github.io/buddha-style/">佛系ＯＯ生成器</a>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="py-12 border-t border-gray-900 bg-black/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div>
+                <span class="font-mono font-bold text-lg text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 to-cyan-400">SHAWT.IM</span>
+                <p class="text-xs text-gray-500 mt-2">&copy; 2026 ShawTim Studio. All rights reserved. Architected in Hong Kong.</p>
+            </div>
+            <div class="flex space-x-6 text-sm text-gray-500 font-mono">
+                <span>work@shawt.im</span>
+                <span>// SECURE DEPLOYMENT</span>
+            </div>
         </div>
-        <div class="grid-item">
-          <img src="./zuckerberg-meme.jpg"/>
-          <a href="https://shawtim.github.io/zuckerberg-meme/">Mark Zuckerberg meme generator</a>
-        </div>
-      </div>
-    </div>
-  </body>
+    </footer>
+
+    <script>
+        // Scroll reveal
+        const revealEls = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        revealEls.forEach(el => revealObserver.observe(el));
+
+        // Hero parallax
+        const hero = document.getElementById('heroImage');
+        window.addEventListener('scroll', () => {
+            const y = window.scrollY * 0.12;
+            if (hero) hero.style.transform = `translateY(${y}px) scale(1.03)`;
+        }, { passive: true });
+
+        // Mouse glow spotlight
+        const glow = document.getElementById('mouseGlow');
+        let mx = 0, my = 0, gx = 0, gy = 0;
+        window.addEventListener('mousemove', (e) => {
+            mx = e.clientX - 128;
+            my = e.clientY - 128;
+            glow.style.opacity = '.95';
+        }, { passive: true });
+
+        // Tilt cards
+        const cards = document.querySelectorAll('.tilt-card');
+        cards.forEach((card) => {
+            card.addEventListener('mousemove', (e) => {
+                const r = card.getBoundingClientRect();
+                const x = e.clientX - r.left;
+                const y = e.clientY - r.top;
+                const rx = ((y / r.height) - .5) * -8;
+                const ry = ((x / r.width) - .5) * 10;
+                card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+            });
+        });
+
+        // Terminal typewriter (loop)
+        const terminalLines = [
+            '[INFO] Initiating connection to SAGE_CONSENSUS_ENGINE...',
+            'SAGE_1 (DeepSeek V4 Pro): ORDER FLOW COMPLETE',
+            'SAGE_2 (Gemini 3.5 Flash): MARKET STRUCTURE COMPLETE',
+            'SAGE_3 (GPT-5.5): RISK OPTIMIZATION COMPLETE',
+            '[KOL_AGENCY] Patreon Funnel ROI = 312%'
+        ];
+
+        const terminalBox = document.getElementById('terminalBox');
+        if (terminalBox) {
+            const dyn = document.createElement('p');
+            dyn.className = 'text-cyan-300 mt-4';
+            terminalBox.appendChild(dyn);
+
+            let li = 0;
+            let ci = 0;
+            let deleting = false;
+            function tick() {
+                const line = terminalLines[li];
+                if (!deleting) {
+                    ci++;
+                    dyn.textContent = line.slice(0, ci);
+                    if (ci === line.length) {
+                        deleting = true;
+                        setTimeout(tick, 900);
+                        return;
+                    }
+                } else {
+                    ci--;
+                    dyn.textContent = line.slice(0, ci);
+                    if (ci <= 1) {
+                        ci = 1;
+                        deleting = false;
+                        li = (li + 1) % terminalLines.length;
+                    }
+                }
+                setTimeout(tick, deleting ? 20 : 35);
+            }
+            tick();
+        }
+
+        // Particle background canvas
+        const canvas = document.getElementById('fxCanvas');
+        const ctx = canvas.getContext('2d');
+        let w = canvas.width = window.innerWidth;
+        let h = canvas.height = window.innerHeight;
+        const particleCount = Math.min(26, Math.max(16, Math.floor(window.innerWidth / 80)));
+        const pts = Array.from({ length: particleCount }, () => ({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            vx: (Math.random() - .5) * .35,
+            vy: (Math.random() - .5) * .35
+        }));
+
+        function resize() {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+
+        function draw() {
+            ctx.clearRect(0, 0, w, h);
+            for (const p of pts) {
+                p.x += p.vx; p.y += p.vy;
+                if (p.x < 0 || p.x > w) p.vx *= -1;
+                if (p.y < 0 || p.y > h) p.vy *= -1;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 1.6, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(6,182,212,0.35)';
+                ctx.fill();
+            }
+            for (let i = 0; i < pts.length; i++) {
+                for (let j = i + 1; j < pts.length; j++) {
+                    const dx = pts[i].x - pts[j].x;
+                    const dy = pts[i].y - pts[j].y;
+                    const d = Math.hypot(dx, dy);
+                    if (d < 120) {
+                        ctx.strokeStyle = `rgba(192,38,211,${(120 - d) / 120 * 0.08})`;
+                        ctx.beginPath();
+                        ctx.moveTo(pts[i].x, pts[i].y);
+                        ctx.lineTo(pts[j].x, pts[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            gx += (mx - gx) * 0.14;
+            gy += (my - gy) * 0.14;
+            glow.style.transform = `translate(${gx}px, ${gy}px)`;
+            requestAnimationFrame(draw);
+        }
+        draw();
+    </script>
+</body>
 </html>
