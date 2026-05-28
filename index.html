@@ -4,6 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShawTim Studio | AI Consultation, Creative Writing & Digital Agency</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./img/logo.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shawt.im/">
+    <meta property="og:title" content="ShawTim Studio | AI Consultation, Creative Writing & Digital Agency">
+    <meta property="og:description" content="We architect the future of creative narrative & AI intelligence. High-fidelity multi-agent systems, transgressive sci-fi worldbuilding, and monetization engineering.">
+    <meta property="og:image" content="https://shawt.im/img/hero.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://shawt.im/">
+    <meta property="twitter:title" content="ShawTim Studio | AI Consultation, Creative Writing & Digital Agency">
+    <meta property="twitter:description" content="We architect the future of creative narrative & AI intelligence. High-fidelity multi-agent systems, transgressive sci-fi worldbuilding, and monetization engineering.">
+    <meta property="twitter:image" content="https://shawt.im/img/hero.png">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -12,7 +30,7 @@
                 extend: {
                     colors: {
                         cyber: {
-                            dark: '#0a0a0c',
+                            dark: '#0b1020',
                             card: '#121216',
                             primary: '#c026d3', // Fuchsia
                             secondary: '#06b6d4', // Cyan
@@ -249,10 +267,65 @@
         </div>
     </section>
 
-    <!-- Tech Stack / Philosophy -->
-    <section class="py-20 bg-black/40 border-y border-gray-900">
+    <!-- Creative Works / Portfolio Section -->
+    <section id="portfolio" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-gray-900">
+        <div class="text-center mb-16 reveal">
+            <h2 class="text-xs font-mono uppercase tracking-widest text-fuchsia-500 mb-2">// CREATIVE PORTFOLIO</h2>
+            <p class="text-3xl sm:text-4xl font-bold text-gray-200">Active Narratives & Systems</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Project 1 -->
+            <div class="tilt-card bg-cyber-card border border-gray-900 rounded-2xl p-6 hover:border-fuchsia-500/40 transition-all duration-300 border-glow flex flex-col justify-between">
+                <div>
+                    <h4 class="text-xs font-mono text-fuchsia-400 mb-2">// NARRATIVE DESIGN IP</h4>
+                    <h3 class="text-lg font-bold mb-3 text-gray-100">Story 74: Shadow of the Emerald Star</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed font-light">
+                        A transgressive, hard sci-fi noir audio-visual interactive epic set in Hong Kong’s neon-drenched dark alleyways. Featuring high-concept worldbuilding, rogue AIs, and dark corporate conspiracies.
+                    </p>
+                </div>
+                <div class="mt-6 flex justify-between items-center text-xs font-mono text-gray-500">
+                    <span>STATUS: PUBLISHED</span>
+                    <a href="https://shawtim.github.io/shawtim-studio/" target="_blank" class="text-fuchsia-400 hover:underline">Read Case Study &gt;</a>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="tilt-card bg-cyber-card border border-gray-900 rounded-2xl p-6 hover:border-cyan-500/40 transition-all duration-300 border-glow flex flex-col justify-between">
+                <div>
+                    <h4 class="text-xs font-mono text-cyan-400 mb-2">// AGENTIC SYSTEM</h4>
+                    <h3 class="text-lg font-bold mb-3 text-gray-100">Endless Werewolf Simulation</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed font-light">
+                        A fully autonomous agent sandbox where 6 LLM-driven players engage in complex social deduction, strategic lying, and tactical persuasion. Features persistent agent memory backends.
+                    </p>
+                </div>
+                <div class="mt-6 flex justify-between items-center text-xs font-mono text-gray-500">
+                    <span>STATUS: REFACTORING</span>
+                    <a href="https://shawtim.github.io/endless-werewolf/" target="_blank" class="text-cyan-400 hover:underline">View Source &gt;</a>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="tilt-card bg-cyber-card border border-gray-900 rounded-2xl p-6 hover:border-emerald-500/40 transition-all duration-300 border-glow flex flex-col justify-between">
+                <div>
+                    <h4 class="text-xs font-mono text-emerald-400 mb-2">// DATA PIPELINE</h4>
+                    <h3 class="text-lg font-bold mb-3 text-gray-100">HK Address Kit</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed font-light">
+                        Enterprise-grade, AI-assisted address parsing and standardization infrastructure. Resolves highly unstructured local Hong Kong addresses into normalized coordinates and standard formats.
+                    </p>
+                </div>
+                <div class="mt-6 flex justify-between items-center text-xs font-mono text-gray-500">
+                    <span>STATUS: PRODUCTION</span>
+                    <a href="https://shawtim.github.io/hk-address-kit/" target="_blank" class="text-emerald-400 hover:underline">Explore API &gt;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack / Philosophy (About Section) -->
+    <section id="about" class="py-20 bg-black/40 border-t border-gray-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
+            <div class="reveal">
                 <h2 class="text-xs font-mono uppercase tracking-widest text-cyan-400 mb-2">// THE COGNITIVE ADVANTAGE</h2>
                 <h3 class="text-3xl font-bold text-gray-100 mb-6">Uncompromising AI Engineering + Soulful Creative Writing</h3>
                 <p class="text-gray-400 leading-relaxed font-light mb-6">
@@ -277,7 +350,7 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-cyber-card border border-gray-800 rounded-2xl p-6 font-mono text-xs text-cyan-300 overflow-x-auto shadow-2xl" id="terminalBox">
+            <div class="bg-cyber-card border border-gray-800 rounded-2xl p-6 font-mono text-xs text-cyan-300 overflow-x-auto shadow-2xl reveal" id="terminalBox">
                 <div class="flex justify-between items-center mb-4 pb-2 border-b border-gray-800">
                     <span class="text-gray-500">SYSTEM STATUS: OPERATIONAL</span>
                     <span class="text-fuchsia-400 animate-pulse">● LIVE RUNTIME</span>
