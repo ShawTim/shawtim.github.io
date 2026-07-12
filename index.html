@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShawTim — Web3, AI-Native & Frontend Engineering</title>
+    <title>ShawTim — Frontend, Full-Stack & AI-Native Systems</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="./favicon.ico">
@@ -13,15 +13,15 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://shawt.im/">
-    <meta property="og:title" content="ShawTim — Web3, AI-Native & Frontend Engineering">
-    <meta property="og:description" content="Senior frontend / full-stack engineering across Web3 product surfaces, production-grade frontend architecture, full-stack ownership, and AI-native development workflows.">
+    <meta property="og:title" content="ShawTim — Frontend, Full-Stack & AI-Native Systems">
+    <meta property="og:description" content="6 LLM agents in a live 3D sim · solo-shipped SaaS · production frontend systems. AI-native engineering with human judgement. Proof first, claims second.">
     <meta property="og:image" content="https://shawt.im/img/og-image.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://shawt.im/">
-    <meta property="twitter:title" content="ShawTim — Web3, AI-Native & Frontend Engineering">
-    <meta property="twitter:description" content="Senior frontend / full-stack engineering across Web3 product surfaces, production-grade frontend architecture, full-stack ownership, and AI-native development workflows.">
+    <meta property="twitter:title" content="ShawTim — Frontend, Full-Stack & AI-Native Systems">
+    <meta property="twitter:description" content="6 LLM agents in a live 3D sim · solo-shipped SaaS · production frontend systems. AI-native engineering with human judgement. Proof first, claims second.">
     <meta property="twitter:image" content="https://shawt.im/img/og-image.png">
 
     <!-- Tailwind CSS -->
@@ -279,8 +279,6 @@
 </head>
 <body class="text-gray-100 min-h-screen selection:bg-cyan-500 selection:text-black">
     <div id="scrollProgress" class="fixed top-0 left-0 h-[3px] z-[60] bg-gradient-to-r from-fuchsia-500 via-purple-500 to-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.6)]" style="width:0%"></div>
-    <canvas id="fxCanvas" class="fixed inset-0 pointer-events-none z-[1] opacity-40"></canvas>
-    <div id="mouseGlow" class="fixed w-64 h-64 rounded-full pointer-events-none z-[2] opacity-0" style="background: radial-gradient(circle, rgba(6,182,212,.22) 0%, rgba(192,38,211,.12) 35%, transparent 70%); filter: blur(8px);"></div>
 
     <!-- Header / Nav -->
     <header class="border-b border-gray-800 bg-black/60 backdrop-blur-md sticky top-0 z-50">
@@ -292,14 +290,14 @@
                 <span class="font-mono font-bold text-xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 to-cyan-400">SHAWT.IM</span>
             </div>
             <nav class="hidden md:flex space-x-8 text-sm font-medium text-gray-400">
+                <a href="#shipped" class="hover:text-cyan-400 transition-colors">Systems</a>
                 <a href="#strengths" class="hover:text-cyan-400 transition-colors">Strengths</a>
-                <a href="#stack" class="hover:text-cyan-400 transition-colors">Stack</a>
-                <a href="#portfolio" class="hover:text-cyan-400 transition-colors">Creative Works</a>
+                <a href="#judgement" class="hover:text-cyan-400 transition-colors">Notes</a>
             </nav>
             <div>
                 <span class="hidden md:inline-flex items-center px-4 py-2 border border-cyan-500/30 rounded-full text-xs font-mono text-cyan-400 bg-cyan-500/5">
                     <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse mr-2 floating-dot"></span>
-                    Web3 · AI · Full-Stack
+                    Frontend · Full-Stack · AI
                 </span>
             </div>
         </div>
@@ -328,45 +326,140 @@
                     Production-Grade Products
                 </span>
             </h1>
-            <p class="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto mb-10 leading-relaxed font-light">
-                Web3 product interfaces, production-grade frontend architecture, full-stack ownership, and <span class="text-fuchsia-400 font-semibold">AI-native</span> development workflows — shipped with engineering judgement, not vibe coding.
+            <p class="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto mb-4 leading-relaxed font-light font-mono">
+                6 LLM agents in a live 3D sim · solo-shipped SaaS · production frontend systems.
+            </p>
+            <p class="text-sm text-gray-500 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+                AI-native engineering with human judgement. Proof first, claims second.
             </p>
             <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                <a href="#strengths" class="shimmer-btn w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-fuchsia-600 to-cyan-500 hover:from-fuchsia-500 hover:to-cyan-400 text-black font-bold rounded-lg transition-all transform hover:-translate-y-[2px] shadow-lg shadow-fuchsia-500/10">
-                    Explore Strengths
+                <a href="#shipped" class="shimmer-btn w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-fuchsia-600 to-cyan-500 hover:from-fuchsia-500 hover:to-cyan-400 text-black font-bold rounded-lg transition-all transform hover:-translate-y-[2px] shadow-lg shadow-fuchsia-500/10">
+                    Open live builds
                 </a>
-                <a href="#portfolio" class="w-full sm:w-auto px-8 py-4 bg-cyber-card hover:bg-gray-800 text-gray-300 font-medium rounded-lg border border-gray-800 hover:border-gray-700 transition-all font-mono">
-                    View Creative Work &gt;
+                <a href="#judgement" class="w-full sm:w-auto px-8 py-4 bg-cyber-card hover:bg-gray-800 text-gray-300 font-medium rounded-lg border border-gray-800 hover:border-gray-700 transition-all font-mono">
+                    Read engineering notes &gt;
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Core Strengths Section -->
-    <section id="strengths" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Shipped Systems Section -->
+    <section id="shipped" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-gray-900">
         <div class="text-center mb-16 reveal-3d">
-            <h2 class="text-xs font-mono uppercase tracking-widest text-cyan-400 mb-2">// CORE STRENGTHS</h2>
-            <p class="text-3xl sm:text-4xl font-bold text-gray-200">What I Build Best</p>
+            <h2 class="text-xs font-mono uppercase tracking-widest text-cyan-400 mb-2">// SHIPPED SYSTEMS</h2>
+            <p class="text-3xl sm:text-4xl font-bold text-gray-200">Live builds and systems you can open</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Strength 1 -->
-            <div class="tilt-card bg-cyber-card border border-gray-900 rounded-2xl p-8 hover:border-fuchsia-500/40 transition-all duration-300 border-glow flex flex-col justify-between">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- System 1: Werewolf -->
+            <div class="tilt-card bg-cyber-card border border-gray-900 rounded-2xl p-6 hover:border-cyan-500/40 transition-all duration-300 border-glow flex flex-col justify-between">
                 <div>
-                    <div class="w-12 h-12 rounded-xl bg-fuchsia-500/10 flex items-center justify-center text-fuchsia-400 text-2xl mb-6">
-                        🜲
+                    <div class="relative -mx-6 -mt-6 mb-4 overflow-hidden rounded-t-2xl border-b border-gray-800">
+                        <img src="./img/preview-werewolf.png" alt="Endless Werewolf preview" class="w-full aspect-[1200/630] object-cover opacity-85 hover:opacity-100 hover:scale-105 transition-all duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-card to-transparent pointer-events-none"></div>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-gray-100">Web3 Product Engineering</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed font-light">
-                        Turning complex protocol state into usable product interfaces. Wallet onboarding, transaction flows, lending & borrowing, DEX and liquidity products, real-time portfolio state, and mobile-first crypto UX.
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-mono text-emerald-400">STATUS: LIVE</span>
+                        <span class="text-xs font-mono text-gray-600">01</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2 text-gray-100">Endless Werewolf Simulation</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed font-light mb-3">
+                        Six autonomous LLM agents play continuous social-deduction games in a 3D UI.
                     </p>
+                    <div class="space-y-2 mb-4">
+                        <p class="text-xs font-mono text-gray-500"><span class="text-fuchsia-400">Challenge:</span> <span class="text-gray-400">Sync agent decisions, game state, and 3D scene while remaining inspectable.</span></p>
+                        <p class="text-xs font-mono text-gray-500"><span class="text-fuchsia-400">Built with:</span> <span class="text-gray-400">3D UI · multi-agent orchestration · state machine · multi-model routing</span></p>
+                    </div>
                 </div>
-                <div class="mt-8 pt-4 border-t border-gray-800/40 font-mono text-xs text-fuchsia-400">
-                    #React #TypeScript #Viem #Wagmi #Starknet.js #Solana #Privy
+                <div class="flex items-center gap-3 text-xs font-mono">
+                    <a href="https://shawtim.github.io/endless-werewolf/" target="_blank" class="flex-1 text-center px-3 py-2 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 rounded-lg border border-cyan-500/30 transition-all">Launch 3D Sim ↗</a>
+                    <a href="/notes/werewolf" class="px-3 py-2 text-gray-500 hover:text-gray-300 border border-gray-800 hover:border-gray-700 rounded-lg transition-all" title="Coming soon">Teardown</a>
                 </div>
             </div>
 
-            <!-- Strength 2 -->
+            <!-- System 2: ZenCV -->
+            <div class="tilt-card bg-cyber-card border border-gray-900 rounded-2xl p-6 hover:border-emerald-500/40 transition-all duration-300 border-glow flex flex-col justify-between">
+                <div>
+                    <div class="relative -mx-6 -mt-6 mb-4 overflow-hidden rounded-t-2xl border-b border-gray-800">
+                        <img src="./img/preview-zencv.png" alt="ZenCV.ai preview" class="w-full aspect-[1200/630] object-cover opacity-85 hover:opacity-100 hover:scale-105 transition-all duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-card to-transparent pointer-events-none"></div>
+                    </div>
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-mono text-emerald-400">STATUS: LIVE</span>
+                        <span class="text-xs font-mono text-gray-600">02</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2 text-gray-100">ZenCV.ai</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed font-light mb-3">
+                        Solo-built AI CV generation SaaS with custom model routing and privacy-first design.
+                    </p>
+                    <div class="space-y-2 mb-4">
+                        <p class="text-xs font-mono text-gray-500"><span class="text-fuchsia-400">Challenge:</span> <span class="text-gray-400">Route models, score ATS fitness, and ship a full product loop without a team.</span></p>
+                        <p class="text-xs font-mono text-gray-500"><span class="text-fuchsia-400">Built with:</span> <span class="text-gray-400">React · TypeScript · Node.js · model routing · ATS scoring</span></p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 text-xs font-mono">
+                    <a href="https://zencv.ai" target="_blank" class="flex-1 text-center px-3 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 rounded-lg border border-emerald-500/30 transition-all">Visit Product ↗</a>
+                    <a href="/notes/zencv" class="px-3 py-2 text-gray-500 hover:text-gray-300 border border-gray-800 hover:border-gray-700 rounded-lg transition-all" title="Coming soon">Teardown</a>
+                </div>
+            </div>
+
+            <!-- System 3: Story 80 -->
+            <div class="tilt-card bg-cyber-card border border-gray-900 rounded-2xl p-6 hover:border-fuchsia-500/40 transition-all duration-300 border-glow flex flex-col justify-between opacity-90">
+                <div>
+                    <div class="relative -mx-6 -mt-6 mb-4 overflow-hidden rounded-t-2xl border-b border-gray-800">
+                        <img src="./img/preview-story74.png" alt="Story 80 preview" class="w-full aspect-[1200/630] object-cover opacity-75 hover:opacity-90 hover:scale-105 transition-all duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-card to-transparent pointer-events-none"></div>
+                    </div>
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-mono text-gray-400">STATUS: PUBLISHED</span>
+                        <span class="text-xs font-mono text-gray-600">03</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2 text-gray-100">Aliens Don't Need to Work?</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed font-light mb-3">
+                        Published satire / narrative piece under ShawTim Studio.
+                    </p>
+                    <div class="space-y-2 mb-4">
+                        <p class="text-xs font-mono text-gray-500"><span class="text-fuchsia-400">Format:</span> <span class="text-gray-400">Creative signal — not engineering proof.</span></p>
+                        <p class="text-xs font-mono text-gray-500"><span class="text-fuchsia-400">Built with:</span> <span class="text-gray-400">Narrative design · AI-assisted creative production</span></p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 text-xs font-mono">
+                    <a href="https://www.patreon.com/shawtim/posts/wai-xing-ren-wu-159581178" target="_blank" class="flex-1 text-center px-3 py-2 bg-fuchsia-500/10 hover:bg-fuchsia-500/20 text-fuchsia-400 rounded-lg border border-fuchsia-500/30 transition-all">Read on Patreon ↗</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What I Build Section -->
+    <section id="strengths" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-gray-900">
+        <div class="text-center mb-16 reveal-3d">
+            <h2 class="text-xs font-mono uppercase tracking-widest text-cyan-400 mb-2">// WHAT I BUILD</h2>
+            <p class="text-3xl sm:text-4xl font-bold text-gray-200">Capabilities, backed by evidence</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Capability 1: AI-Native Full-Stack -->
+            <div class="tilt-card bg-cyber-card border border-gray-900 rounded-2xl p-8 hover:border-fuchsia-500/40 transition-all duration-300 border-glow flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-xl bg-fuchsia-500/10 flex items-center justify-center text-fuchsia-400 text-2xl mb-6">
+                        ⟁
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-100">AI-Native Full-Stack</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed font-light">
+                        Multi-agent orchestration, custom model routing, and end-to-end product loops shipped solo — frontend, backend, and AI wiring held together with human judgement.
+                    </p>
+                </div>
+                <div class="mt-8 pt-4 border-t border-gray-800/40 space-y-2">
+                    <p class="font-mono text-xs text-gray-500">Evidence</p>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="https://shawtim.github.io/endless-werewolf/" target="_blank" class="font-mono text-xs text-cyan-400 hover:underline">↗ Werewolf Sim</a>
+                        <span class="text-gray-700">·</span>
+                        <a href="https://zencv.ai" target="_blank" class="font-mono text-xs text-emerald-400 hover:underline">↗ ZenCV.ai</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Capability 2: Frontend Architecture -->
             <div class="tilt-card bg-cyber-card border border-gray-900 rounded-2xl p-8 hover:border-cyan-500/40 transition-all duration-300 border-glow flex flex-col justify-between">
                 <div>
                     <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 text-2xl mb-6">
@@ -374,214 +467,113 @@
                     </div>
                     <h3 class="text-xl font-bold mb-3 text-gray-100">Frontend Architecture</h3>
                     <p class="text-gray-400 text-sm leading-relaxed font-light">
-                        Designing frontend systems that keep shipping under real production pressure. Component & design systems, async state modelling, real-time data flows, responsive UI, accessibility, i18n, and performance.
+                        Component & design systems, async state modelling, real-time 3D scene sync, responsive UI, accessibility, and performance budgets that survive production.
                     </p>
                 </div>
-                <div class="mt-8 pt-4 border-t border-gray-800/40 font-mono text-xs text-cyan-400">
-                    #Next.js #ReactNative #Jotai #Redux #RxJS #Tailwind #i18n
+                <div class="mt-8 pt-4 border-t border-gray-800/40 space-y-2">
+                    <p class="font-mono text-xs text-gray-500">Evidence</p>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="https://shawtim.github.io/endless-werewolf/" target="_blank" class="font-mono text-xs text-cyan-400 hover:underline">↗ Werewolf 3D UI</a>
+                        <span class="text-gray-700">·</span>
+                        <a href="#judgement" class="font-mono text-xs text-cyan-400 hover:underline">↗ This site</a>
+                    </div>
                 </div>
             </div>
 
-            <!-- Strength 3 -->
-            <div class="tilt-card bg-cyber-card border border-gray-900 rounded-2xl p-8 hover:border-emerald-500/40 transition-all duration-300 border-glow flex flex-col justify-between">
+            <!-- Capability 3: Web3 Product Engineering (demoted) -->
+            <div class="tilt-card bg-cyber-card border border-gray-900 rounded-2xl p-8 hover:border-emerald-500/40 transition-all duration-300 border-glow flex flex-col justify-between opacity-90">
                 <div>
                     <div class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 text-2xl mb-6">
-                        ⚙
+                        🜲
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-gray-100">Full-Stack Product Development</h3>
+                    <h3 class="text-xl font-bold mb-3 text-gray-100">Web3 Product Engineering</h3>
                     <p class="text-gray-400 text-sm leading-relaxed font-light">
-                        End-to-end ownership across frontend, backend, APIs, databases, and deployment. Backend APIs, MongoDB & PostgreSQL data models, WebSocket integrations, custom indexers, and SaaS infrastructure.
+                        Wallet onboarding, transaction flows, lending & DEX products, real-time portfolio state, and mobile-first crypto UX across EVM, Starknet, and Solana.
                     </p>
                 </div>
-                <div class="mt-8 pt-4 border-t border-gray-800/40 font-mono text-xs text-emerald-400">
-                    #Node.js #Express #MongoDB #PostgreSQL #Redis #GraphQL #WebSockets
-                </div>
-            </div>
-
-            <!-- Strength 4 -->
-            <div class="tilt-card bg-cyber-card border border-gray-900 rounded-2xl p-8 hover:border-fuchsia-500/40 transition-all duration-300 border-glow flex flex-col justify-between">
-                <div>
-                    <div class="w-12 h-12 rounded-xl bg-fuchsia-500/10 flex items-center justify-center text-fuchsia-400 text-2xl mb-6">
-                        ⟁
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-gray-100">AI-Native Engineering</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed font-light">
-                        AI tools as a daily engineering workflow — Claude Code, Copilot & Codex, custom model proxying, agent-assisted development, automated review, and multi-agent task orchestration, with human judgement kept in the loop.
-                    </p>
-                </div>
-                <div class="mt-8 pt-4 border-t border-gray-800/40 font-mono text-xs text-fuchsia-400">
-                    #ClaudeCode #Copilot #Codex #MultiAgent #ModelRouting
-                </div>
-            </div>
-
-            <!-- Strength 5 -->
-            <div class="tilt-card bg-cyber-card border border-gray-900 rounded-2xl p-8 hover:border-cyan-500/40 transition-all duration-300 border-glow flex flex-col justify-between">
-                <div>
-                    <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 text-2xl mb-6">
-                        ✦
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-gray-100">Creative Technology</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed font-light">
-                        AI-assisted creative systems under ShawTim Studio. Cyberpunk & sci-fi narrative design, AI-generated visual assets, autonomous agent simulations, interactive experiments, and creator tooling.
-                    </p>
-                </div>
-                <div class="mt-8 pt-4 border-t border-gray-800/40 font-mono text-xs text-cyan-400">
-                    #Worldbuilding #NarrativeDesign #AI-Media #Simulation
-                </div>
-            </div>
-
-            <!-- Strength 6 -->
-            <div class="tilt-card bg-cyber-card border border-gray-900 rounded-2xl p-8 hover:border-emerald-500/40 transition-all duration-300 border-glow flex flex-col justify-between">
-                <div>
-                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 text-2xl mb-6">
-                        ◎
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-gray-100">Delivery & Quality</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed font-light">
-                        Production reliability as a discipline. CI/CD pipelines, automated testing, visual regression, performance profiling, production debugging, accessibility, and long-lived maintainable delivery.
-                    </p>
-                </div>
-                <div class="mt-8 pt-4 border-t border-gray-800/40 font-mono text-xs text-emerald-400">
-                    #AWS #Docker #GitHubActions #Vercel #CI/CD #Regression
+                <div class="mt-8 pt-4 border-t border-gray-800/40 space-y-2">
+                    <p class="font-mono text-xs text-gray-500">Evidence</p>
+                    <p class="font-mono text-xs text-amber-400/70 italic">Coming: public tx-flow playground</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Creative Works / Portfolio Section -->
-    <section id="portfolio" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-gray-900">
-        <div class="text-center mb-16 reveal-3d">
-            <h2 class="text-xs font-mono uppercase tracking-widest text-fuchsia-500 mb-2">// CREATIVE PORTFOLIO</h2>
-            <p class="text-3xl sm:text-4xl font-bold text-gray-200">Active Narratives & Systems</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Project 1 -->
-            <div class="tilt-card bg-cyber-card border border-gray-900 rounded-2xl p-6 hover:border-fuchsia-500/40 transition-all duration-300 border-glow flex flex-col justify-between">
-                <div>
-                    <div class="relative -mx-6 -mt-6 mb-4 overflow-hidden rounded-t-2xl border-b border-gray-800">
-                        <img src="./img/preview-story74.png" alt="Story 74 preview" class="w-full aspect-[1200/630] object-cover opacity-85 hover:opacity-100 hover:scale-105 transition-all duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-card to-transparent pointer-events-none"></div>
-                    </div>
-                    <h4 class="text-xs font-mono text-fuchsia-400 mb-2">// STORY 80 — SATIRE</h4>
-                    <h3 class="text-lg font-bold mb-3 text-gray-100">Aliens Don't Need to Work?</h3>
-                    <p class="text-gray-400 text-xs leading-relaxed font-light">
-                        An alien scout from Vega infiltrates a Hong Kong trading firm for three years, awaiting the invasion fleet. He unmasks himself to resign — only to discover that Hong Kong corporate culture is a force deadlier than any galactic empire. The fleet retreats: Earth's PM2.5 makes it uninhabitable.
-                    </p>
-                </div>
-                <div class="mt-6 flex justify-between items-center text-xs font-mono text-gray-500">
-                    <span>STATUS: PUBLISHED</span>
-                    <a href="https://www.patreon.com/shawtim/posts/wai-xing-ren-wu-159581178" target="_blank" class="text-fuchsia-400 hover:underline">Read on Patreon &gt;</a>
-                </div>
-            </div>
-
-            <!-- Project 2 -->
-            <div class="tilt-card bg-cyber-card border border-gray-900 rounded-2xl p-6 hover:border-cyan-500/40 transition-all duration-300 border-glow flex flex-col justify-between">
-                <div>
-                    <div class="relative -mx-6 -mt-6 mb-4 overflow-hidden rounded-t-2xl border-b border-gray-800">
-                        <img src="./img/preview-werewolf.png" alt="Endless Werewolf preview" class="w-full aspect-[1200/630] object-cover opacity-85 hover:opacity-100 hover:scale-105 transition-all duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-card to-transparent pointer-events-none"></div>
-                    </div>
-                    <h4 class="text-xs font-mono text-cyan-400 mb-2">// 3D AGENTIC SIMULATION</h4>
-                    <h3 class="text-lg font-bold mb-3 text-gray-100">Endless Werewolf Simulation</h3>
-                    <p class="text-gray-400 text-xs leading-relaxed font-light">
-                        A fully autonomous agent simulation reimagined with a 3D UI. Six distinct LLM-driven characters play through complete social deduction games — night actions, debate, vote, and resolution — with autonomous decisions powered by different LLMs.
-                    </p>
-                </div>
-                <div class="mt-6 flex justify-between items-center text-xs font-mono text-gray-500">
-                    <span>STATUS: LIVE</span>
-                    <a href="https://shawtim.github.io/endless-werewolf/" target="_blank" class="text-cyan-400 hover:underline">Launch 3D Sim &gt;</a>
-                </div>
-            </div>
-
-            <!-- Project 3 -->
-            <div class="tilt-card bg-cyber-card border border-gray-900 rounded-2xl p-6 hover:border-emerald-500/40 transition-all duration-300 border-glow flex flex-col justify-between">
-                <div>
-                    <div class="relative -mx-6 -mt-6 mb-4 overflow-hidden rounded-t-2xl border-b border-gray-800">
-                        <img src="./img/preview-zencv.png" alt="ZenCV.ai preview" class="w-full aspect-[1200/630] object-cover opacity-85 hover:opacity-100 hover:scale-105 transition-all duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-card to-transparent pointer-events-none"></div>
-                    </div>
-                    <h4 class="text-xs font-mono text-emerald-400 mb-2">// AI SAAS</h4>
-                    <h3 class="text-lg font-bold mb-3 text-gray-100">ZenCV.ai</h3>
-                    <p class="text-gray-400 text-xs leading-relaxed font-light">
-                        AI-powered CV generation SaaS built solo. React + TypeScript frontend, Node.js backend, custom AI model routing, job description analysis, ATS scoring, and privacy-first zero data retention architecture.
-                    </p>
-                </div>
-                <div class="mt-6 flex justify-between items-center text-xs font-mono text-gray-500">
-                    <span>STATUS: LIVE</span>
-                    <a href="https://zencv.ai" target="_blank" class="text-emerald-400 hover:underline">Visit Product &gt;</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Tech Stack / AI-Native Workflow Section -->
-    <section id="stack" class="py-20 bg-black/40 border-t border-gray-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div class="reveal-3d">
-                <h2 class="text-xs font-mono uppercase tracking-widest text-cyan-400 mb-2">// AI-NATIVE, WITH JUDGEMENT</h2>
-                <h3 class="text-3xl font-bold text-gray-100 mb-6">Fast AI Implementation, Strong Human Review</h3>
-                <p class="text-gray-400 leading-relaxed font-light mb-6">
-                    AI-native engineering means combining fast AI-assisted implementation with strong human judgement around architecture, correctness, privacy, maintainability, and production risk.
-                </p>
-                <div class="grid grid-cols-2 gap-4 font-mono text-xs text-gray-500">
-                    <div class="flex items-center">
-                        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 mr-2"></span>
-                        Agent-Assisted Development
-                    </div>
-                    <div class="flex items-center">
-                        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 mr-2"></span>
-                        Multi-Agent Orchestration
-                    </div>
-                    <div class="flex items-center">
-                        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 mr-2"></span>
-                        Custom Model Routing
-                    </div>
-                    <div class="flex items-center">
-                        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 mr-2"></span>
-                        AI-Assisted Refactoring
-                    </div>
-                    <div class="flex items-center">
-                        <span class="w-1.5 h-1.5 rounded-full bg-fuchsia-400 mr-2"></span>
-                        Human Review for Correctness
-                    </div>
-                    <div class="flex items-center">
-                        <span class="w-1.5 h-1.5 rounded-full bg-fuchsia-400 mr-2"></span>
-                        Production Verification
-                    </div>
-                </div>
-                <p class="text-gray-500 leading-relaxed font-light text-sm mt-6 italic">
-                    The goal is not to generate more code. The goal is to ship useful, maintainable systems faster.
+    <!-- Judgement in the Loop / Workflow Artifact -->
+    <section id="judgement" class="py-24 bg-black/40 border-t border-gray-900">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12 reveal-3d">
+                <h2 class="text-xs font-mono uppercase tracking-widest text-fuchsia-400 mb-2">// JUDGEMENT IN THE LOOP</h2>
+                <p class="text-3xl sm:text-4xl font-bold text-gray-200 mb-3">Where AI speeds up, and where I intervene</p>
+                <p class="text-gray-400 leading-relaxed font-light max-w-2xl">
+                    AI generates most of the code. The work that matters is catching what it gets wrong — and knowing why. A real excerpt from the Werewolf build:
                 </p>
             </div>
-            <div class="bg-cyber-card border border-gray-800 rounded-2xl p-6 font-mono text-xs text-cyan-300 overflow-x-auto shadow-2xl reveal-3d" id="terminalBox">
-                <div class="flex justify-between items-center mb-4 pb-2 border-b border-gray-800">
-                    <span class="text-gray-500">CAPABILITY SCAN: OPERATIONAL</span>
-                    <span class="text-fuchsia-400 animate-pulse">● LIVE STACK</span>
+
+            <div class="bg-cyber-card border border-gray-800 rounded-2xl overflow-hidden shadow-2xl reveal-3d font-mono text-xs">
+                <div class="flex items-center justify-between px-5 py-3 border-b border-gray-800 bg-black/40">
+                    <span class="text-gray-500">werewolf/agent-loop.ts</span>
+                    <span class="text-fuchsia-400 animate-pulse">● ARTIFACT</span>
                 </div>
-                <p class="text-gray-500 mb-1">&gt; scan_capabilities --full</p>
-                <p class="text-emerald-400">[INFO] Indexing engineering surface areas...</p>
-                <p class="text-gray-300">[FRONTEND] React, TypeScript, Next.js, React Native, Expo, Tailwind</p>
-                <p class="text-gray-300">[STATE]    Jotai, Redux, RxJS, async state, real-time flows</p>
-                <p class="text-gray-300">[WEB3]     Viem, Wagmi, Starknet.js, Solana Web3.js, Privy</p>
-                <p class="text-gray-300">[BACKEND]  Node.js, Express, MongoDB, PostgreSQL, Redis, GraphQL</p>
-                <p class="text-gray-300">[AI]       Claude Code, Copilot, Codex, multi-agent, model routing</p>
-                <p class="text-gray-300">[DELIVERY] AWS, Docker, GitHub Actions, Vercel, CI/CD, regression</p>
-                <p class="text-purple-400">[OK] All capability domains indexed. Ready for production.</p>
+                <div class="p-5 space-y-4 overflow-x-auto leading-relaxed">
+                    <div>
+                        <p class="text-red-400/80 mb-1">// AGENT GENERATED — race condition</p>
+                        <pre class="text-gray-400"><span class="text-purple-400">async function</span> runNightCycle(agents) {
+  <span class="text-purple-400">await</span> Promise.all(agents.map(a =&gt; act(a)));
+  <span class="text-cyan-400">// resolveAll reads state mid-flight</span>
+  resolveDeaths(gameState); <span class="text-red-400/60">// ← state not yet settled</span>
+}</pre>
+                    </div>
+                    <div>
+                        <p class="text-emerald-400/80 mb-1">// HUMAN INTERVENTION — serialise critical section</p>
+                        <pre class="text-gray-300"><span class="text-purple-400">async function</span> runNightCycle(agents) {
+  <span class="text-cyan-400">// agents must commit before resolution reads state</span>
+  <span class="text-purple-400">for</span> (<span class="text-purple-400">const</span> a <span class="text-purple-400">of</span> agents) {
+    <span class="text-purple-400">await</span> act(a); <span class="text-gray-500">// deterministic order, inspectable per-step</span>
+  }
+  resolveDeaths(gameState); <span class="text-emerald-400/70">// ← state fully settled</span>
+}</pre>
+                    </div>
+                    <div class="pt-3 border-t border-gray-800/60">
+                        <p class="text-gray-500"><span class="text-fuchsia-400">Why:</span> <span class="text-gray-400">Promise.all let agents race on shared game state. The agent suggested it for "performance" — but social-deduction requires a strict night-order so votes are auditable. Parallelism here breaks replayability and trust in the sim.</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center">
+                <a href="/notes/werewolf" class="inline-flex items-center gap-2 px-6 py-3 text-sm font-mono text-cyan-400 border border-cyan-500/30 rounded-lg hover:bg-cyan-500/10 transition-all">
+                    See full teardown
+                    <span class="text-gray-600">(coming soon)</span>
+                </a>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="py-12 border-t border-gray-900 bg-black/80">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div>
-                <span class="font-mono font-bold text-lg text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 to-cyan-400">SHAWT.IM</span>
-                <p class="text-xs text-gray-500 mt-2">&copy; 2026 ShawTim. Systems thinking, iteration, automation, and a bias toward output.</p>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div>
+                    <span class="font-mono font-bold text-lg text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 to-cyan-400">SHAWT.IM</span>
+                    <p class="text-xs text-gray-500 mt-2 leading-relaxed">Proof first. Claims annotate evidence.<br>The page itself is part of the portfolio.</p>
+                </div>
+                <div class="md:text-right">
+                    <p class="text-xs font-mono uppercase tracking-widest text-gray-600 mb-3">// PAGE TELEMETRY</p>
+                    <div id="telemetry" class="inline-grid grid-cols-[auto_auto] gap-x-4 gap-y-1 text-xs font-mono text-gray-500">
+                        <span class="text-gray-600">JS payload</span>          <span id="stat-js"  class="text-cyan-400">measuring…</span>
+                        <span class="text-gray-600">LCP</span>                <span id="stat-lcp" class="text-cyan-400">measuring…</span>
+                        <span class="text-gray-600">DOM elements</span>       <span id="stat-dom" class="text-cyan-400">—</span>
+                        <span class="text-gray-600">Deploy</span>             <span id="stat-sha" class="text-emerald-400">9ffbe39</span>
+                        <span class="text-gray-600">Source</span>             <a href="https://github.com/ShawTim/shawtim.github.io" target="_blank" class="text-fuchsia-400 hover:underline">github ↗</a>
+                    </div>
+                </div>
             </div>
-            <div class="flex space-x-6 text-sm text-gray-500 font-mono">
-                <span>Web3 · AI · Full-Stack</span>
-                <span>// PRODUCTION-GRADE</span>
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 pt-6 border-t border-gray-900">
+                <p class="text-xs text-gray-600 font-mono">&copy; 2026 ShawTim. Systems thinking, iteration, automation, and a bias toward output.</p>
+                <div class="flex space-x-6 text-xs text-gray-600 font-mono">
+                    <span>Frontend · Full-Stack · AI</span>
+                    <span>// PROOF-GRADE</span>
+                </div>
             </div>
         </div>
     </footer>
@@ -622,15 +614,6 @@
             if (scrollBar) scrollBar.style.width = pct + '%';
         }, { passive: true });
 
-        // Mouse glow spotlight
-        const glow = document.getElementById('mouseGlow');
-        let mx = 0, my = 0, gx = 0, gy = 0;
-        window.addEventListener('mousemove', (e) => {
-            mx = e.clientX - 128;
-            my = e.clientY - 128;
-            glow.style.opacity = '.95';
-        }, { passive: true });
-
         // Tilt cards
         const cards = document.querySelectorAll('.tilt-card');
         cards.forEach((card) => {
@@ -649,98 +632,45 @@
             });
         });
 
-        // Terminal typewriter (loop)
-        const terminalLines = [
-            '[FRONTEND] React, TypeScript, Next.js, React Native, Expo',
-            '[WEB3]     Viem, Wagmi, Starknet.js, Solana Web3.js, Privy',
-            '[BACKEND]  Node.js, Express, MongoDB, PostgreSQL, Redis',
-            '[AI]       Claude Code, Copilot, Codex, multi-agent routing',
-            '[DELIVERY] AWS, Docker, GitHub Actions, Vercel, CI/CD'
-        ];
-
-        const terminalBox = document.getElementById('terminalBox');
-        if (terminalBox) {
-            const dyn = document.createElement('p');
-            dyn.className = 'text-cyan-300 mt-4';
-            terminalBox.appendChild(dyn);
-
-            let li = 0;
-            let ci = 0;
-            let deleting = false;
-            function tick() {
-                const line = terminalLines[li];
-                if (!deleting) {
-                    ci++;
-                    dyn.textContent = line.slice(0, ci);
-                    if (ci === line.length) {
-                        deleting = true;
-                        setTimeout(tick, 900);
-                        return;
-                    }
-                } else {
-                    ci--;
-                    dyn.textContent = line.slice(0, ci);
-                    if (ci <= 1) {
-                        ci = 1;
-                        deleting = false;
-                        li = (li + 1) % terminalLines.length;
-                    }
+        // Page telemetry — real numbers, measured at runtime
+        (function () {
+            function fmtBytes(n) {
+                if (n < 1024) return n + ' B';
+                if (n < 1048576) return (n / 1024).toFixed(1) + ' KB';
+                return (n / 1048576).toFixed(2) + ' MB';
+            }
+            window.addEventListener('load', function () {
+                var scripts = document.querySelectorAll('script[src], link[rel="stylesheet"]');
+                var total = 0;
+                var pending = scripts.length;
+                if (pending === 0) {
+                    var el = document.getElementById('stat-js');
+                    if (el) el.textContent = fmtBytes(performance.getEntriesByType('resource').reduce(function (s, e) { return s + e.transferSize; }, 0)) + ' (inline)';
                 }
-                setTimeout(tick, deleting ? 20 : 35);
-            }
-            tick();
-        }
-
-        // Particle background canvas
-        const canvas = document.getElementById('fxCanvas');
-        const ctx = canvas.getContext('2d');
-        let w = canvas.width = window.innerWidth;
-        let h = canvas.height = window.innerHeight;
-        const particleCount = Math.min(26, Math.max(16, Math.floor(window.innerWidth / 80)));
-        const pts = Array.from({ length: particleCount }, () => ({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            vx: (Math.random() - .5) * .35,
-            vy: (Math.random() - .5) * .35
-        }));
-
-        function resize() {
-            w = canvas.width = window.innerWidth;
-            h = canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resize);
-
-        function draw() {
-            ctx.clearRect(0, 0, w, h);
-            for (const p of pts) {
-                p.x += p.vx; p.y += p.vy;
-                if (p.x < 0 || p.x > w) p.vx *= -1;
-                if (p.y < 0 || p.y > h) p.vy *= -1;
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, 1.6, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(6,182,212,0.35)';
-                ctx.fill();
-            }
-            for (let i = 0; i < pts.length; i++) {
-                for (let j = i + 1; j < pts.length; j++) {
-                    const dx = pts[i].x - pts[j].x;
-                    const dy = pts[i].y - pts[j].y;
-                    const d = Math.hypot(dx, dy);
-                    if (d < 120) {
-                        ctx.strokeStyle = `rgba(192,38,211,${(120 - d) / 120 * 0.08})`;
-                        ctx.beginPath();
-                        ctx.moveTo(pts[i].x, pts[i].y);
-                        ctx.lineTo(pts[j].x, pts[j].y);
-                        ctx.stroke();
+                scripts.forEach(function (s) {
+                    var url = s.src || s.href;
+                    perf.getEntriesByName(url).forEach(function (e) { total += e.transferSize || 0; });
+                    pending--;
+                    if (pending === 0) {
+                        var el = document.getElementById('stat-js');
+                        if (el && total > 0) el.textContent = fmtBytes(total);
+                        else if (el) el.textContent = fmtBytes(performance.getEntriesByType('resource').reduce(function (s, e) { return s + e.transferSize; }, 0));
                     }
-                }
+                });
+                var dom = document.getElementById('stat-dom');
+                if (dom) dom.textContent = document.querySelectorAll('*').length + ' nodes';
+            });
+
+            var perf = performance;
+            var lcpEl = document.getElementById('stat-lcp');
+            if (lcpEl && perf && perf.getEntriesByType) {
+                new PerformanceObserver(function (list) {
+                    var entries = list.getEntries();
+                    var last = entries[entries.length - 1];
+                    if (last) lcpEl.textContent = Math.round(last.startTime) + ' ms';
+                }).observe({ type: 'largest-contentful-paint', buffered: true });
             }
-            gx += (mx - gx) * 0.14;
-            gy += (my - gy) * 0.14;
-            glow.style.transform = `translate(${gx}px, ${gy}px)`;
-            requestAnimationFrame(draw);
-        }
-        draw();
+        })();
     </script>
 </body>
 </html>
