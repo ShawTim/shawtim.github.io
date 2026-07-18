@@ -24,32 +24,38 @@
     <meta property="twitter:description" content="6 LLM agents in a live 3D sim · solo-shipped SaaS · production frontend systems. AI-native engineering with human judgement. Proof first, claims second.">
     <meta property="twitter:image" content="https://shawt.im/img/og-image.png">
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        cyber: {
-                            dark: '#0b1020',
-                            card: '#121216',
-                            primary: '#c026d3', // Fuchsia
-                            secondary: '#06b6d4', // Cyan
-                            accent: '#10b981', // Emerald
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
-                    }
-                }
-            }
-        }
+    <!-- SEO -->
+    <meta name="description" content="6 LLM agents in a live 3D sim · solo-shipped SaaS · production frontend systems. AI-native engineering with human judgement. Proof first, claims second.">
+    <link rel="canonical" href="https://shawt.im/">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "ShawTim",
+        "url": "https://shawt.im/",
+        "image": "https://shawt.im/img/logo.png",
+        "jobTitle": "Senior Frontend / Full-Stack Engineer",
+        "description": "AI-native engineering with human judgement. Proof first, claims second.",
+        "sameAs": [
+            "https://github.com/ShawTim"
+        ]
+    }
     </script>
+
+    <!-- Tailwind CSS — prebuilt static stylesheet (replaces the Play CDN runtime compiler).
+         Rebuild after changing utility classes:
+         tailwindcss -c tailwind.config.js -i input.css -o styles.css --minify -->
+    <link rel="stylesheet" href="./styles.css">
     <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 5.5rem;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: #0b1020;
@@ -273,6 +279,7 @@
         }
 
         @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto !important; }
             *, *::before, *::after { animation: none !important; transition: none !important; }
         }
     </style>
@@ -285,7 +292,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <div class="flex items-center space-x-3">
                 <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-fuchsia-500 to-cyan-400 p-[2px] flex items-center justify-center shadow-[0_0_22px_rgba(6,182,212,.35),0_0_18px_rgba(192,38,211,.25)]">
-                    <img src="./img/logo.png" alt="Logo" class="w-full h-full object-cover rounded-lg bg-white/10 backdrop-blur-sm border border-white/20">
+                    <img src="./img/logo-256.webp" alt="Logo" class="w-full h-full object-cover rounded-lg bg-white/10 backdrop-blur-sm border border-white/20">
                 </div>
                 <span class="font-mono font-bold text-xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 to-cyan-400">SHAWT.IM</span>
             </div>
@@ -293,13 +300,30 @@
                 <a href="#shipped" class="hover:text-cyan-400 transition-colors">Systems</a>
                 <a href="#strengths" class="hover:text-cyan-400 transition-colors">Strengths</a>
                 <a href="#judgement" class="hover:text-cyan-400 transition-colors">Notes</a>
+                <a href="#about" class="hover:text-cyan-400 transition-colors">About</a>
+                <a href="#contact" class="hover:text-cyan-400 transition-colors">Contact</a>
             </nav>
-            <div>
+            <div class="flex items-center gap-3">
                 <span class="hidden md:inline-flex items-center px-4 py-2 border border-cyan-500/30 rounded-full text-xs font-mono text-cyan-400 bg-cyan-500/5">
                     <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse mr-2 floating-dot"></span>
                     Frontend · Full-Stack · AI
                 </span>
+                <button id="mobileMenuBtn" class="md:hidden p-2 -mr-2 text-gray-400 hover:text-cyan-400 transition-colors" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileMenu">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
             </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobileMenu" class="hidden md:hidden border-t border-gray-800 bg-black/90">
+            <nav class="px-4 py-4 flex flex-col space-y-4 text-sm font-medium text-gray-400">
+                <a href="#shipped" class="hover:text-cyan-400 transition-colors">Systems</a>
+                <a href="#strengths" class="hover:text-cyan-400 transition-colors">Strengths</a>
+                <a href="#judgement" class="hover:text-cyan-400 transition-colors">Notes</a>
+                <a href="#about" class="hover:text-cyan-400 transition-colors">About</a>
+                <a href="#contact" class="hover:text-cyan-400 transition-colors">Contact</a>
+            </nav>
         </div>
     </header>
 
@@ -310,14 +334,17 @@
         
         <!-- Hero Image (Overlayed) -->
         <div class="absolute inset-0 z-0">
-            <img src="./img/hero.png" alt="Hero Background" class="w-full h-full object-cover opacity-45 filter brightness-90 contrast-125 saturate-115 hero-parallax" id="heroImage">
+            <picture class="block w-full h-full">
+                <source srcset="./img/hero.webp" type="image/webp">
+                <img src="./img/hero.png" alt="" width="1360" height="768" fetchpriority="high" decoding="async" class="w-full h-full object-cover opacity-45 filter brightness-90 contrast-125 saturate-115 hero-parallax" id="heroImage">
+            </picture>
             <div class="absolute inset-0 bg-gradient-to-t from-cyber-dark/75 via-cyber-dark/45 to-transparent"></div>
         </div>
 
         <div class="relative z-10 max-w-5xl mx-auto px-4 text-center reveal">
             <div class="hero-logo-wrap">
                 <div class="hero-logo-ring"></div>
-                <img src="./img/logo.png" alt="Logo" class="hero-logo-img">
+                <img src="./img/logo-256.webp" alt="Logo" class="hero-logo-img">
             </div>
             <p class="text-xs font-mono uppercase tracking-widest text-cyan-400 mb-4">// SENIOR FRONTEND / FULL-STACK ENGINEER</p>
             <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-6">
@@ -355,7 +382,10 @@
             <div class="tilt-card bg-cyber-card border border-gray-900 rounded-2xl p-6 hover:border-cyan-500/40 transition-all duration-300 border-glow flex flex-col justify-between">
                 <div>
                     <div class="relative -mx-6 -mt-6 mb-4 overflow-hidden rounded-t-2xl border-b border-gray-800">
-                        <img src="./img/preview-werewolf.png" alt="Endless Werewolf preview" class="w-full aspect-[1200/630] object-cover opacity-85 hover:opacity-100 hover:scale-105 transition-all duration-500">
+                        <picture class="block">
+                            <source srcset="./img/preview-werewolf.webp" type="image/webp">
+                            <img src="./img/preview-werewolf.png" alt="Endless Werewolf preview" width="1200" height="630" loading="lazy" decoding="async" class="w-full aspect-[1200/630] object-cover opacity-85 hover:opacity-100 hover:scale-105 transition-all duration-500">
+                        </picture>
                         <div class="absolute inset-0 bg-gradient-to-t from-cyber-card to-transparent pointer-events-none"></div>
                     </div>
                     <div class="flex items-center justify-between mb-2">
@@ -372,8 +402,8 @@
                     </div>
                 </div>
                 <div class="flex items-center gap-3 text-xs font-mono">
-                    <a href="https://shawtim.github.io/endless-werewolf/" target="_blank" class="flex-1 text-center px-3 py-2 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 rounded-lg border border-cyan-500/30 transition-all">Launch 3D Sim ↗</a>
-                    <a href="/notes/werewolf" class="px-3 py-2 text-gray-500 hover:text-gray-300 border border-gray-800 hover:border-gray-700 rounded-lg transition-all" title="Coming soon">Teardown</a>
+                    <a href="https://shawtim.github.io/endless-werewolf/" target="_blank" rel="noopener noreferrer" class="flex-1 text-center px-3 py-2 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 rounded-lg border border-cyan-500/30 transition-all">Launch 3D Sim ↗</a>
+                    <span class="px-3 py-2 text-gray-600 border border-gray-800/60 rounded-lg cursor-not-allowed select-none" title="Teardown — in writing, publishing soon">Teardown · soon</span>
                 </div>
             </div>
 
@@ -381,7 +411,10 @@
             <div class="tilt-card bg-cyber-card border border-gray-900 rounded-2xl p-6 hover:border-emerald-500/40 transition-all duration-300 border-glow flex flex-col justify-between">
                 <div>
                     <div class="relative -mx-6 -mt-6 mb-4 overflow-hidden rounded-t-2xl border-b border-gray-800">
-                        <img src="./img/preview-zencv.png" alt="ZenCV.ai preview" class="w-full aspect-[1200/630] object-cover opacity-85 hover:opacity-100 hover:scale-105 transition-all duration-500">
+                        <picture class="block">
+                            <source srcset="./img/preview-zencv.webp" type="image/webp">
+                            <img src="./img/preview-zencv.png" alt="ZenCV.ai preview" width="1200" height="630" loading="lazy" decoding="async" class="w-full aspect-[1200/630] object-cover opacity-85 hover:opacity-100 hover:scale-105 transition-all duration-500">
+                        </picture>
                         <div class="absolute inset-0 bg-gradient-to-t from-cyber-card to-transparent pointer-events-none"></div>
                     </div>
                     <div class="flex items-center justify-between mb-2">
@@ -398,8 +431,8 @@
                     </div>
                 </div>
                 <div class="flex items-center gap-3 text-xs font-mono">
-                    <a href="https://zencv.ai" target="_blank" class="flex-1 text-center px-3 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 rounded-lg border border-emerald-500/30 transition-all">Visit Product ↗</a>
-                    <a href="/notes/zencv" class="px-3 py-2 text-gray-500 hover:text-gray-300 border border-gray-800 hover:border-gray-700 rounded-lg transition-all" title="Coming soon">Teardown</a>
+                    <a href="https://zencv.ai" target="_blank" rel="noopener noreferrer" class="flex-1 text-center px-3 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 rounded-lg border border-emerald-500/30 transition-all">Visit Product ↗</a>
+                    <span class="px-3 py-2 text-gray-600 border border-gray-800/60 rounded-lg cursor-not-allowed select-none" title="Teardown — in writing, publishing soon">Teardown · soon</span>
                 </div>
             </div>
 
@@ -407,7 +440,10 @@
             <div class="tilt-card bg-cyber-card border border-gray-900 rounded-2xl p-6 hover:border-fuchsia-500/40 transition-all duration-300 border-glow flex flex-col justify-between opacity-90">
                 <div>
                     <div class="relative -mx-6 -mt-6 mb-4 overflow-hidden rounded-t-2xl border-b border-gray-800">
-                        <img src="./img/preview-story74.png" alt="Story 80 preview" class="w-full aspect-[1200/630] object-cover opacity-75 hover:opacity-90 hover:scale-105 transition-all duration-500">
+                        <picture class="block">
+                            <source srcset="./img/preview-story74.webp" type="image/webp">
+                            <img src="./img/preview-story74.png" alt="Story 80 preview" width="820" height="461" loading="lazy" decoding="async" class="w-full aspect-[1200/630] object-cover opacity-75 hover:opacity-90 hover:scale-105 transition-all duration-500">
+                        </picture>
                         <div class="absolute inset-0 bg-gradient-to-t from-cyber-card to-transparent pointer-events-none"></div>
                     </div>
                     <div class="flex items-center justify-between mb-2">
@@ -424,7 +460,7 @@
                     </div>
                 </div>
                 <div class="flex items-center gap-3 text-xs font-mono">
-                    <a href="https://www.patreon.com/shawtim/posts/wai-xing-ren-wu-159581178" target="_blank" class="flex-1 text-center px-3 py-2 bg-fuchsia-500/10 hover:bg-fuchsia-500/20 text-fuchsia-400 rounded-lg border border-fuchsia-500/30 transition-all">Read on Patreon ↗</a>
+                    <a href="https://www.patreon.com/shawtim/posts/wai-xing-ren-wu-159581178" target="_blank" rel="noopener noreferrer" class="flex-1 text-center px-3 py-2 bg-fuchsia-500/10 hover:bg-fuchsia-500/20 text-fuchsia-400 rounded-lg border border-fuchsia-500/30 transition-all">Read on Patreon ↗</a>
                 </div>
             </div>
         </div>
@@ -452,9 +488,9 @@
                 <div class="mt-8 pt-4 border-t border-gray-800/40 space-y-2">
                     <p class="font-mono text-xs text-gray-500">Evidence</p>
                     <div class="flex flex-wrap gap-2">
-                        <a href="https://shawtim.github.io/endless-werewolf/" target="_blank" class="font-mono text-xs text-cyan-400 hover:underline">↗ Werewolf Sim</a>
+                        <a href="https://shawtim.github.io/endless-werewolf/" target="_blank" rel="noopener noreferrer" class="font-mono text-xs text-cyan-400 hover:underline">↗ Werewolf Sim</a>
                         <span class="text-gray-700">·</span>
-                        <a href="https://zencv.ai" target="_blank" class="font-mono text-xs text-emerald-400 hover:underline">↗ ZenCV.ai</a>
+                        <a href="https://zencv.ai" target="_blank" rel="noopener noreferrer" class="font-mono text-xs text-emerald-400 hover:underline">↗ ZenCV.ai</a>
                     </div>
                 </div>
             </div>
@@ -473,7 +509,7 @@
                 <div class="mt-8 pt-4 border-t border-gray-800/40 space-y-2">
                     <p class="font-mono text-xs text-gray-500">Evidence</p>
                     <div class="flex flex-wrap gap-2">
-                        <a href="https://shawtim.github.io/endless-werewolf/" target="_blank" class="font-mono text-xs text-cyan-400 hover:underline">↗ Werewolf 3D UI</a>
+                        <a href="https://shawtim.github.io/endless-werewolf/" target="_blank" rel="noopener noreferrer" class="font-mono text-xs text-cyan-400 hover:underline">↗ Werewolf 3D UI</a>
                         <span class="text-gray-700">·</span>
                         <a href="#judgement" class="font-mono text-xs text-cyan-400 hover:underline">↗ This site</a>
                     </div>
@@ -541,9 +577,86 @@
             </div>
 
             <div class="mt-8 text-center">
-                <a href="/notes/werewolf" class="inline-flex items-center gap-2 px-6 py-3 text-sm font-mono text-cyan-400 border border-cyan-500/30 rounded-lg hover:bg-cyan-500/10 transition-all">
-                    See full teardown
-                    <span class="text-gray-600">(coming soon)</span>
+                <span class="inline-flex items-center gap-2 px-6 py-3 text-sm font-mono text-gray-500 border border-gray-800 rounded-lg cursor-not-allowed select-none" title="Teardown — in writing, publishing soon">
+                    Full teardown
+                    <span class="text-gray-600">— in writing</span>
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-gray-900">
+        <div class="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-12 items-center">
+            <div class="text-center reveal">
+                <div class="hero-logo-wrap">
+                    <div class="hero-logo-ring"></div>
+                    <img src="./img/logo-256.webp" alt="ShawTim avatar" class="hero-logo-img">
+                </div>
+                <div class="inline-grid grid-cols-[auto_auto] gap-x-4 gap-y-1 text-left text-xs font-mono text-gray-500">
+                    <span class="text-gray-600">FOCUS</span>  <span class="text-cyan-400">Frontend · Full-Stack · AI</span>
+                    <span class="text-gray-600">MODE</span>   <span class="text-gray-400">Solo builder, end-to-end</span>
+                    <span class="text-gray-600">STUDIO</span> <span class="text-gray-400">ShawTim Studio</span>
+                    <span class="text-gray-600">SOURCE</span> <a href="https://github.com/ShawTim" target="_blank" rel="noopener noreferrer" class="text-fuchsia-400 hover:underline">github ↗</a>
+                </div>
+            </div>
+            <div class="reveal">
+                <h2 class="text-xs font-mono uppercase tracking-widest text-cyan-400 mb-2">// THE HUMAN</h2>
+                <p class="text-3xl sm:text-4xl font-bold text-gray-200 mb-5">Behind the systems</p>
+                <p class="text-gray-400 leading-relaxed font-light mb-4">
+                    I'm ShawTim — a senior frontend / full-stack engineer who ships alone and ships for real. Multi-agent AI sims, SaaS products, Web3 flows across EVM, Starknet, and Solana: designed, built, and operated end-to-end.
+                </p>
+                <p class="text-gray-400 leading-relaxed font-light">
+                    AI writes most of the code with me. The architecture, the trade-offs, and the final call stay human — that's the job.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journey / Timeline Section -->
+    <section id="journey" class="py-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-gray-900">
+        <div class="text-center mb-16 reveal-3d">
+            <h2 class="text-xs font-mono uppercase tracking-widest text-cyan-400 mb-2">// THE ROAD SO FAR</h2>
+            <p class="text-3xl sm:text-4xl font-bold text-gray-200">Experience, compressed</p>
+        </div>
+        <!-- EDIT: swap these eras for real roles / companies / dates if you want a recruiter-style timeline -->
+        <div class="relative border-l border-gray-800 ml-3 space-y-10">
+            <div class="relative pl-8 reveal">
+                <span class="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.8)]"></span>
+                <p class="text-xs font-mono text-cyan-400 mb-1">NOW</p>
+                <h3 class="text-lg font-bold text-gray-100 mb-1">AI-native full-stack systems</h3>
+                <p class="text-gray-400 text-sm font-light leading-relaxed">Multi-agent sims and solo-shipped SaaS — Endless Werewolf, ZenCV.ai. Design, build, operate, end to end.</p>
+            </div>
+            <div class="relative pl-8 reveal">
+                <span class="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-fuchsia-500 shadow-[0_0_10px_rgba(192,38,211,0.8)]"></span>
+                <p class="text-xs font-mono text-fuchsia-400 mb-1">PREVIOUSLY</p>
+                <h3 class="text-lg font-bold text-gray-100 mb-1">Web3 product engineering</h3>
+                <p class="text-gray-400 text-sm font-light leading-relaxed">Lending &amp; DEX products, wallet onboarding, real-time portfolio state across EVM, Starknet, and Solana.</p>
+            </div>
+            <div class="relative pl-8 reveal">
+                <span class="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(16,185,129,0.8)]"></span>
+                <p class="text-xs font-mono text-emerald-400 mb-1">ALWAYS</p>
+                <h3 class="text-lg font-bold text-gray-100 mb-1">ShawTim Studio</h3>
+                <p class="text-gray-400 text-sm font-light leading-relaxed">Writing, satire, and experiments in AI-assisted creative production.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-black/40 border-t border-gray-900">
+        <div class="max-w-3xl mx-auto px-4 text-center reveal-3d">
+            <h2 class="text-xs font-mono uppercase tracking-widest text-fuchsia-400 mb-2">// CONTACT</h2>
+            <p class="text-3xl sm:text-4xl font-bold text-gray-200 mb-4">Have a system that needs shipping?</p>
+            <p class="text-gray-400 leading-relaxed font-light mb-10">
+                Open to senior frontend / full-stack / AI-product work and interesting collaborations.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <!-- EDIT: replace with your real email address -->
+                <a href="mailto:work@shawt.im" class="shimmer-btn w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-fuchsia-600 to-cyan-500 hover:from-fuchsia-500 hover:to-cyan-400 text-black font-bold rounded-lg transition-all transform hover:-translate-y-[2px] shadow-lg shadow-fuchsia-500/10">
+                    work@shawt.im
+                </a>
+                <a href="https://github.com/ShawTim" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-8 py-4 bg-cyber-card hover:bg-gray-800 text-gray-300 font-medium rounded-lg border border-gray-800 hover:border-gray-700 transition-all font-mono">
+                    GitHub / ShawTim ↗
                 </a>
             </div>
         </div>
@@ -564,7 +677,7 @@
                         <span class="text-gray-600">LCP</span>                <span id="stat-lcp" class="text-cyan-400">measuring…</span>
                         <span class="text-gray-600">DOM elements</span>       <span id="stat-dom" class="text-cyan-400">—</span>
                         <span class="text-gray-600">Deploy</span>             <span id="stat-sha" class="text-emerald-400">9ffbe39</span>
-                        <span class="text-gray-600">Source</span>             <a href="https://github.com/ShawTim/shawtim.github.io" target="_blank" class="text-fuchsia-400 hover:underline">github ↗</a>
+                        <span class="text-gray-600">Source</span>             <a href="https://github.com/ShawTim/shawtim.github.io" target="_blank" rel="noopener noreferrer" class="text-fuchsia-400 hover:underline">github ↗</a>
                     </div>
                 </div>
             </div>
@@ -603,65 +716,78 @@
         }, { threshold: 0.12 });
         reveal3dEls.forEach(el => reveal3dObserver.observe(el));
 
+        // Respect reduced-motion preference for JS-driven movement
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
         // Hero parallax
         const hero = document.getElementById('heroImage');
         const scrollBar = document.getElementById('scrollProgress');
         window.addEventListener('scroll', () => {
-            const y = window.scrollY * 0.12;
-            if (hero) hero.style.transform = `translateY(${y}px) scale(1.03)`;
+            if (!prefersReducedMotion && hero) {
+                const y = window.scrollY * 0.12;
+                hero.style.transform = `translateY(${y}px) scale(1.03)`;
+            }
             const docH = document.documentElement.scrollHeight - window.innerHeight;
             const pct = docH > 0 ? (window.scrollY / docH) * 100 : 0;
             if (scrollBar) scrollBar.style.width = pct + '%';
         }, { passive: true });
 
-        // Tilt cards
+        // Tilt cards (skipped for reduced-motion users)
         const cards = document.querySelectorAll('.tilt-card');
-        cards.forEach((card) => {
-            card.addEventListener('mousemove', (e) => {
-                const r = card.getBoundingClientRect();
-                const x = e.clientX - r.left;
-                const y = e.clientY - r.top;
-                const rx = ((y / r.height) - .5) * -8;
-                const ry = ((x / r.width) - .5) * 10;
-                card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px)`;
-                card.style.setProperty('--mx', x + 'px');
-                card.style.setProperty('--my', y + 'px');
+        if (!prefersReducedMotion) {
+            cards.forEach((card) => {
+                card.addEventListener('mousemove', (e) => {
+                    const r = card.getBoundingClientRect();
+                    const x = e.clientX - r.left;
+                    const y = e.clientY - r.top;
+                    const rx = ((y / r.height) - .5) * -8;
+                    const ry = ((x / r.width) - .5) * 10;
+                    card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px)`;
+                    card.style.setProperty('--mx', x + 'px');
+                    card.style.setProperty('--my', y + 'px');
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+                });
             });
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+        }
+
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => {
+                const nowHidden = mobileMenu.classList.toggle('hidden');
+                menuBtn.setAttribute('aria-expanded', String(!nowHidden));
             });
-        });
+            mobileMenu.querySelectorAll('a').forEach((link) => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    menuBtn.setAttribute('aria-expanded', 'false');
+                });
+            });
+        }
 
         // Page telemetry — real numbers, measured at runtime
         (function () {
+            var perf = window.performance;
             function fmtBytes(n) {
                 if (n < 1024) return n + ' B';
                 if (n < 1048576) return (n / 1024).toFixed(1) + ' KB';
                 return (n / 1048576).toFixed(2) + ' MB';
             }
             window.addEventListener('load', function () {
-                var scripts = document.querySelectorAll('script[src], link[rel="stylesheet"]');
-                var total = 0;
-                var pending = scripts.length;
-                if (pending === 0) {
-                    var el = document.getElementById('stat-js');
-                    if (el) el.textContent = fmtBytes(performance.getEntriesByType('resource').reduce(function (s, e) { return s + e.transferSize; }, 0)) + ' (inline)';
-                }
-                scripts.forEach(function (s) {
-                    var url = s.src || s.href;
-                    perf.getEntriesByName(url).forEach(function (e) { total += e.transferSize || 0; });
-                    pending--;
-                    if (pending === 0) {
-                        var el = document.getElementById('stat-js');
-                        if (el && total > 0) el.textContent = fmtBytes(total);
-                        else if (el) el.textContent = fmtBytes(performance.getEntriesByType('resource').reduce(function (s, e) { return s + e.transferSize; }, 0));
-                    }
-                });
+                // External JS only. Cross-origin transfer sizes report 0 without
+                // Timing-Allow-Origin, so an all-inline page honestly shows 'inline only'.
+                var jsBytes = perf.getEntriesByType('resource').reduce(function (sum, e) {
+                    return e.initiatorType === 'script' ? sum + (e.transferSize || 0) : sum;
+                }, 0);
+                var el = document.getElementById('stat-js');
+                if (el) el.textContent = jsBytes > 0 ? fmtBytes(jsBytes) + ' ext' : 'inline only';
                 var dom = document.getElementById('stat-dom');
                 if (dom) dom.textContent = document.querySelectorAll('*').length + ' nodes';
             });
 
-            var perf = performance;
             var lcpEl = document.getElementById('stat-lcp');
             if (lcpEl && perf && perf.getEntriesByType) {
                 new PerformanceObserver(function (list) {
