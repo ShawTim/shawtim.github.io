@@ -278,6 +278,56 @@
             opacity: .35;
         }
 
+        /* Typewriter caret */
+        .type-caret {
+            display: inline-block;
+            width: 0.55em;
+            height: 1.1em;
+            margin-left: 2px;
+            vertical-align: text-bottom;
+            background: #06b6d4;
+            animation: caretBlink 1s steps(1) infinite;
+        }
+        @keyframes caretBlink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+
+        /* Kinetic marquee */
+        .marquee-track {
+            display: inline-flex;
+            white-space: nowrap;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.14em;
+            color: #4b5563;
+            animation: marqueeScroll 38s linear infinite;
+            will-change: transform;
+        }
+        .marquee:hover .marquee-track { animation-play-state: paused; }
+        @keyframes marqueeScroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* Magnetic buttons */
+        .magnetic {
+            transition: transform .3s cubic-bezier(.22,.61,.36,1);
+            will-change: transform;
+        }
+
+        /* Mask reveal (transform-only: safe for LCP, no-JS and reduced-motion show text normally) */
+        .mask-line { display: block; overflow: hidden; }
+        .mask-inner {
+            display: block;
+            animation: maskUp .9s cubic-bezier(.22,.61,.36,1) both;
+        }
+        .mask-inner.delay { animation-delay: .28s; }
+        @keyframes maskUp {
+            from { transform: translateY(110%); }
+            to { transform: translateY(0); }
+        }
+
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto !important; }
             *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -348,14 +398,12 @@
             </div>
             <p class="text-xs font-mono uppercase tracking-widest text-cyan-400 mb-4">// SENIOR FRONTEND / FULL-STACK ENGINEER</p>
             <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-6">
-                <span class="block text-gray-300">Turning Complex Systems Into</span>
-                <span class="glitch block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 via-purple-500 to-cyan-500 text-glow" data-text="Production-Grade Products">
-                    Production-Grade Products
+                <span class="block text-gray-300 mask-line"><span class="mask-inner">Turning Complex Systems Into</span></span>
+                <span class="block mt-2 mask-line">
+                    <span class="glitch text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 via-purple-500 to-cyan-500 text-glow mask-inner delay" data-text="Production-Grade Products">Production-Grade Products</span>
                 </span>
             </h1>
-            <p class="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto mb-4 leading-relaxed font-light font-mono">
-                6 LLM agents in a live 3D sim · solo-shipped SaaS · production frontend systems.
-            </p>
+            <p id="heroType" class="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto mb-4 leading-relaxed font-light font-mono">6 LLM agents in a live 3D sim · solo-shipped SaaS · production frontend systems.</p>
             <p class="text-sm text-gray-500 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
                 AI-native engineering with human judgement. Proof first, claims second.
             </p>
@@ -369,6 +417,14 @@
             </div>
         </div>
     </section>
+
+    <!-- Kinetic marquee -->
+    <div class="marquee border-y border-gray-900 bg-black/30 py-3 overflow-hidden select-none" aria-hidden="true">
+        <div class="marquee-track">
+            <span>MULTI-AGENT ORCHESTRATION · REACT · TYPESCRIPT · NODE.JS · MODEL ROUTING · STATE MACHINES · 3D UI · EVM · STARKNET · SOLANA · DESIGN SYSTEMS · ATS SCORING ·&nbsp;</span>
+            <span>MULTI-AGENT ORCHESTRATION · REACT · TYPESCRIPT · NODE.JS · MODEL ROUTING · STATE MACHINES · 3D UI · EVM · STARKNET · SOLANA · DESIGN SYSTEMS · ATS SCORING ·&nbsp;</span>
+        </div>
+    </div>
 
     <!-- Shipped Systems Section -->
     <section id="shipped" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-gray-900">
@@ -676,7 +732,7 @@
                         <span class="text-gray-600">JS payload</span>          <span id="stat-js"  class="text-cyan-400">measuring…</span>
                         <span class="text-gray-600">LCP</span>                <span id="stat-lcp" class="text-cyan-400">measuring…</span>
                         <span class="text-gray-600">DOM elements</span>       <span id="stat-dom" class="text-cyan-400">—</span>
-                        <span class="text-gray-600">Deploy</span>             <span id="stat-sha" class="text-emerald-400">9ffbe39</span>
+                        <span class="text-gray-600">Deploy</span>             <span id="stat-sha" class="text-emerald-400">e4f9d8d</span>
                         <span class="text-gray-600">Source</span>             <a href="https://github.com/ShawTim/shawtim.github.io" target="_blank" rel="noopener noreferrer" class="text-fuchsia-400 hover:underline">github ↗</a>
                     </div>
                 </div>
@@ -764,6 +820,40 @@
                 link.addEventListener('click', () => {
                     mobileMenu.classList.add('hidden');
                     menuBtn.setAttribute('aria-expanded', 'false');
+                });
+            });
+        }
+
+        // Typewriter hero line (skipped for reduced-motion; no-JS keeps full text)
+        const heroType = document.getElementById('heroType');
+        if (heroType && !prefersReducedMotion) {
+            const fullText = heroType.textContent.trim();
+            heroType.style.minHeight = heroType.offsetHeight + 'px';
+            heroType.textContent = '';
+            const caret = document.createElement('span');
+            caret.className = 'type-caret';
+            let i = 0;
+            setTimeout(function tick() {
+                if (i < fullText.length) {
+                    heroType.textContent = fullText.slice(0, ++i);
+                    heroType.appendChild(caret);
+                    setTimeout(tick, 26 + Math.random() * 30);
+                }
+            }, 450);
+        }
+
+        // Magnetic buttons (desktop pointer only, skipped for reduced-motion)
+        if (!prefersReducedMotion && window.matchMedia('(pointer: fine)').matches) {
+            document.querySelectorAll('.shimmer-btn').forEach((btn) => {
+                btn.classList.add('magnetic');
+                btn.addEventListener('mousemove', (e) => {
+                    const r = btn.getBoundingClientRect();
+                    const mx = e.clientX - r.left - r.width / 2;
+                    const my = e.clientY - r.top - r.height / 2;
+                    btn.style.transform = `translate(${mx * 0.18}px, ${my * 0.28}px)`;
+                });
+                btn.addEventListener('mouseleave', () => {
+                    btn.style.transform = '';
                 });
             });
         }
