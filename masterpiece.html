@@ -103,6 +103,7 @@ img{display:none} /* discipline: zero images */
 .boot-lines span:nth-child(3){animation-delay:.30s}
 .boot-lines span:nth-child(4){animation-delay:.42s}
 .boot-lines span:nth-child(5){animation-delay:.54s}
+.boot-lines span:nth-child(6){animation-delay:.66s}
 .boot-lines b{color:var(--acid-text);font-weight:400}
 @keyframes bootLine{to{opacity:1}}
 .boot-count{
@@ -368,6 +369,10 @@ section{position:relative;padding-block:clamp(88px,11vw,170px)}
   color:var(--mut);font-size:clamp(11px,1.15vw,12.5px);line-height:1.75;
 }
 .art-why b{color:var(--ink);font-weight:400}
+.art-verdict{
+  margin-top:18px;font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--acid-text);
+}
 .judge-intro{
   max-width:640px;margin-bottom:clamp(28px,3.6vw,44px);
   font-size:clamp(14px,1.4vw,17px);line-height:1.65;color:var(--mut);font-weight:400;
@@ -425,6 +430,7 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
     <span>&gt; MOTION ....... <b>HAND-ROLLED</b></span>
     <span>&gt; IMAGES ....... <b>0 SHIPPED</b></span>
     <span>&gt; ACCENT ....... <b>1 — DISCIPLINE</b></span>
+    <span>&gt; CALIBRATION .. <b>60FPS — NON-NEGOTIABLE</b></span>
   </div>
   <div class="boot-count" id="bootCount">000</div>
 </div>
@@ -436,7 +442,7 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
 <div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
 
 <!-- SIDE LABELS -->
-<aside class="side left" aria-hidden="true">SHAWT.IM — ONE HTML FILE — NO FRAMEWORKS — 2026 ©</aside>
+<aside class="side left" aria-hidden="true">SHAWT.IM — SPECIMEN SHEET — ONE HTML FILE — NO FRAMEWORKS — 2026 ©</aside>
 <aside class="side right" aria-hidden="true">SCROLL — <span id="scrollPct">000%</span></aside>
 
 <!-- NAV -->
@@ -476,13 +482,13 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
         <b>live, linked, and inspectable</b> — this page included.
       </p>
       <div class="hero-cta">
-        <a href="#capabilities" class="btn btn-acid magnetic">See capabilities <span class="ar">↓</span></a>
+        <a href="#proof" class="btn btn-acid magnetic">Open the proof <span class="ar">↓</span></a>
         <a href="mailto:work@shawt.im" class="btn btn-ghost magnetic">work@shawt.im <span class="ar">↗</span></a>
       </div>
       <div class="hero-meta">
         <span>©2026 — Portfolio</span>
         <span class="status"><i></i>Open to senior frontend / full-stack / AI-product work</span>
-        <span>Scroll to read ↓</span>
+        <span>Scroll to inspect ↓</span>
       </div>
     </div>
   </section>
@@ -498,7 +504,7 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
   <section id="manifesto">
     <div class="ghost" aria-hidden="true">01</div>
     <div class="wrap sec-body">
-      <div class="shead"><span class="sidx">01 — Manifesto</span><span class="shint">Scroll to read</span></div>
+      <div class="shead"><span class="sidx">01 — Manifesto</span><span class="shint">Declared, then demonstrated</span></div>
       <p class="manifesto-text" id="manifestoText">The interface is the last honest <span class="ac">craft.</span> AI writes most of my code — the architecture, the trade-offs and the final call stay <span class="ac">human.</span> I ship alone and ship for real: systems you can open, inspect and measure. <span class="ac">Proof first.</span> Claims second.</p>
       <p class="manifesto-sig">— ShawTim, engineer of record for this page</p>
     </div>
@@ -508,7 +514,7 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
   <section id="capabilities">
     <div class="ghost" aria-hidden="true">02</div>
     <div class="wrap sec-body">
-      <div class="shead"><span class="sidx">02 — Capabilities</span><span class="shint">What I actually do</span></div>
+      <div class="shead"><span class="sidx">02 — Capabilities</span><span class="shint">Evidence attached</span></div>
       <div class="rows">
         <article class="row" tabindex="0">
           <span class="rnum">/01</span>
@@ -558,7 +564,7 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
   <section id="proof">
     <div class="ghost" aria-hidden="true">03</div>
     <div class="wrap sec-body">
-      <div class="shead"><span class="sidx">03 — Proof</span><span class="shint">Live systems — open them, inspect them</span></div>
+      <div class="shead"><span class="sidx">03 — Proof</span><span class="shint">Status: live — open, inspect, measure</span></div>
       <div class="rows">
         <a class="row" href="https://shawtim.github.io/endless-werewolf/" target="_blank" rel="noopener noreferrer">
           <span class="rnum">/01</span>
@@ -566,7 +572,7 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
             <p class="pstatus"><i></i>Live — 3D multi-agent sim</p>
             <h3>Endless Werewolf</h3>
             <p>Six autonomous LLM agents play continuous social-deduction games in a real-time 3D UI. Sync, state machines and multi-model routing — inspectable at every step.</p>
-            <p class="tags">Agent Orchestration · State Machines · 3D UI · Model Routing</p>
+            <p class="tags">READOUT — AGENTS 6 · STATE MACHINE · REAL-TIME 3D · MULTI-MODEL ROUTING</p>
           </div>
           <span class="rarrow" aria-hidden="true">↗</span>
         </a>
@@ -576,7 +582,7 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
             <p class="pstatus"><i></i>Live — solo-built SaaS</p>
             <h3>ZenCV.ai</h3>
             <p>AI CV generation with custom model routing, ATS scoring and privacy-first design. The full product loop — schema to pixel to deploy — shipped without a team.</p>
-            <p class="tags">React · TypeScript · Node.js · Model Routing · ATS Scoring</p>
+            <p class="tags">READOUT — TEAM 1 · FULL LOOP · MODEL ROUTING · ATS SCORING · PRIVACY-FIRST</p>
           </div>
           <span class="rarrow" aria-hidden="true">↗</span>
         </a>
@@ -586,7 +592,7 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
             <p class="pstatus"><i></i>Published — creative signal</p>
             <h3>ShawTim Studio</h3>
             <p>Satire and narrative experiments in AI-assisted creative production. Not engineering proof — range.</p>
-            <p class="tags">Writing · Narrative Design · AI-Assisted Production</p>
+            <p class="tags">READOUT — EVIDENCE: NONE CLAIMED · RANGE: DEMONSTRATED</p>
           </div>
           <span class="rarrow" aria-hidden="true">↗</span>
         </a>
@@ -598,10 +604,10 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
   <section id="judgement">
     <div class="ghost" aria-hidden="true">04</div>
     <div class="wrap sec-body">
-      <div class="shead"><span class="sidx">04 — Judgement in the Loop</span><span class="shint">A real excerpt from the Werewolf build</span></div>
+      <div class="shead"><span class="sidx">04 — Judgement in the Loop</span><span class="shint">Caught in review — fixed in writing</span></div>
       <p class="judge-intro">AI generates most of the code. The work that matters is <b>catching what it gets wrong — and knowing why.</b></p>
       <div class="artifact">
-        <div class="art-head"><span>werewolf/agent-loop.ts</span><span class="art-badge">Real excerpt</span></div>
+        <div class="art-head"><span>werewolf/agent-loop.ts</span><span class="art-badge">Specimen 01</span></div>
         <div class="art-body">
           <p class="art-tag">// Agent generated — race condition</p>
           <pre>async function runNightCycle(agents) {
@@ -618,6 +624,7 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
   resolveDeaths(gameState);  // ← state fully settled
 }</pre>
           <p class="art-why"><b>Why:</b> Promise.all let agents race on shared game state — suggested for "performance". Social deduction needs a strict night order so votes stay auditable. Parallelism here breaks replayability, and trust in the sim.</p>
+          <p class="art-verdict">Verdict — serialised: shipped, replayable, auditable</p>
         </div>
       </div>
     </div>
@@ -698,7 +705,7 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
   <section id="journey">
     <div class="ghost" aria-hidden="true">07</div>
     <div class="wrap sec-body">
-      <div class="shead"><span class="sidx">07 — The Road</span><span class="shint">Experience, compressed</span></div>
+      <div class="shead"><span class="sidx">07 — The Road</span><span class="shint">History, compressed</span></div>
       <div class="jrows">
         <div class="jrow">
           <span class="jera">Now</span>
@@ -758,12 +765,16 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
         <span>LCP</span><b id="tLcp">measuring…</b>
         <span>DOM NODES</span><b id="tDom">—</b>
         <span>FPS</span><b id="tFps" class="acid">—</b>
+        <span>VIEWPORT</span><b id="tVp">—</b>
+        <span>CONNECTION</span><b id="tConn">—</b>
+        <span>REDUCED-MOTION</span><b id="tRm">—</b>
+        <span>ACCENTS</span><b>1</b>
         <span>THEME</span><b id="tTheme">DARK</b>
         <span>TIME</span><b id="tClock">—</b>
       </div>
     </div>
     <div class="f-bottom">
-      <span>© 2026 ShawTim — one HTML file, no frameworks</span>
+      <span>© 2026 ShawTim — one HTML file, no frameworks — integrity: view-source verifiable</span>
       <a href="#top" class="top-link">Back to top <span aria-hidden="true">↑</span></a>
     </div>
   </div>
@@ -1121,6 +1132,21 @@ if (curvesWrap) {
     }, { threshold: 0.1 }).observe(curvesWrap);
   }
 }
+
+/* ============ INSTRUMENTS: VIEWPORT / CONNECTION / RM ============ */
+var tVp = $('#tVp');
+function setVp(){ if (tVp) tVp.textContent = window.innerWidth + '×' + window.innerHeight; }
+setVp();
+window.addEventListener('resize', setVp);
+
+var tConn = $('#tConn');
+var net = navigator.connection || navigator.webkitConnection;
+function setConn(){ if (tConn) tConn.textContent = (net && net.effectiveType) ? net.effectiveType.toUpperCase() : 'N/A'; }
+setConn();
+if (net && net.addEventListener) net.addEventListener('change', setConn);
+
+var tRm = $('#tRm');
+if (tRm) tRm.textContent = reduceMotion ? 'ON' : 'OFF';
 
 /* ============ TELEMETRY: FPS / LCP / JS / DOM ============ */
 var tFps = $('#tFps'), fpsBig = $('#fpsBig');
