@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SHAWT.IM® — I Build Interfaces That Ship</title>
-<meta name="description" content="Senior frontend / full-stack engineer. AI-native systems, interface architecture, product judgement. One HTML file, no frameworks, no images — the page is the proof.">
+<meta name="description" content="ShawTim — senior frontend / full-stack engineer. AI-native systems, interface architecture, product judgement. Live proof linked, page included: one HTML file, no frameworks, no images.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23d8ff3a'/></svg>">
 <script>document.documentElement.classList.add('js');</script>
 <link rel="preconnect" href="https://api.fontshare.com">
@@ -102,6 +102,7 @@ img{display:none} /* discipline: zero images */
 .boot-lines span:nth-child(2){animation-delay:.18s}
 .boot-lines span:nth-child(3){animation-delay:.30s}
 .boot-lines span:nth-child(4){animation-delay:.42s}
+.boot-lines span:nth-child(5){animation-delay:.54s}
 .boot-lines b{color:var(--acid-text);font-weight:400}
 @keyframes bootLine{to{opacity:1}}
 .boot-count{
@@ -270,6 +271,24 @@ section{position:relative;padding-block:clamp(88px,11vw,170px)}
 }
 .row:hover .rarrow,.row:focus-visible .rarrow{transform:translateX(0);opacity:1}
 @media(max-width:640px){.rarrow{display:none}}
+.pstatus{
+  display:inline-flex;align-items:center;gap:9px;margin-bottom:14px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--acid-text);transition:color .45s;
+}
+.pstatus i{width:7px;height:7px;border-radius:50%;background:var(--acid);animation:pulse 2s ease-in-out infinite;flex:none}
+.row:hover .pstatus,.row:focus-visible .pstatus{color:var(--acid-ink)}
+.row:hover .pstatus i,.row:focus-visible .pstatus i{background:var(--acid-ink)}
+.evi{
+  margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--mut);transition:color .45s;
+}
+.evi a{color:var(--acid-text);border-bottom:1px solid transparent;transition:border-color .3s,color .45s}
+.evi a:hover{border-color:var(--acid-text)}
+.row:hover .evi,.row:focus-visible .evi{color:rgba(10,10,10,.6)}
+.row:hover .evi a,.row:focus-visible .evi a{color:var(--acid-ink);text-decoration:underline}
+.row.dim{opacity:.82}
+.row.dim:hover,.row.dim:focus-visible{opacity:1}
 
 /* ============ MOTION ============ */
 .curves{border-top:1px solid var(--line)}
@@ -294,6 +313,11 @@ section{position:relative;padding-block:clamp(88px,11vw,170px)}
 }
 
 /* ============ NUMBERS ============ */
+.nums-head{
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--mut);margin-bottom:18px;
+}
+.nums+.nums-head{margin-top:clamp(36px,5vw,60px)}
 .nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line)}
 .num{
   padding:clamp(26px,3vw,44px);border-right:1px solid var(--line);border-bottom:1px solid var(--line);
@@ -320,6 +344,35 @@ section{position:relative;padding-block:clamp(88px,11vw,170px)}
 .jera{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;color:var(--acid-text);text-transform:uppercase;padding-top:6px}
 .jrow h3{font-weight:600;text-transform:uppercase;letter-spacing:-.015em;font-size:clamp(1.3rem,2.6vw,2.1rem)}
 .jrow p{margin-top:10px;max-width:620px;font-size:clamp(13px,1.3vw,15px);line-height:1.6;color:var(--mut);font-weight:400}
+
+/* ============ ARTIFACT ============ */
+.artifact{border:1px solid var(--line);background:var(--panel);max-width:940px}
+.art-head{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  padding:14px 18px;border-bottom:1px solid var(--line);
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--mut);
+}
+.art-badge{display:inline-flex;align-items:center;gap:8px;color:var(--acid-text);font-size:10px;letter-spacing:.18em;white-space:nowrap}
+.art-badge::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--acid);animation:pulse 2s ease-in-out infinite}
+.art-body{
+  padding:clamp(18px,3vw,32px);font-family:'JetBrains Mono',monospace;
+  font-size:clamp(11px,1.15vw,13px);line-height:1.8;overflow-x:auto;
+}
+.art-tag{margin:22px 0 8px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mut)}
+.art-tag:first-child{margin-top:0}
+.art-tag.good{color:var(--acid-text)}
+.art-body pre{white-space:pre;color:var(--mut)}
+.art-body pre.human{color:var(--ink)}
+.art-why{
+  margin-top:22px;padding-top:18px;border-top:1px solid var(--line);
+  color:var(--mut);font-size:clamp(11px,1.15vw,12.5px);line-height:1.75;
+}
+.art-why b{color:var(--ink);font-weight:400}
+.judge-intro{
+  max-width:640px;margin-bottom:clamp(28px,3.6vw,44px);
+  font-size:clamp(14px,1.4vw,17px);line-height:1.65;color:var(--mut);font-weight:400;
+}
+.judge-intro b{color:var(--ink);font-weight:500}
 
 /* ============ CONTACT ============ */
 .contact-h{
@@ -367,6 +420,7 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
 <div class="boot" id="boot" aria-hidden="true">
   <div class="boot-top"><span>SHAWT.IM®</span><span>PORTFOLIO — 2026</span></div>
   <div class="boot-lines">
+    <span>&gt; HUMAN ........ <b>SHAWTIM — JUDGEMENT INCLUDED</b></span>
     <span>&gt; TYPE ......... <b>CLASH DISPLAY</b></span>
     <span>&gt; MOTION ....... <b>HAND-ROLLED</b></span>
     <span>&gt; IMAGES ....... <b>0 SHIPPED</b></span>
@@ -392,8 +446,8 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
     <nav class="nav-links" id="navLinks" aria-label="Sections">
       <a href="#manifesto">MANIFESTO</a>
       <a href="#capabilities">CAPABILITIES</a>
+      <a href="#proof">PROOF</a>
       <a href="#motion">MOTION</a>
-      <a href="#numbers">NUMBERS</a>
       <a href="#contact">CONTACT</a>
     </nav>
     <div class="nav-right">
@@ -417,9 +471,9 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
         <span class="ln mask d2"><span>THAT&nbsp;<span id="rot">SHIP.</span></span></span>
       </h1>
       <p class="hero-sub">
-        Frontend architecture, <b>AI-native systems</b>, and the judgement to ship them —
-        end to end, solo when it counts. This page is the proof:
-        <b>one file, no frameworks, no images.</b>
+        I'm <b>ShawTim</b> — frontend architecture, <b>AI-native systems</b>, and the judgement
+        to ship them, end to end, solo when it counts. The proof is
+        <b>live, linked, and inspectable</b> — this page included.
       </p>
       <div class="hero-cta">
         <a href="#capabilities" class="btn btn-acid magnetic">See capabilities <span class="ar">↓</span></a>
@@ -462,6 +516,7 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
             <h3>Frontend Architecture</h3>
             <p>Design systems, async state modelling, rendering performance, accessibility. Interfaces that stay fast and honest under production load.</p>
             <p class="tags">React · TypeScript · State Machines · Design Systems · Motion · A11y</p>
+            <p class="evi">Evidence — <a href="https://shawtim.github.io/endless-werewolf/" target="_blank" rel="noopener noreferrer">Werewolf 3D UI ↗</a> · this page</p>
           </div>
           <span class="rarrow" aria-hidden="true">→</span>
         </article>
@@ -471,6 +526,7 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
             <h3>AI-Native Engineering</h3>
             <p>Multi-agent orchestration, model routing, eval loops. AI generates; I decide what ships. Judgement is the product.</p>
             <p class="tags">Agent Orchestration · Model Routing · Eval Loops · Prompt Systems</p>
+            <p class="evi">Evidence — <a href="https://shawtim.github.io/endless-werewolf/" target="_blank" rel="noopener noreferrer">Werewolf Sim ↗</a> · <a href="#judgement">intervention below ↓</a></p>
           </div>
           <span class="rarrow" aria-hidden="true">→</span>
         </article>
@@ -480,6 +536,7 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
             <h3>Full-Stack Delivery</h3>
             <p>Schema to pixel to deploy — solo when it counts. Auth, data, caching, edge, CI. The whole loop, no hand-offs.</p>
             <p class="tags">Node.js · API Design · Postgres · Edge · CI/CD</p>
+            <p class="evi">Evidence — <a href="https://zencv.ai" target="_blank" rel="noopener noreferrer">ZenCV.ai ↗</a></p>
           </div>
           <span class="rarrow" aria-hidden="true">→</span>
         </article>
@@ -489,6 +546,7 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
             <h3>Product Judgement</h3>
             <p>Knowing what not to build. Trade-offs stated in writing, evidence before claims, teardowns over adjectives.</p>
             <p class="tags">Scoping · Trade-offs · Writing · Teardowns</p>
+            <p class="evi">Evidence — <a href="#judgement">the artefact below ↓</a></p>
           </div>
           <span class="rarrow" aria-hidden="true">→</span>
         </article>
@@ -496,11 +554,80 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
     </div>
   </section>
 
-  <!-- 03 MOTION -->
-  <section id="motion">
+  <!-- 03 PROOF -->
+  <section id="proof">
     <div class="ghost" aria-hidden="true">03</div>
     <div class="wrap sec-body">
-      <div class="shead"><span class="sidx">03 — Motion Study</span><span class="shint">Easing is a personality</span></div>
+      <div class="shead"><span class="sidx">03 — Proof</span><span class="shint">Live systems — open them, inspect them</span></div>
+      <div class="rows">
+        <a class="row" href="https://shawtim.github.io/endless-werewolf/" target="_blank" rel="noopener noreferrer">
+          <span class="rnum">/01</span>
+          <div class="rmain">
+            <p class="pstatus"><i></i>Live — 3D multi-agent sim</p>
+            <h3>Endless Werewolf</h3>
+            <p>Six autonomous LLM agents play continuous social-deduction games in a real-time 3D UI. Sync, state machines and multi-model routing — inspectable at every step.</p>
+            <p class="tags">Agent Orchestration · State Machines · 3D UI · Model Routing</p>
+          </div>
+          <span class="rarrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="row" href="https://zencv.ai" target="_blank" rel="noopener noreferrer">
+          <span class="rnum">/02</span>
+          <div class="rmain">
+            <p class="pstatus"><i></i>Live — solo-built SaaS</p>
+            <h3>ZenCV.ai</h3>
+            <p>AI CV generation with custom model routing, ATS scoring and privacy-first design. The full product loop — schema to pixel to deploy — shipped without a team.</p>
+            <p class="tags">React · TypeScript · Node.js · Model Routing · ATS Scoring</p>
+          </div>
+          <span class="rarrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="row dim" href="https://www.patreon.com/shawtim/posts/wai-xing-ren-wu-159581178" target="_blank" rel="noopener noreferrer">
+          <span class="rnum">/03</span>
+          <div class="rmain">
+            <p class="pstatus"><i></i>Published — creative signal</p>
+            <h3>ShawTim Studio</h3>
+            <p>Satire and narrative experiments in AI-assisted creative production. Not engineering proof — range.</p>
+            <p class="tags">Writing · Narrative Design · AI-Assisted Production</p>
+          </div>
+          <span class="rarrow" aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 JUDGEMENT -->
+  <section id="judgement">
+    <div class="ghost" aria-hidden="true">04</div>
+    <div class="wrap sec-body">
+      <div class="shead"><span class="sidx">04 — Judgement in the Loop</span><span class="shint">A real excerpt from the Werewolf build</span></div>
+      <p class="judge-intro">AI generates most of the code. The work that matters is <b>catching what it gets wrong — and knowing why.</b></p>
+      <div class="artifact">
+        <div class="art-head"><span>werewolf/agent-loop.ts</span><span class="art-badge">Real excerpt</span></div>
+        <div class="art-body">
+          <p class="art-tag">// Agent generated — race condition</p>
+          <pre>async function runNightCycle(agents) {
+  await Promise.all(agents.map(a =&gt; act(a)));
+  // resolveDeaths reads state mid-flight
+  resolveDeaths(gameState);  // ← state not yet settled
+}</pre>
+          <p class="art-tag good">// Human intervention — serialise the critical section</p>
+          <pre class="human">async function runNightCycle(agents) {
+  // agents must commit before resolution reads state
+  for (const a of agents) {
+    await act(a);  // deterministic order, inspectable per-step
+  }
+  resolveDeaths(gameState);  // ← state fully settled
+}</pre>
+          <p class="art-why"><b>Why:</b> Promise.all let agents race on shared game state — suggested for "performance". Social deduction needs a strict night order so votes stay auditable. Parallelism here breaks replayability, and trust in the sim.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 MOTION -->
+  <section id="motion">
+    <div class="ghost" aria-hidden="true">05</div>
+    <div class="wrap sec-body">
+      <div class="shead"><span class="sidx">05 — Motion Study</span><span class="shint">Easing is a personality</span></div>
       <div class="curves" id="curves">
         <div class="curve" data-ease="expo">
           <div class="curve-name">EXPO.OUT<b>1 − 2^(−10t)</b></div>
@@ -543,11 +670,19 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
     </div>
   </section>
 
-  <!-- 04 NUMBERS -->
+  <!-- 06 NUMBERS -->
   <section id="numbers">
-    <div class="ghost" aria-hidden="true">04</div>
+    <div class="ghost" aria-hidden="true">06</div>
     <div class="wrap sec-body">
-      <div class="shead"><span class="sidx">04 — Numbers</span><span class="shint">This page, measured</span></div>
+      <div class="shead"><span class="sidx">06 — Numbers</span><span class="shint">Measured, not claimed</span></div>
+      <p class="nums-head">The human, measured</p>
+      <div class="nums">
+        <div class="num"><div class="v">06</div><div class="l">LLM agents — live in one sim</div></div>
+        <div class="num"><div class="v">02</div><div class="l">Products — solo-built &amp; live</div></div>
+        <div class="num"><div class="v">03</div><div class="l">Chains — EVM · Starknet · Solana</div></div>
+        <div class="num"><div class="v">01</div><div class="l">Human — judgement included</div></div>
+      </div>
+      <p class="nums-head">This page, measured</p>
       <div class="nums">
         <div class="num"><div class="v">01</div><div class="l">HTML file — the whole thing</div></div>
         <div class="num"><div class="v">00</div><div class="l">Frameworks — hand-rolled CSS/JS</div></div>
@@ -559,17 +694,17 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
     </div>
   </section>
 
-  <!-- 05 JOURNEY -->
+  <!-- 07 JOURNEY -->
   <section id="journey">
-    <div class="ghost" aria-hidden="true">05</div>
+    <div class="ghost" aria-hidden="true">07</div>
     <div class="wrap sec-body">
-      <div class="shead"><span class="sidx">05 — The Road</span><span class="shint">Experience, compressed</span></div>
+      <div class="shead"><span class="sidx">07 — The Road</span><span class="shint">Experience, compressed</span></div>
       <div class="jrows">
         <div class="jrow">
           <span class="jera">Now</span>
           <div>
             <h3>AI-Native Full-Stack Systems</h3>
-            <p>Multi-agent sims and solo-shipped SaaS. Design, build, operate — end to end, no hand-offs.</p>
+            <p>Multi-agent sims and solo-shipped SaaS — Endless Werewolf, ZenCV.ai. Design, build, operate — end to end, no hand-offs.</p>
           </div>
         </div>
         <div class="jrow">
@@ -590,11 +725,11 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
     </div>
   </section>
 
-  <!-- 06 CONTACT -->
+  <!-- 08 CONTACT -->
   <section id="contact">
-    <div class="ghost" aria-hidden="true">06</div>
+    <div class="ghost" aria-hidden="true">08</div>
     <div class="wrap sec-body">
-      <div class="shead"><span class="sidx">06 — Contact</span><span class="shint">No forms. Just email.</span></div>
+      <div class="shead"><span class="sidx">08 — Contact</span><span class="shint">No forms. Just email.</span></div>
       <h2 class="contact-h">
         <span class="ln">Got a system</span>
         <span class="ln outline">that needs</span>
