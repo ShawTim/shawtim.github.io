@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHAWT.IM® — I Build Interfaces That Ship</title>
+<meta name="description" content="Senior frontend / full-stack engineer. AI-native systems, interface architecture, product judgement. One HTML file, no frameworks, no images — the page is the proof.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23d8ff3a'/></svg>">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --bg:#0a0a0a;
+  --ink:#f2f2ee;
+  --mut:#84847c;
+  --line:rgba(255,255,255,.13);
+  --panel:#101010;
+  --acid:#d8ff3a;
+  --acid-text:#d8ff3a;
+  --acid-ink:#0a0a0a;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --snap:cubic-bezier(.76,0,.24,1);
+}
+body[data-theme="light"]{
+  --bg:#e9e9e2;
+  --ink:#111110;
+  --mut:#66665e;
+  --line:rgba(0,0,0,.16);
+  --panel:#dcdcd4;
+  --acid-text:#4f6d00;
+  --acid-ink:#0a0a0a;
+}
+/* ============ BASE ============ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Clash Display','Inter',system-ui,sans-serif;
+  font-weight:500;
+  min-height:100vh;
+  overflow-x:hidden;
+  transition:background-color .5s ease,color .5s ease;
+}
+body:not(.ready){overflow:hidden}
+::selection{background:var(--acid);color:#0a0a0a}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--line);border:2px solid var(--bg)}
+::-webkit-scrollbar-thumb:hover{background:var(--acid)}
+html{scrollbar-width:thin;scrollbar-color:var(--line) var(--bg)}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0}
+:focus-visible{outline:2px solid var(--acid-text);outline-offset:3px}
+.mono{font-family:'JetBrains Mono',monospace}
+img{display:none} /* discipline: zero images */
+.wrap{max-width:1600px;margin:0 auto;padding-inline:clamp(20px,4vw,64px)}
+
+/* ============ NOISE / CURSOR / PROGRESS ============ */
+.noise{
+  position:fixed;inset:0;z-index:400;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+.cursor-dot,.cursor-ring{position:fixed;top:0;left:0;z-index:600;pointer-events:none;border-radius:50%;display:none}
+.cursor-dot{width:6px;height:6px;background:var(--acid)}
+.cursor-ring{width:34px;height:34px;border:1.5px solid #fff;mix-blend-mode:difference;transition:width .25s var(--ease),height .25s var(--ease)}
+.cursor-ring.big{width:64px;height:64px}
+@media(pointer:fine){
+  body.cursor-on,body.cursor-on a,body.cursor-on button,body.cursor-on .row{cursor:none}
+  body.cursor-on .cursor-dot,body.cursor-on .cursor-ring{display:block}
+}
+.progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:300;background:transparent}
+.progress i{display:block;height:100%;background:var(--acid);transform:scaleX(0);transform-origin:left}
+
+/* ============ SIDE LABELS ============ */
+.side{
+  position:fixed;top:50%;z-index:90;pointer-events:none;
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.22em;
+  color:var(--mut);text-transform:uppercase;white-space:nowrap;
+}
+.side.left{left:18px;transform:rotate(180deg) translateY(50%);writing-mode:vertical-rl}
+.side.right{right:18px;transform:translateY(-50%);writing-mode:vertical-rl}
+@media(max-width:900px){.side{display:none}}
+
+/* ============ BOOT ============ */
+.boot{
+  position:fixed;inset:0;z-index:500;background:var(--bg);color:var(--ink);
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:clamp(20px,4vw,64px);
+  transition:transform .65s var(--snap);
+}
+.boot.out{transform:translateY(-101%)}
+.boot-top{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;color:var(--mut)}
+.boot-lines{font-family:'JetBrains Mono',monospace;font-size:clamp(11px,1.2vw,13px);line-height:2.1;color:var(--mut);letter-spacing:.08em}
+.boot-lines span{display:block;opacity:0;animation:bootLine .4s var(--ease) forwards}
+.boot-lines span:nth-child(1){animation-delay:.06s}
+.boot-lines span:nth-child(2){animation-delay:.18s}
+.boot-lines span:nth-child(3){animation-delay:.30s}
+.boot-lines span:nth-child(4){animation-delay:.42s}
+.boot-lines b{color:var(--acid-text);font-weight:400}
+@keyframes bootLine{to{opacity:1}}
+.boot-count{
+  align-self:flex-end;font-weight:600;line-height:.9;letter-spacing:-.03em;
+  font-size:clamp(5rem,14vw,12rem);color:var(--ink);
+}
+
+/* ============ NAV ============ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  border-bottom:1px solid var(--line);
+  background:var(--bg);
+  background:color-mix(in srgb,var(--bg) 82%,transparent);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{font-weight:600;font-size:19px;letter-spacing:-.01em}
+.logo sup{font-size:.55em;color:var(--acid-text)}
+.nav-links{display:flex;gap:clamp(18px,2.6vw,40px);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;color:var(--mut)}
+.nav-links a{position:relative;padding:4px 0;transition:color .3s}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;background:var(--acid);transform:scaleX(0);transform-origin:right;transition:transform .35s var(--ease)}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a:hover::after{transform:scaleX(1);transform-origin:left}
+.nav-right{display:flex;align-items:center;gap:18px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--mut)}
+.invert{
+  display:inline-flex;align-items:center;gap:8px;padding:7px 14px;
+  border:1px solid var(--line);border-radius:999px;letter-spacing:.14em;font-size:10px;
+  transition:background .3s,color .3s,border-color .3s;
+}
+.invert i{width:7px;height:7px;border-radius:50%;background:var(--acid);display:inline-block}
+.invert:hover{background:var(--acid);color:var(--acid-ink);border-color:var(--acid)}
+.invert:hover i{background:var(--acid-ink)}
+.burger{display:none;flex-direction:column;gap:5px;padding:8px}
+.burger i{width:22px;height:1.5px;background:var(--ink);transition:transform .35s var(--ease)}
+@media(max-width:900px){
+  .nav-links{display:none}
+  .burger{display:flex}
+  .nav.open .nav-links{
+    display:flex;position:absolute;top:72px;left:0;right:0;flex-direction:column;gap:0;
+    background:var(--bg);border-bottom:1px solid var(--line);padding:12px clamp(20px,4vw,64px) 20px;
+  }
+  .nav.open .nav-links a{padding:12px 0;border-top:1px solid var(--line);font-size:13px}
+  .nav.open .burger i:nth-child(1){transform:translateY(3.25px) rotate(45deg)}
+  .nav.open .burger i:nth-child(2){transform:translateY(-3.25px) rotate(-45deg)}
+  .clock{display:none}
+}
+
+/* ============ HERO ============ */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;padding-top:72px}
+#grid{position:absolute;inset:0;z-index:0;width:100%;height:100%;-webkit-mask-image:linear-gradient(to bottom,#000 55%,transparent);mask-image:linear-gradient(to bottom,#000 55%,transparent)}
+.hero-in{position:relative;z-index:1}
+.eyebrow{
+  font-family:'JetBrains Mono',monospace;font-size:clamp(10px,1.1vw,12px);letter-spacing:.22em;
+  color:var(--mut);text-transform:uppercase;margin-bottom:clamp(24px,3vw,44px);display:flex;align-items:center;gap:10px;
+}
+.eyebrow::before{content:"";width:9px;height:9px;background:var(--acid);flex:none}
+.h1{
+  font-weight:600;letter-spacing:-.03em;line-height:.94;
+  font-size:clamp(2.2rem,12vw,10.5rem);text-transform:uppercase;
+}
+.h1 .ln{display:block;white-space:nowrap}
+.mask{display:block;overflow:hidden}
+.mask>span{display:block}
+html.js body:not(.ready) .mask>span{transform:translateY(112%)}
+body.ready .mask>span{animation:maskUp 1s var(--snap) .05s both}
+body.ready .mask.d1>span{animation-delay:.16s}
+body.ready .mask.d2>span{animation-delay:.27s}
+@keyframes maskUp{from{transform:translateY(112%)}to{transform:translateY(0)}}
+.outline{color:transparent;-webkit-text-stroke:2px var(--ink)}
+@supports not (-webkit-text-stroke:1px #000){.outline{color:var(--ink)}}
+#rot{color:var(--acid-text);display:inline-block;min-width:7.3ch;text-align:left}
+.hero-sub{
+  max-width:640px;margin-top:clamp(28px,3.4vw,48px);
+  font-size:clamp(15px,1.5vw,19px);line-height:1.6;font-weight:400;color:var(--mut);
+}
+.hero-sub b{color:var(--ink);font-weight:500}
+.hero-cta{display:flex;flex-wrap:wrap;gap:16px;margin-top:clamp(28px,3.4vw,48px)}
+.btn{
+  display:inline-flex;align-items:center;gap:12px;
+  font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  padding:18px 30px;border:1px solid var(--line);border-radius:2px;
+  transition:background .35s var(--ease),color .35s var(--ease),border-color .35s var(--ease),transform .3s var(--ease);
+  will-change:transform;
+}
+.btn-acid{background:var(--acid);color:var(--acid-ink);border-color:var(--acid);font-weight:700}
+.btn-ghost{color:var(--ink)}
+.btn-ghost:hover{border-color:var(--acid);color:var(--acid-text)}
+.btn .ar{transition:transform .35s var(--ease)}
+.btn:hover .ar{transform:translate(4px,-4px)}
+.hero-meta{
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  margin-top:clamp(48px,7vw,96px);padding-top:20px;border-top:1px solid var(--line);
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;color:var(--mut);text-transform:uppercase;
+}
+.status{display:inline-flex;align-items:center;gap:9px}
+.status i{width:7px;height:7px;background:var(--acid);border-radius:50%;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+
+/* ============ MARQUEE ============ */
+.marquee{border-block:1px solid var(--line);padding:18px 0;overflow:hidden;user-select:none}
+.marquee-track{display:inline-flex;white-space:nowrap;animation:mq 34s linear infinite;will-change:transform}
+.marquee:hover .marquee-track{animation-play-state:paused}
+.marquee-track span{
+  font-weight:600;text-transform:uppercase;letter-spacing:-.02em;
+  font-size:clamp(1.4rem,3vw,2.4rem);color:transparent;-webkit-text-stroke:1px var(--mut);padding-right:.6em;
+}
+.marquee-track span b{color:var(--acid);-webkit-text-stroke:0;font-weight:600}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ============ SECTIONS ============ */
+section{position:relative;padding-block:clamp(88px,11vw,170px)}
+.shead{
+  display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+  font-family:'JetBrains Mono',monospace;font-size:clamp(10px,1.1vw,12px);letter-spacing:.2em;
+  text-transform:uppercase;margin-bottom:clamp(40px,5vw,72px);
+}
+.shead .sidx{color:var(--ink);display:flex;align-items:center;gap:10px}
+.shead .sidx::before{content:"";width:8px;height:8px;background:var(--acid);flex:none}
+.shead .shint{color:var(--mut);text-align:right}
+.ghost{
+  position:absolute;top:clamp(40px,6vw,90px);right:0;z-index:0;pointer-events:none;user-select:none;
+  font-weight:700;font-size:clamp(9rem,22vw,22rem);line-height:.8;letter-spacing:-.04em;
+  color:transparent;-webkit-text-stroke:1px var(--line);
+}
+.sec-body{position:relative;z-index:1}
+
+/* ============ MANIFESTO ============ */
+.manifesto-text{
+  max-width:1150px;
+  font-weight:500;letter-spacing:-.015em;line-height:1.28;
+  font-size:clamp(1.7rem,4.4vw,3.9rem);
+}
+.manifesto-text .w{opacity:.13;transition:opacity .35s ease}
+.manifesto-text .w.on{opacity:1}
+.manifesto-text .w.ac.on{color:var(--acid-text)}
+.manifesto-sig{
+  margin-top:clamp(32px,4vw,56px);font-family:'JetBrains Mono',monospace;font-size:11px;
+  letter-spacing:.2em;color:var(--mut);text-transform:uppercase;
+}
+
+/* ============ CAPABILITIES ============ */
+.rows{border-top:1px solid var(--line)}
+.row{
+  display:grid;grid-template-columns:clamp(48px,6vw,96px) 1fr auto;gap:clamp(16px,3vw,48px);
+  align-items:center;padding:clamp(28px,3.6vw,52px) clamp(8px,1.4vw,24px);
+  border-bottom:1px solid var(--line);
+  transition:background .45s var(--ease),color .45s var(--ease);
+}
+.row:hover,.row:focus-visible{background:var(--acid);color:var(--acid-ink)}
+.rnum{
+  font-family:'JetBrains Mono',monospace;font-size:clamp(11px,1.2vw,13px);letter-spacing:.14em;color:var(--mut);
+  transition:color .45s;
+}
+.row:hover .rnum,.row:focus-visible .rnum{color:var(--acid-ink)}
+.rmain h3{
+  font-weight:600;text-transform:uppercase;letter-spacing:-.02em;line-height:1;
+  font-size:clamp(1.7rem,4.6vw,4rem);
+}
+.rmain p{max-width:640px;margin-top:12px;font-size:clamp(13px,1.3vw,15px);line-height:1.6;font-weight:400;color:var(--mut);transition:color .45s}
+.row:hover .rmain p,.row:focus-visible .rmain p{color:rgba(10,10,10,.72)}
+.tags{margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mut);opacity:.85;transition:color .45s}
+.row:hover .tags,.row:focus-visible .tags{color:rgba(10,10,10,.6)}
+.rarrow{
+  font-size:clamp(1.6rem,3.4vw,3rem);font-weight:400;
+  transform:translateX(-14px);opacity:0;transition:transform .45s var(--ease),opacity .45s var(--ease);
+}
+.row:hover .rarrow,.row:focus-visible .rarrow{transform:translateX(0);opacity:1}
+@media(max-width:640px){.rarrow{display:none}}
+
+/* ============ MOTION ============ */
+.curves{border-top:1px solid var(--line)}
+.curve{
+  display:grid;grid-template-columns:minmax(120px,220px) 1fr minmax(90px,150px);gap:clamp(14px,3vw,48px);
+  align-items:center;padding:clamp(22px,3vw,36px) 0;border-bottom:1px solid var(--line);
+}
+.curve-name{font-family:'JetBrains Mono',monospace;font-size:clamp(11px,1.2vw,13px);letter-spacing:.14em}
+.curve-name b{display:block;color:var(--mut);font-weight:400;margin-top:6px;font-size:10px}
+.curve svg{width:100%;height:auto;display:block;overflow:visible}
+.curve-path{fill:none;stroke:var(--line);stroke-width:1.5;stroke-dasharray:2 7}
+.curve-end{fill:none;stroke:var(--mut);stroke-width:1.5}
+.curve-dot{fill:var(--acid);filter:drop-shadow(0 0 7px var(--acid))}
+.curve-cap{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;color:var(--mut);text-transform:uppercase;text-align:right}
+.motion-note{
+  margin-top:clamp(28px,3.4vw,44px);max-width:520px;
+  font-size:clamp(13px,1.3vw,15px);line-height:1.65;color:var(--mut);font-weight:400;
+}
+@media(max-width:640px){
+  .curve{grid-template-columns:1fr;gap:10px}
+  .curve-cap{text-align:left}
+}
+
+/* ============ NUMBERS ============ */
+.nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.num{
+  padding:clamp(26px,3vw,44px);border-right:1px solid var(--line);border-bottom:1px solid var(--line);
+  transition:background .4s var(--ease),color .4s var(--ease);position:relative;
+}
+.num:hover{background:var(--acid);color:var(--acid-ink)}
+.num .v{font-weight:600;font-size:clamp(3.2rem,6.5vw,6rem);line-height:1;letter-spacing:-.03em}
+.num .l{margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mut);transition:color .4s}
+.num:hover .l{color:rgba(10,10,10,.65)}
+.num .live{
+  position:absolute;top:14px;right:14px;font-family:'JetBrains Mono',monospace;font-size:9px;
+  letter-spacing:.16em;color:var(--acid-text);display:inline-flex;align-items:center;gap:6px;
+}
+.num .live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--acid);animation:pulse 2s ease-in-out infinite}
+.num:hover .live{color:var(--acid-ink)}
+.num:hover .live::before{background:var(--acid-ink)}
+
+/* ============ JOURNEY ============ */
+.jrows{border-top:1px solid var(--line)}
+.jrow{
+  display:grid;grid-template-columns:minmax(110px,180px) 1fr;gap:clamp(14px,3vw,48px);
+  padding:clamp(24px,3vw,40px) 0;border-bottom:1px solid var(--line);
+}
+.jera{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;color:var(--acid-text);text-transform:uppercase;padding-top:6px}
+.jrow h3{font-weight:600;text-transform:uppercase;letter-spacing:-.015em;font-size:clamp(1.3rem,2.6vw,2.1rem)}
+.jrow p{margin-top:10px;max-width:620px;font-size:clamp(13px,1.3vw,15px);line-height:1.6;color:var(--mut);font-weight:400}
+
+/* ============ CONTACT ============ */
+.contact-h{
+  font-weight:600;text-transform:uppercase;letter-spacing:-.03em;line-height:.96;
+  font-size:clamp(2rem,9.4vw,8.6rem);
+}
+.contact-h .ln{display:block}
+.contact-cta{display:flex;flex-wrap:wrap;gap:16px;margin-top:clamp(32px,4.4vw,60px)}
+.contact-note{
+  margin-top:clamp(28px,3.6vw,44px);font-family:'JetBrains Mono',monospace;font-size:11px;
+  letter-spacing:.2em;color:var(--mut);text-transform:uppercase;
+}
+
+/* ============ FOOTER ============ */
+footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
+.f-grid{display:grid;grid-template-columns:1fr auto;gap:clamp(32px,5vw,80px);align-items:start}
+.f-tag{margin-top:14px;max-width:420px;font-size:14px;line-height:1.6;color:var(--mut);font-weight:400}
+.telemetry{
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;
+  display:grid;grid-template-columns:auto auto;gap:8px 28px;color:var(--mut);
+}
+.telemetry b{color:var(--ink);font-weight:400;text-align:right}
+.telemetry b.acid{color:var(--acid-text)}
+.f-bottom{
+  display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
+  margin-top:clamp(40px,5vw,64px);padding-top:20px;border-top:1px solid var(--line);
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;color:var(--mut);text-transform:uppercase;
+}
+.top-link{display:inline-flex;align-items:center;gap:8px;transition:color .3s}
+.top-link:hover{color:var(--acid-text)}
+@media(max-width:760px){.f-grid{grid-template-columns:1fr}}
+
+/* ============ REDUCED MOTION ============ */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+  .marquee-track{animation:none}
+  html.js body:not(.ready) .mask>span{transform:none}
+}
+</style>
+</head>
+<body data-theme="dark">
+
+<!-- BOOT -->
+<div class="boot" id="boot" aria-hidden="true">
+  <div class="boot-top"><span>SHAWT.IM®</span><span>PORTFOLIO — 2026</span></div>
+  <div class="boot-lines">
+    <span>&gt; TYPE ......... <b>CLASH DISPLAY</b></span>
+    <span>&gt; MOTION ....... <b>HAND-ROLLED</b></span>
+    <span>&gt; IMAGES ....... <b>0 SHIPPED</b></span>
+    <span>&gt; ACCENT ....... <b>1 — DISCIPLINE</b></span>
+  </div>
+  <div class="boot-count" id="bootCount">000</div>
+</div>
+
+<!-- CURSOR / NOISE / PROGRESS -->
+<div class="cursor-dot" id="cDot"></div>
+<div class="cursor-ring" id="cRing"></div>
+<div class="noise" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
+
+<!-- SIDE LABELS -->
+<aside class="side left" aria-hidden="true">SHAWT.IM — ONE HTML FILE — NO FRAMEWORKS — 2026 ©</aside>
+<aside class="side right" aria-hidden="true">SCROLL — <span id="scrollPct">000%</span></aside>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a href="#top" class="logo">SHAWT.IM<sup>®</sup></a>
+    <nav class="nav-links" id="navLinks" aria-label="Sections">
+      <a href="#manifesto">MANIFESTO</a>
+      <a href="#capabilities">CAPABILITIES</a>
+      <a href="#motion">MOTION</a>
+      <a href="#numbers">NUMBERS</a>
+      <a href="#contact">CONTACT</a>
+    </nav>
+    <div class="nav-right">
+      <span class="clock mono" id="clock">00:00:00</span>
+      <button class="invert" id="themeBtn" aria-label="Invert theme"><i></i>INVERT</button>
+      <button class="burger" id="burger" aria-label="Toggle menu" aria-expanded="false"><i></i><i></i></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <canvas id="grid" aria-hidden="true"></canvas>
+    <div class="wrap hero-in" id="heroIn">
+      <p class="eyebrow">ShawTim — Senior Frontend / Full-Stack Engineer</p>
+      <h1 class="h1">
+        <span class="ln mask"><span>I BUILD</span></span>
+        <span class="ln mask d1"><span class="outline">INTERFACES</span></span>
+        <span class="ln mask d2"><span>THAT&nbsp;<span id="rot">SHIP.</span></span></span>
+      </h1>
+      <p class="hero-sub">
+        Frontend architecture, <b>AI-native systems</b>, and the judgement to ship them —
+        end to end, solo when it counts. This page is the proof:
+        <b>one file, no frameworks, no images.</b>
+      </p>
+      <div class="hero-cta">
+        <a href="#capabilities" class="btn btn-acid magnetic">See capabilities <span class="ar">↓</span></a>
+        <a href="mailto:work@shawt.im" class="btn btn-ghost magnetic">work@shawt.im <span class="ar">↗</span></a>
+      </div>
+      <div class="hero-meta">
+        <span>©2026 — Portfolio</span>
+        <span class="status"><i></i>Open to senior frontend / full-stack / AI-product work</span>
+        <span>Scroll to read ↓</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Frontend Architecture <b>·</b> TypeScript <b>·</b> React <b>·</b> State Machines <b>·</b> Design Systems <b>·</b> Motion <b>·</b> Agent Orchestration <b>·</b> Model Routing <b>·</b> Node.js <b>·</b> Performance <b>·</b> </span><span>Frontend Architecture <b>·</b> TypeScript <b>·</b> React <b>·</b> State Machines <b>·</b> Design Systems <b>·</b> Motion <b>·</b> Agent Orchestration <b>·</b> Model Routing <b>·</b> Node.js <b>·</b> Performance <b>·</b> </span>
+    </div>
+  </div>
+
+  <!-- 01 MANIFESTO -->
+  <section id="manifesto">
+    <div class="ghost" aria-hidden="true">01</div>
+    <div class="wrap sec-body">
+      <div class="shead"><span class="sidx">01 — Manifesto</span><span class="shint">Scroll to read</span></div>
+      <p class="manifesto-text" id="manifestoText">The interface is the last honest <span class="ac">craft.</span> AI writes most of my code — the architecture, the trade-offs and the final call stay <span class="ac">human.</span> I ship alone and ship for real: systems you can open, inspect and measure. <span class="ac">Proof first.</span> Claims second.</p>
+      <p class="manifesto-sig">— ShawTim, engineer of record for this page</p>
+    </div>
+  </section>
+
+  <!-- 02 CAPABILITIES -->
+  <section id="capabilities">
+    <div class="ghost" aria-hidden="true">02</div>
+    <div class="wrap sec-body">
+      <div class="shead"><span class="sidx">02 — Capabilities</span><span class="shint">What I actually do</span></div>
+      <div class="rows">
+        <article class="row" tabindex="0">
+          <span class="rnum">/01</span>
+          <div class="rmain">
+            <h3>Frontend Architecture</h3>
+            <p>Design systems, async state modelling, rendering performance, accessibility. Interfaces that stay fast and honest under production load.</p>
+            <p class="tags">React · TypeScript · State Machines · Design Systems · Motion · A11y</p>
+          </div>
+          <span class="rarrow" aria-hidden="true">→</span>
+        </article>
+        <article class="row" tabindex="0">
+          <span class="rnum">/02</span>
+          <div class="rmain">
+            <h3>AI-Native Engineering</h3>
+            <p>Multi-agent orchestration, model routing, eval loops. AI generates; I decide what ships. Judgement is the product.</p>
+            <p class="tags">Agent Orchestration · Model Routing · Eval Loops · Prompt Systems</p>
+          </div>
+          <span class="rarrow" aria-hidden="true">→</span>
+        </article>
+        <article class="row" tabindex="0">
+          <span class="rnum">/03</span>
+          <div class="rmain">
+            <h3>Full-Stack Delivery</h3>
+            <p>Schema to pixel to deploy — solo when it counts. Auth, data, caching, edge, CI. The whole loop, no hand-offs.</p>
+            <p class="tags">Node.js · API Design · Postgres · Edge · CI/CD</p>
+          </div>
+          <span class="rarrow" aria-hidden="true">→</span>
+        </article>
+        <article class="row" tabindex="0">
+          <span class="rnum">/04</span>
+          <div class="rmain">
+            <h3>Product Judgement</h3>
+            <p>Knowing what not to build. Trade-offs stated in writing, evidence before claims, teardowns over adjectives.</p>
+            <p class="tags">Scoping · Trade-offs · Writing · Teardowns</p>
+          </div>
+          <span class="rarrow" aria-hidden="true">→</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 MOTION -->
+  <section id="motion">
+    <div class="ghost" aria-hidden="true">03</div>
+    <div class="wrap sec-body">
+      <div class="shead"><span class="sidx">03 — Motion Study</span><span class="shint">Easing is a personality</span></div>
+      <div class="curves" id="curves">
+        <div class="curve" data-ease="expo">
+          <div class="curve-name">EXPO.OUT<b>1 − 2^(−10t)</b></div>
+          <svg viewBox="0 0 300 70" preserveAspectRatio="none" aria-hidden="true">
+            <path class="curve-path" d="M8 64 C 60 10, 130 6, 292 6"/>
+            <circle class="curve-end" cx="292" cy="6" r="4"/>
+            <circle class="curve-dot" r="5"/>
+          </svg>
+          <div class="curve-cap">The landing</div>
+        </div>
+        <div class="curve" data-ease="inout">
+          <div class="curve-name">POWER.INOUT<b>4t³ / mirror</b></div>
+          <svg viewBox="0 0 300 70" preserveAspectRatio="none" aria-hidden="true">
+            <path class="curve-path" d="M8 64 C 100 64, 200 6, 292 6"/>
+            <circle class="curve-end" cx="292" cy="6" r="4"/>
+            <circle class="curve-dot" r="5"/>
+          </svg>
+          <div class="curve-cap">The door</div>
+        </div>
+        <div class="curve" data-ease="steps">
+          <div class="curve-name">STEPS(6)<b>floor(6t) / 6</b></div>
+          <svg viewBox="0 0 300 70" preserveAspectRatio="none" aria-hidden="true">
+            <path class="curve-path" d="M8 64 h47.33 v-9.67 h47.33 v-9.67 h47.33 v-9.66 h47.33 v-9.67 h47.33 v-9.67 h47.34 v-9.66"/>
+            <circle class="curve-end" cx="292" cy="6" r="4"/>
+            <circle class="curve-dot" r="5"/>
+          </svg>
+          <div class="curve-cap">The machine</div>
+        </div>
+        <div class="curve" data-ease="spring">
+          <div class="curve-name">SPRING<b>1 − e^(−5.5t)·cos(7t)</b></div>
+          <svg viewBox="0 0 300 70" preserveAspectRatio="none" aria-hidden="true">
+            <path class="curve-path" d="M8 64 C 70 -16, 170 34, 292 6"/>
+            <circle class="curve-end" cx="292" cy="6" r="4"/>
+            <circle class="curve-dot" r="5"/>
+          </svg>
+          <div class="curve-cap">The handshake</div>
+        </div>
+      </div>
+      <p class="motion-note">Four curves, four personalities. Choose the personality before the property — then ship it at 60fps, on a mid-range phone, with reduced-motion respected.</p>
+    </div>
+  </section>
+
+  <!-- 04 NUMBERS -->
+  <section id="numbers">
+    <div class="ghost" aria-hidden="true">04</div>
+    <div class="wrap sec-body">
+      <div class="shead"><span class="sidx">04 — Numbers</span><span class="shint">This page, measured</span></div>
+      <div class="nums">
+        <div class="num"><div class="v">01</div><div class="l">HTML file — the whole thing</div></div>
+        <div class="num"><div class="v">00</div><div class="l">Frameworks — hand-rolled CSS/JS</div></div>
+        <div class="num"><div class="v">00</div><div class="l">Images — type did it</div></div>
+        <div class="num"><div class="v">01</div><div class="l">Accent color — discipline</div></div>
+        <div class="num"><span class="live">Live</span><div class="v" id="fpsBig">—</div><div class="l">FPS, measured — non-negotiable</div></div>
+        <div class="num"><span class="live">Live</span><div class="v" id="lcpBig">—</div><div class="l">LCP ms — measured at runtime</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 JOURNEY -->
+  <section id="journey">
+    <div class="ghost" aria-hidden="true">05</div>
+    <div class="wrap sec-body">
+      <div class="shead"><span class="sidx">05 — The Road</span><span class="shint">Experience, compressed</span></div>
+      <div class="jrows">
+        <div class="jrow">
+          <span class="jera">Now</span>
+          <div>
+            <h3>AI-Native Full-Stack Systems</h3>
+            <p>Multi-agent sims and solo-shipped SaaS. Design, build, operate — end to end, no hand-offs.</p>
+          </div>
+        </div>
+        <div class="jrow">
+          <span class="jera">Previously</span>
+          <div>
+            <h3>Web3 Product Engineering</h3>
+            <p>Lending &amp; DEX products, wallet onboarding, real-time portfolio state across EVM, Starknet and Solana.</p>
+          </div>
+        </div>
+        <div class="jrow">
+          <span class="jera">Always</span>
+          <div>
+            <h3>ShawTim Studio</h3>
+            <p>Writing, satire, and experiments in AI-assisted creative production.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 CONTACT -->
+  <section id="contact">
+    <div class="ghost" aria-hidden="true">06</div>
+    <div class="wrap sec-body">
+      <div class="shead"><span class="sidx">06 — Contact</span><span class="shint">No forms. Just email.</span></div>
+      <h2 class="contact-h">
+        <span class="ln">Got a system</span>
+        <span class="ln outline">that needs</span>
+        <span class="ln" style="color:var(--acid-text)">shipping?</span>
+      </h2>
+      <div class="contact-cta">
+        <a href="mailto:work@shawt.im" class="btn btn-acid magnetic">work@shawt.im <span class="ar">↗</span></a>
+        <a href="https://github.com/ShawTim" target="_blank" rel="noopener noreferrer" class="btn btn-ghost magnetic">GitHub / ShawTim <span class="ar">↗</span></a>
+      </div>
+      <p class="contact-note">// Open to senior frontend / full-stack / AI-product roles and interesting collaborations</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div>
+        <span class="logo">SHAWT.IM<sup>®</sup></span>
+        <p class="f-tag">Proof first. Claims annotate evidence. The page itself is part of the portfolio — view source and check.</p>
+      </div>
+      <div class="telemetry" id="telemetry">
+        <span>JS PAYLOAD</span><b id="tJs">measuring…</b>
+        <span>LCP</span><b id="tLcp">measuring…</b>
+        <span>DOM NODES</span><b id="tDom">—</b>
+        <span>FPS</span><b id="tFps" class="acid">—</b>
+        <span>THEME</span><b id="tTheme">DARK</b>
+        <span>TIME</span><b id="tClock">—</b>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <span>© 2026 ShawTim — one HTML file, no frameworks</span>
+      <a href="#top" class="top-link">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+var $  = function(s,c){ return (c||document).querySelector(s); };
+var $$ = function(s,c){ return Array.prototype.slice.call((c||document).querySelectorAll(s)); };
+var clamp = function(v,a,b){ return Math.min(b, Math.max(a, v)); };
+var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var finePointer  = window.matchMedia('(pointer: fine)').matches;
+var store = {
+  get: function(k){ try { return window.localStorage.getItem(k); } catch(e){ return null; } },
+  set: function(k,v){ try { window.localStorage.setItem(k,v); } catch(e){} },
+  sget: function(k){ try { return window.sessionStorage.getItem(k); } catch(e){ return null; } },
+  sset: function(k,v){ try { window.sessionStorage.setItem(k,v); } catch(e){} }
+};
+
+/* ============ THEME ============ */
+var themeBtn = $('#themeBtn'), tTheme = $('#tTheme');
+function setTheme(t){
+  document.body.dataset.theme = t;
+  store.set('theme', t);
+  if (tTheme) tTheme.textContent = t.toUpperCase();
+}
+setTheme(store.get('theme') === 'light' ? 'light' : 'dark');
+if (themeBtn) themeBtn.addEventListener('click', function(){
+  setTheme(document.body.dataset.theme === 'dark' ? 'light' : 'dark');
+});
+window.addEventListener('keydown', function(e){
+  if ((e.key === 'i' || e.key === 'I') && !e.metaKey && !e.ctrlKey && !e.altKey) {
+    setTheme(document.body.dataset.theme === 'dark' ? 'light' : 'dark');
+  }
+});
+
+/* ============ BOOT ============ */
+var boot = $('#boot'), bootCount = $('#bootCount');
+function endBoot(){
+  if (!boot || boot.dataset.done) return;
+  boot.dataset.done = '1';
+  document.body.classList.add('ready');
+  boot.classList.add('out');
+  setTimeout(function(){ if (boot.parentNode) boot.parentNode.removeChild(boot); }, 750);
+}
+if (!boot) {
+  document.body.classList.add('ready');
+} else if (reduceMotion || store.sget('seen')) {
+  boot.parentNode.removeChild(boot);
+  document.body.classList.add('ready');
+} else {
+  store.sset('seen','1');
+  var t0 = null, DUR = 950;
+  function count(ts){
+    if (!t0) t0 = ts;
+    var p = clamp((ts - t0) / DUR, 0, 1);
+    if (bootCount) bootCount.textContent = String(Math.round(p * 100)).padStart(3, '0');
+    if (p < 1) requestAnimationFrame(count); else setTimeout(endBoot, 160);
+  }
+  requestAnimationFrame(count);
+  boot.addEventListener('click', endBoot);
+  setTimeout(endBoot, 4200); // failsafe
+}
+
+/* ============ NAV / MOBILE ============ */
+var nav = $('#nav'), burger = $('#burger');
+if (burger && nav) {
+  burger.addEventListener('click', function(){
+    var open = nav.classList.toggle('open');
+    burger.setAttribute('aria-expanded', String(open));
+  });
+  $$('#navLinks a').forEach(function(a){
+    a.addEventListener('click', function(){
+      nav.classList.remove('open');
+      burger.setAttribute('aria-expanded','false');
+    });
+  });
+}
+
+/* ============ CLOCK ============ */
+var clockEl = $('#clock'), tClock = $('#tClock');
+function tickClock(){
+  var s = new Date().toLocaleTimeString('en-GB', { hour12:false });
+  if (clockEl) clockEl.textContent = s;
+  if (tClock) tClock.textContent = s;
+}
+tickClock();
+setInterval(tickClock, 1000);
+
+/* ============ SCROLL: progress / parallax / manifesto ============ */
+var progressBar = $('#progressBar'), scrollPct = $('#scrollPct');
+var heroIn = $('#heroIn');
+var manText = $('#manifestoText');
+var manWords = [];
+
+/* split manifesto into word spans (preserve .ac acid spans) */
+if (manText) {
+  var frag = document.createDocumentFragment();
+  Array.prototype.slice.call(manText.childNodes).forEach(function(n){
+    if (n.nodeType === 3) {
+      n.textContent.split(/(\s+)/).forEach(function(part){
+        if (!part) return;
+        if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); }
+        else {
+          var s = document.createElement('span');
+          s.className = 'w';
+          s.textContent = part;
+          frag.appendChild(s);
+        }
+      });
+    } else if (n.nodeType === 1) {
+      var el = document.createElement('span');
+      el.className = 'w ac';
+      el.textContent = n.textContent;
+      frag.appendChild(el);
+    }
+  });
+  manText.textContent = '';
+  manText.appendChild(frag);
+  manWords = $$('.w', manText);
+  if (reduceMotion) manWords.forEach(function(w){ w.classList.add('on'); });
+}
+
+function updateManifesto(){
+  if (!manText || !manWords.length || reduceMotion) return;
+  var r = manText.getBoundingClientRect();
+  var vh = window.innerHeight;
+  var p = clamp((vh * 0.82 - r.top) / (r.height + vh * 0.30), 0, 1);
+  var lit = Math.floor(p * manWords.length);
+  for (var i = 0; i < manWords.length; i++) {
+    var on = i < lit;
+    if (manWords[i].classList.contains('on') !== on) manWords[i].classList.toggle('on', on);
+  }
+}
+
+var scrollTicking = false;
+function onScroll(){
+  if (scrollTicking) return;
+  scrollTicking = true;
+  requestAnimationFrame(function(){
+    var de = document.documentElement;
+    var max = de.scrollHeight - de.clientHeight;
+    var p = max > 0 ? (de.scrollTop || window.scrollY) / max : 0;
+    if (progressBar) progressBar.style.transform = 'scaleX(' + p + ')';
+    if (scrollPct) scrollPct.textContent = String(Math.round(p * 100)).padStart(3,'0') + '%';
+    if (heroIn && !reduceMotion && window.scrollY < window.innerHeight * 1.2) {
+      heroIn.style.transform = 'translateY(' + (window.scrollY * 0.07) + 'px)';
+      heroIn.style.opacity = String(1 - clamp(window.scrollY / (window.innerHeight * 0.9), 0, 0.55));
+    }
+    updateManifesto();
+    scrollTicking = false;
+  });
+}
+window.addEventListener('scroll', onScroll, { passive:true });
+onScroll();
+
+/* ============ SCRAMBLE ROTATOR ============ */
+var rotEl = $('#rot');
+var WORDS = ['SHIP.', 'THINK.', 'RENDER.', 'SCALE.', 'BEHAVE.'];
+if (rotEl && !reduceMotion) {
+  var CHARS = '!<>-_\\/[]{}=+*^?#';
+  var queue = [], raf = null, frame = 0, resolveFn = null;
+  function setText(next){
+    var old = rotEl.textContent;
+    var len = Math.max(old.length, next.length);
+    queue = [];
+    for (var i = 0; i < len; i++) {
+      var start = Math.floor(Math.random() * 18);
+      queue.push({ from: old[i] || '', to: next[i] || '', start: start, end: start + 4 + Math.floor(Math.random() * 18), char: '' });
+    }
+    frame = 0;
+    if (raf) cancelAnimationFrame(raf);
+    step();
+  }
+  function step(){
+    var out = '', done = 0;
+    for (var i = 0; i < queue.length; i++) {
+      var q = queue[i];
+      if (frame >= q.end) { done++; out += q.to; }
+      else if (frame >= q.start) {
+        if (!q.char || Math.random() < 0.28) q.char = CHARS[Math.floor(Math.random() * CHARS.length)];
+        out += q.char;
+      } else out += q.from;
+    }
+    rotEl.textContent = out;
+    if (done === queue.length) { raf = null; return; }
+    frame++;
+    raf = requestAnimationFrame(step);
+  }
+  var wi = 0;
+  setInterval(function(){
+    wi = (wi + 1) % WORDS.length;
+    if (!raf) setText(WORDS[wi]);
+  }, 2400);
+}
+
+/* ============ CUSTOM CURSOR ============ */
+if (finePointer && !reduceMotion) {
+  document.body.classList.add('cursor-on');
+  var dot = $('#cDot'), ring = $('#cRing');
+  var mx = -100, my = -100, rx = -100, ry = -100, ringHalf = 17;
+  window.addEventListener('mousemove', function(e){ mx = e.clientX; my = e.clientY; }, { passive:true });
+  (function cursorLoop(){
+    rx += (mx - rx) * 0.16;
+    ry += (my - ry) * 0.16;
+    if (dot)  dot.style.transform  = 'translate(' + (mx - 3) + 'px,' + (my - 3) + 'px)';
+    if (ring) ring.style.transform = 'translate(' + (rx - ringHalf) + 'px,' + (ry - ringHalf) + 'px)';
+    requestAnimationFrame(cursorLoop);
+  })();
+  document.addEventListener('mouseover', function(e){
+    if (!ring) return;
+    var t = e.target.closest ? e.target.closest('a,button,.row,.num') : null;
+    var big = !!t;
+    if (ring.classList.contains('big') !== big) {
+      ring.classList.toggle('big', big);
+      ringHalf = big ? 32 : 17;
+    }
+  });
+}
+
+/* ============ MAGNETIC BUTTONS ============ */
+if (finePointer && !reduceMotion) {
+  $$('.magnetic').forEach(function(btn){
+    btn.addEventListener('mousemove', function(e){
+      var r = btn.getBoundingClientRect();
+      var dx = e.clientX - r.left - r.width / 2;
+      var dy = e.clientY - r.top - r.height / 2;
+      btn.style.transform = 'translate(' + dx * 0.16 + 'px,' + dy * 0.24 + 'px)';
+    });
+    btn.addEventListener('mouseleave', function(){ btn.style.transform = ''; });
+  });
+}
+
+/* ============ HERO DOT-GRID CANVAS ============ */
+var cv = $('#grid'), hero = $('#hero');
+if (cv && hero) {
+  var ctx = cv.getContext('2d');
+  var W = 0, H = 0, pts = [], GAP = 46, R = 150;
+  var pmx = -9999, pmy = -9999, heroVisible = true, gridRaf = null;
+  function buildGrid(){
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = cv.clientWidth; H = cv.clientHeight;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    pts = [];
+    for (var y = GAP / 2; y < H; y += GAP)
+      for (var x = GAP / 2; x < W; x += GAP)
+        pts.push({ ox:x, oy:y, x:x, y:y, vx:0, vy:0 });
+  }
+  function inkDots(){ return document.body.dataset.theme === 'light' ? 'rgba(0,0,0,0.13)' : 'rgba(255,255,255,0.11)'; }
+  function drawStatic(){
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = inkDots();
+    for (var i = 0; i < pts.length; i++) ctx.fillRect(pts[i].ox, pts[i].oy, 1.4, 1.4);
+  }
+  function gridLoop(){
+    gridRaf = null;
+    if (!heroVisible) return;
+    ctx.clearRect(0, 0, W, H);
+    var base = inkDots();
+    for (var i = 0; i < pts.length; i++) {
+      var p = pts[i];
+      var dx = p.x - pmx, dy = p.y - pmy;
+      var d2 = dx * dx + dy * dy;
+      if (d2 < R * R && d2 > 0.01) {
+        var d = Math.sqrt(d2);
+        var f = (1 - d / R) * 1.9;
+        p.vx += (dx / d) * f;
+        p.vy += (dy / d) * f;
+      }
+      p.vx += (p.ox - p.x) * 0.018;
+      p.vy += (p.oy - p.y) * 0.018;
+      p.vx *= 0.90; p.vy *= 0.90;
+      p.x += p.vx; p.y += p.vy;
+      var pd = Math.sqrt((p.x - pmx) * (p.x - pmx) + (p.y - pmy) * (p.y - pmy));
+      if (pd < R) {
+        var a = (1 - pd / R);
+        ctx.fillStyle = 'rgba(216,255,58,' + (a * 0.85).toFixed(3) + ')';
+        ctx.fillRect(p.x - 1, p.y - 1, 2.4, 2.4);
+      } else {
+        ctx.fillStyle = base;
+        ctx.fillRect(p.x, p.y, 1.4, 1.4);
+      }
+    }
+    gridRaf = requestAnimationFrame(gridLoop);
+  }
+  function kick(){ if (!gridRaf && heroVisible && !reduceMotion) gridRaf = requestAnimationFrame(gridLoop); }
+  buildGrid();
+  if (reduceMotion) { drawStatic(); }
+  else {
+    hero.addEventListener('mousemove', function(e){
+      var r = cv.getBoundingClientRect();
+      pmx = e.clientX - r.left; pmy = e.clientY - r.top;
+    }, { passive:true });
+    hero.addEventListener('mouseleave', function(){ pmx = -9999; pmy = -9999; });
+    new IntersectionObserver(function(en){
+      heroVisible = en[0].isIntersecting;
+      kick();
+    }, { threshold: 0 }).observe(hero);
+    kick();
+  }
+  var rsT;
+  window.addEventListener('resize', function(){
+    clearTimeout(rsT);
+    rsT = setTimeout(function(){ buildGrid(); if (reduceMotion) drawStatic(); }, 180);
+  });
+  document.addEventListener('themechange', function(){ if (reduceMotion) drawStatic(); });
+}
+
+/* ============ EASING CURVES ============ */
+var EASE = {
+  expo:   function(t){ return t >= 1 ? 1 : 1 - Math.pow(2, -10 * t); },
+  inout:  function(t){ return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; },
+  steps:  function(t){ return Math.min(1, Math.floor(t * 6) / 6); },
+  spring: function(t){ return clamp(1 - Math.exp(-5.5 * t) * Math.cos(7 * t), 0, 1); }
+};
+var curvesWrap = $('#curves');
+if (curvesWrap) {
+  var curves = $$('.curve', curvesWrap).map(function(el, i){
+    var path = $('.curve-path', el), dotEl = $('.curve-dot', el);
+    var len = 0;
+    try { len = path.getTotalLength(); } catch(e){}
+    return { path:path, dot:dotEl, len:len, fn:EASE[el.dataset.ease] || EASE.expo, off:i * 0.23 };
+  });
+  var curvesVisible = false, curvesRaf = null, cStart = null;
+  var CDUR = 2600;
+  function curvesLoop(ts){
+    curvesRaf = null;
+    if (!curvesVisible) return;
+    if (cStart === null) cStart = ts;
+    var tGlobal = (ts - cStart) / CDUR;
+    curves.forEach(function(c){
+      if (!c.len) { try { c.len = c.path.getTotalLength(); } catch(e){} if (!c.len) return; }
+      var t = (tGlobal + c.off) % 1;
+      var e = c.fn(t);
+      var pt = c.path.getPointAtLength(e * c.len);
+      c.dot.setAttribute('transform', 'translate(' + pt.x + ' ' + pt.y + ')');
+    });
+    curvesRaf = requestAnimationFrame(curvesLoop);
+  }
+  function parkDots(){
+    curves.forEach(function(c){
+      if (!c.len) { try { c.len = c.path.getTotalLength(); } catch(e){} }
+      if (!c.len) return;
+      var pt = c.path.getPointAtLength(c.len);
+      c.dot.setAttribute('transform', 'translate(' + pt.x + ' ' + pt.y + ')');
+    });
+  }
+  if (reduceMotion) { parkDots(); }
+  else {
+    new IntersectionObserver(function(en){
+      curvesVisible = en[0].isIntersecting;
+      if (curvesVisible && !curvesRaf) { cStart = null; curvesRaf = requestAnimationFrame(curvesLoop); }
+    }, { threshold: 0.1 }).observe(curvesWrap);
+  }
+}
+
+/* ============ TELEMETRY: FPS / LCP / JS / DOM ============ */
+var tFps = $('#tFps'), fpsBig = $('#fpsBig');
+var tLcp = $('#tLcp'), lcpBig = $('#lcpBig');
+var ema = 16.7, lastT = null, fpsAcc = 0;
+function fpsLoop(ts){
+  if (lastT !== null) {
+    var dt = ts - lastT;
+    if (dt > 0 && dt < 500) ema = ema * 0.92 + dt * 0.08;
+  }
+  lastT = ts;
+  fpsAcc += (ts - (fpsLoop._p || ts)); fpsLoop._p = ts;
+  if (fpsAcc > 500) {
+    fpsAcc = 0;
+    var f = Math.round(1000 / ema);
+    if (tFps) tFps.textContent = String(f);
+    if (fpsBig) fpsBig.textContent = String(f);
+  }
+  requestAnimationFrame(fpsLoop);
+}
+requestAnimationFrame(fpsLoop);
+
+if (window.PerformanceObserver) {
+  try {
+    new PerformanceObserver(function(list){
+      var entries = list.getEntries();
+      var last = entries[entries.length - 1];
+      if (!last) return;
+      var ms = Math.round(last.startTime);
+      if (tLcp) tLcp.textContent = ms + ' ms';
+      if (lcpBig) lcpBig.textContent = String(ms);
+    }).observe({ type:'largest-contentful-paint', buffered:true });
+  } catch(e){ if (tLcp) tLcp.textContent = 'n/a'; }
+}
+window.addEventListener('load', function(){
+  var jsBytes = 0;
+  try {
+    performance.getEntriesByType('resource').forEach(function(en){
+      if (en.initiatorType === 'script') jsBytes += (en.transferSize || 0);
+    });
+  } catch(e){}
+  var tJs = $('#tJs');
+  if (tJs) tJs.textContent = jsBytes > 0 ? (jsBytes / 1024).toFixed(1) + ' KB ext' : 'INLINE ONLY';
+  var tDom = $('#tDom');
+  if (tDom) tDom.textContent = String(document.querySelectorAll('*').length);
+});
+})();
+</script>
+</body>
+</html>
