@@ -3,37 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SHAWT.IM® — I Build Interfaces That Ship</title>
+<title>SHAWT.IM — console of ShawTim, engineer</title>
 <meta name="description" content="ShawTim — senior frontend / full-stack engineer. AI-native systems, interface architecture, product judgement. Live proof linked, page included: one HTML file, no frameworks, no images.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23d8ff3a'/></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23060706'/><rect x='18' y='18' width='64' height='64' fill='%2333ff88'/></svg>">
 <script>document.documentElement.classList.add('js');</script>
-<link rel="preconnect" href="https://api.fontshare.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 /* ============ TOKENS ============ */
 :root{
-  --bg:#0a0a0a;
-  --ink:#f2f2ee;
-  --mut:#84847c;
-  --line:rgba(255,255,255,.13);
-  --panel:#101010;
-  --acid:#d8ff3a;
-  --acid-text:#d8ff3a;
-  --acid-ink:#0a0a0a;
+  --bg:#060706;
+  --ink:#c9e4cf;
+  --mut:#5f7267;
+  --line:rgba(51,255,136,.13);
+  --panel:#0a0d0b;
+  --acid:#33ff88;
+  --acid-text:#33ff88;
+  --acid-ink:#041007;
   --ease:cubic-bezier(.22,.61,.36,1);
   --snap:cubic-bezier(.76,0,.24,1);
 }
 body[data-theme="light"]{
-  --bg:#e9e9e2;
-  --ink:#111110;
-  --mut:#66665e;
-  --line:rgba(0,0,0,.16);
-  --panel:#dcdcd4;
-  --acid-text:#4f6d00;
-  --acid-ink:#0a0a0a;
+  --bg:#eef1ea;
+  --ink:#12291a;
+  --mut:#5c6f62;
+  --line:rgba(11,77,40,.18);
+  --panel:#e2e8de;
+  --acid:#0ba14b;
+  --acid-text:#0b7a3b;
+  --acid-ink:#f2fff6;
 }
 /* ============ BASE ============ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -41,14 +40,14 @@ html{scroll-behavior:smooth;scroll-padding-top:96px}
 body{
   background:var(--bg);
   color:var(--ink);
-  font-family:'Clash Display','Inter',system-ui,sans-serif;
-  font-weight:500;
+  font-family:'JetBrains Mono',ui-monospace,monospace;
+  font-weight:400;
   min-height:100vh;
   overflow-x:hidden;
   transition:background-color .5s ease,color .5s ease;
 }
 body:not(.ready){overflow:hidden}
-::selection{background:var(--acid);color:#0a0a0a}
+::selection{background:var(--acid);color:var(--acid-ink)}
 ::-webkit-scrollbar{width:10px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--line);border:2px solid var(--bg)}
@@ -61,15 +60,21 @@ button{font:inherit;color:inherit;background:none;border:0}
 img{display:none} /* discipline: zero images */
 .wrap{max-width:1600px;margin:0 auto;padding-inline:clamp(20px,4vw,64px)}
 
-/* ============ NOISE / CURSOR / PROGRESS ============ */
+/* ============ NOISE / SCANLINES / CURSOR / PROGRESS ============ */
 .noise{
-  position:fixed;inset:0;z-index:400;pointer-events:none;opacity:.05;
+  position:fixed;inset:0;z-index:400;pointer-events:none;opacity:.04;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
 }
+.scanlines{
+  position:fixed;inset:0;z-index:399;pointer-events:none;opacity:.35;
+  background:repeating-linear-gradient(to bottom,transparent 0 2px,rgba(0,0,0,.16) 2px 3px);
+}
+body[data-theme="light"] .scanlines{opacity:.12}
+@media (prefers-reduced-motion: reduce){.scanlines{display:none}}
 .cursor-dot,.cursor-ring{position:fixed;top:0;left:0;z-index:600;pointer-events:none;border-radius:50%;display:none}
-.cursor-dot{width:6px;height:6px;background:var(--acid)}
-.cursor-ring{width:34px;height:34px;border:1.5px solid #fff;mix-blend-mode:difference;transition:width .25s var(--ease),height .25s var(--ease)}
-.cursor-ring.big{width:64px;height:64px}
+.cursor-dot{width:8px;height:8px;background:var(--acid);box-shadow:0 0 8px var(--acid)}
+.cursor-ring{width:30px;height:30px;border:1.5px solid var(--acid);opacity:.55;border-radius:0;transition:width .25s var(--ease),height .25s var(--ease),opacity .25s}
+.cursor-ring.big{width:56px;height:56px;opacity:.9}
 @media(pointer:fine){
   body.cursor-on,body.cursor-on a,body.cursor-on button,body.cursor-on .row{cursor:none}
   body.cursor-on .cursor-dot,body.cursor-on .cursor-ring{display:block}
@@ -120,8 +125,8 @@ img{display:none} /* discipline: zero images */
   backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
 }
 .nav-in{display:flex;align-items:center;justify-content:space-between;height:72px}
-.logo{font-weight:600;font-size:19px;letter-spacing:-.01em}
-.logo sup{font-size:.55em;color:var(--acid-text)}
+.logo{font-weight:700;font-size:16px;letter-spacing:.04em}
+.logo sup{font-size:.6em;color:var(--acid-text)}
 .nav-links{display:flex;gap:clamp(18px,2.6vw,40px);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;color:var(--mut)}
 .nav-links a{position:relative;padding:4px 0;transition:color .3s}
 .nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;background:var(--acid);transform:scaleX(0);transform-origin:right;transition:transform .35s var(--ease)}
@@ -154,16 +159,28 @@ img{display:none} /* discipline: zero images */
 /* ============ HERO ============ */
 .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;padding-top:72px}
 #grid{position:absolute;inset:0;z-index:0;width:100%;height:100%;-webkit-mask-image:linear-gradient(to bottom,#000 55%,transparent);mask-image:linear-gradient(to bottom,#000 55%,transparent)}
-.hero-in{position:relative;z-index:1}
+.hero-in{position:relative;z-index:1;min-width:0}
 .eyebrow{
-  font-family:'JetBrains Mono',monospace;font-size:clamp(10px,1.1vw,12px);letter-spacing:.22em;
-  color:var(--mut);text-transform:uppercase;margin-bottom:clamp(24px,3vw,44px);display:flex;align-items:center;gap:10px;
+  font-family:'JetBrains Mono',monospace;font-size:clamp(11px,1.2vw,13px);letter-spacing:.06em;
+  color:var(--mut);margin-bottom:clamp(20px,2.6vw,36px);display:flex;align-items:center;gap:10px;
 }
-.eyebrow::before{content:"";width:9px;height:9px;background:var(--acid);flex:none}
+
 .h1{
-  font-weight:600;letter-spacing:-.03em;line-height:.94;
-  font-size:clamp(2.2rem,12vw,10.5rem);text-transform:uppercase;
+  font-weight:700;letter-spacing:-.02em;line-height:.96;
+  font-size:clamp(2.2rem,9.6vw,8.6rem);text-transform:uppercase;
 }
+/* never let the logotype exceed the line box on narrow screens */
+@supports (font-size: 1cqi){
+  .h1{font-size:clamp(2rem,8.4cqi,8.6rem)}
+  .hero{container-type:inline-size}
+}
+.h1 .dot{color:var(--acid-text)}
+.h1 .cursor{
+  display:inline-block;width:.52em;height:.8em;margin-left:.07em;
+  background:var(--acid);vertical-align:-.02em;
+  animation:blink 1.06s steps(1) infinite;
+}
+@keyframes blink{0%,55%{opacity:1}56%,100%{opacity:0}}
 .h1 .ln{display:block;white-space:nowrap}
 .mask{display:block;overflow:hidden}
 .mask>span{display:block}
@@ -174,7 +191,15 @@ body.ready .mask.d2>span{animation-delay:.27s}
 @keyframes maskUp{from{transform:translateY(112%)}to{transform:translateY(0)}}
 .outline{color:transparent;-webkit-text-stroke:2px var(--ink)}
 @supports not (-webkit-text-stroke:1px #000){.outline{color:var(--ink)}}
-#rot{color:var(--acid-text);display:inline-block;min-width:7.3ch;text-align:left}
+.spec{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));
+  gap:10px clamp(24px,4vw,64px);max-width:940px;
+  margin-top:clamp(24px,3vw,40px);
+  font-family:'JetBrains Mono',monospace;font-size:clamp(11px,1.15vw,13px);
+  letter-spacing:.12em;color:var(--mut);
+}
+.spec b{color:var(--ink);font-weight:500}
+.spec a{color:var(--acid-text)}
 .hero-sub{
   max-width:640px;margin-top:clamp(28px,3.4vw,48px);
   font-size:clamp(15px,1.5vw,19px);line-height:1.6;font-weight:400;color:var(--mut);
@@ -184,7 +209,7 @@ body.ready .mask.d2>span{animation-delay:.27s}
 .btn{
   display:inline-flex;align-items:center;gap:12px;
   font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
-  padding:18px 30px;border:1px solid var(--line);border-radius:2px;
+  padding:18px 30px;border:1px solid var(--line);border-radius:0;
   transition:background .35s var(--ease),color .35s var(--ease),border-color .35s var(--ease),transform .3s var(--ease);
   will-change:transform;
 }
@@ -207,10 +232,10 @@ body.ready .mask.d2>span{animation-delay:.27s}
 .marquee-track{display:inline-flex;white-space:nowrap;animation:mq 34s linear infinite;will-change:transform}
 .marquee:hover .marquee-track{animation-play-state:paused}
 .marquee-track span{
-  font-weight:600;text-transform:uppercase;letter-spacing:-.02em;
-  font-size:clamp(1.4rem,3vw,2.4rem);color:transparent;-webkit-text-stroke:1px var(--mut);padding-right:.6em;
+  font-weight:400;letter-spacing:.02em;
+  font-size:clamp(1.1rem,2.4vw,1.8rem);color:var(--mut);padding-right:.6em;
 }
-.marquee-track span b{color:var(--acid);-webkit-text-stroke:0;font-weight:600}
+.marquee-track span b{color:var(--acid-text);font-weight:400}
 @keyframes mq{to{transform:translateX(-50%)}}
 
 /* ============ SECTIONS ============ */
@@ -225,16 +250,16 @@ section{position:relative;padding-block:clamp(88px,11vw,170px)}
 .shead .shint{color:var(--mut);text-align:right}
 .ghost{
   position:absolute;top:clamp(40px,6vw,90px);right:0;z-index:0;pointer-events:none;user-select:none;
-  font-weight:700;font-size:clamp(9rem,22vw,22rem);line-height:.8;letter-spacing:-.04em;
+  font-weight:700;font-size:clamp(7rem,18vw,17rem);line-height:.8;letter-spacing:-.03em;
   color:transparent;-webkit-text-stroke:1px var(--line);
 }
 .sec-body{position:relative;z-index:1}
 
 /* ============ MANIFESTO ============ */
 .manifesto-text{
-  max-width:1150px;
-  font-weight:500;letter-spacing:-.015em;line-height:1.28;
-  font-size:clamp(1.7rem,4.4vw,3.9rem);
+  max-width:1080px;
+  font-weight:400;letter-spacing:-.01em;line-height:1.42;
+  font-size:clamp(1.3rem,3.3vw,2.8rem);
 }
 .manifesto-text .w{opacity:.13;transition:opacity .35s ease}
 .manifesto-text .w.on{opacity:1}
@@ -259,8 +284,8 @@ section{position:relative;padding-block:clamp(88px,11vw,170px)}
 }
 .row:hover .rnum,.row:focus-visible .rnum{color:var(--acid-ink)}
 .rmain h3{
-  font-weight:600;text-transform:uppercase;letter-spacing:-.02em;line-height:1;
-  font-size:clamp(1.7rem,4.6vw,4rem);
+  font-weight:700;text-transform:uppercase;letter-spacing:-.01em;line-height:1.05;
+  font-size:clamp(1.35rem,3.4vw,2.9rem);
 }
 .rmain p{max-width:640px;margin-top:12px;font-size:clamp(13px,1.3vw,15px);line-height:1.6;font-weight:400;color:var(--mut);transition:color .45s}
 .row:hover .rmain p,.row:focus-visible .rmain p{color:rgba(10,10,10,.72)}
@@ -291,28 +316,6 @@ section{position:relative;padding-block:clamp(88px,11vw,170px)}
 .row.dim{opacity:.82}
 .row.dim:hover,.row.dim:focus-visible{opacity:1}
 
-/* ============ MOTION ============ */
-.curves{border-top:1px solid var(--line)}
-.curve{
-  display:grid;grid-template-columns:minmax(120px,220px) 1fr minmax(90px,150px);gap:clamp(14px,3vw,48px);
-  align-items:center;padding:clamp(22px,3vw,36px) 0;border-bottom:1px solid var(--line);
-}
-.curve-name{font-family:'JetBrains Mono',monospace;font-size:clamp(11px,1.2vw,13px);letter-spacing:.14em}
-.curve-name b{display:block;color:var(--mut);font-weight:400;margin-top:6px;font-size:10px}
-.curve svg{width:100%;height:auto;display:block;overflow:visible}
-.curve-path{fill:none;stroke:var(--line);stroke-width:1.5;stroke-dasharray:2 7}
-.curve-end{fill:none;stroke:var(--mut);stroke-width:1.5}
-.curve-dot{fill:var(--acid);filter:drop-shadow(0 0 7px var(--acid))}
-.curve-cap{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;color:var(--mut);text-transform:uppercase;text-align:right}
-.motion-note{
-  margin-top:clamp(28px,3.4vw,44px);max-width:520px;
-  font-size:clamp(13px,1.3vw,15px);line-height:1.65;color:var(--mut);font-weight:400;
-}
-@media(max-width:640px){
-  .curve{grid-template-columns:1fr;gap:10px}
-  .curve-cap{text-align:left}
-}
-
 /* ============ NUMBERS ============ */
 .nums-head{
   font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;
@@ -325,7 +328,7 @@ section{position:relative;padding-block:clamp(88px,11vw,170px)}
   transition:background .4s var(--ease),color .4s var(--ease);position:relative;
 }
 .num:hover{background:var(--acid);color:var(--acid-ink)}
-.num .v{font-weight:600;font-size:clamp(3.2rem,6.5vw,6rem);line-height:1;letter-spacing:-.03em}
+.num .v{font-weight:700;font-size:clamp(2.8rem,6vw,5.4rem);line-height:1;letter-spacing:-.02em}
 .num .l{margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mut);transition:color .4s}
 .num:hover .l{color:rgba(10,10,10,.65)}
 .num .live{
@@ -343,7 +346,7 @@ section{position:relative;padding-block:clamp(88px,11vw,170px)}
   padding:clamp(24px,3vw,40px) 0;border-bottom:1px solid var(--line);
 }
 .jera{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;color:var(--acid-text);text-transform:uppercase;padding-top:6px}
-.jrow h3{font-weight:600;text-transform:uppercase;letter-spacing:-.015em;font-size:clamp(1.3rem,2.6vw,2.1rem)}
+.jrow h3{font-weight:700;text-transform:uppercase;letter-spacing:-.01em;font-size:clamp(1.15rem,2.2vw,1.7rem)}
 .jrow p{margin-top:10px;max-width:620px;font-size:clamp(13px,1.3vw,15px);line-height:1.6;color:var(--mut);font-weight:400}
 
 /* ============ ARTIFACT ============ */
@@ -381,8 +384,8 @@ section{position:relative;padding-block:clamp(88px,11vw,170px)}
 
 /* ============ CONTACT ============ */
 .contact-h{
-  font-weight:600;text-transform:uppercase;letter-spacing:-.03em;line-height:.96;
-  font-size:clamp(2rem,9.4vw,8.6rem);
+  font-weight:700;text-transform:uppercase;letter-spacing:-.02em;line-height:1;
+  font-size:clamp(1.7rem,7.4vw,6.2rem);
 }
 .contact-h .ln{display:block}
 .contact-cta{display:flex;flex-wrap:wrap;gap:16px;margin-top:clamp(32px,4.4vw,60px)}
@@ -423,14 +426,14 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
 
 <!-- BOOT -->
 <div class="boot" id="boot" aria-hidden="true">
-  <div class="boot-top"><span>SHAWT.IM®</span><span>PORTFOLIO — 2026</span></div>
+  <div class="boot-top"><span>SHAWT.IM — TTY1</span><span>LOGIN: GUEST — 2026</span></div>
   <div class="boot-lines">
-    <span>&gt; HUMAN ........ <b>SHAWTIM — JUDGEMENT INCLUDED</b></span>
-    <span>&gt; TYPE ......... <b>CLASH DISPLAY</b></span>
-    <span>&gt; MOTION ....... <b>HAND-ROLLED</b></span>
-    <span>&gt; IMAGES ....... <b>0 SHIPPED</b></span>
-    <span>&gt; ACCENT ....... <b>1 — DISCIPLINE</b></span>
-    <span>&gt; CALIBRATION .. <b>60FPS — NON-NEGOTIABLE</b></span>
+    <span>shawt.im login: <b>guest</b></span>
+    <span>&gt; loading human ...... <b>SHAWTIM — JUDGEMENT INCLUDED</b></span>
+    <span>&gt; type ............. <b>MONO — ONE FAMILY</b></span>
+    <span>&gt; motion ........... <b>HAND-ROLLED</b></span>
+    <span>&gt; images ........... <b>0 SHIPPED</b></span>
+    <span>&gt; calibration ...... <b>60FPS — NON-NEGOTIABLE</b></span>
   </div>
   <div class="boot-count" id="bootCount">000</div>
 </div>
@@ -439,10 +442,11 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
 <div class="cursor-dot" id="cDot"></div>
 <div class="cursor-ring" id="cRing"></div>
 <div class="noise" aria-hidden="true"></div>
+<div class="scanlines" aria-hidden="true"></div>
 <div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
 
 <!-- SIDE LABELS -->
-<aside class="side left" aria-hidden="true">SHAWT.IM — SPECIMEN SHEET — ONE HTML FILE — NO FRAMEWORKS — 2026 ©</aside>
+<aside class="side left" aria-hidden="true">SHAWT.IM — GUEST SESSION — ONE HTML FILE — NO FRAMEWORKS — 2026 ©</aside>
 <aside class="side right" aria-hidden="true">SCROLL — <span id="scrollPct">000%</span></aside>
 
 <!-- NAV -->
@@ -453,7 +457,6 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
       <a href="#manifesto">MANIFESTO</a>
       <a href="#capabilities">CAPABILITIES</a>
       <a href="#proof">PROOF</a>
-      <a href="#motion">MOTION</a>
       <a href="#contact">CONTACT</a>
     </nav>
     <div class="nav-right">
@@ -470,16 +473,20 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
   <section class="hero" id="hero">
     <canvas id="grid" aria-hidden="true"></canvas>
     <div class="wrap hero-in" id="heroIn">
-      <p class="eyebrow">ShawTim — Senior Frontend / Full-Stack Engineer</p>
+      <p class="eyebrow">guest@shawt.im:~$ whoami</p>
       <h1 class="h1">
-        <span class="ln mask"><span>I BUILD</span></span>
-        <span class="ln mask d1"><span class="outline">INTERFACES</span></span>
-        <span class="ln mask d2"><span>THAT&nbsp;<span id="rot">SHIP.</span></span></span>
+        <span class="ln mask"><span>SHAWT<span class="dot">.</span>IM<span class="cursor" aria-hidden="true"></span></span></span>
       </h1>
+      <div class="spec">
+        <span>&gt; ROLE ......... <b>SENIOR FRONTEND / FULL-STACK</b></span>
+        <span>&gt; MODE ......... <b>SOLO — END TO END</b></span>
+        <span>&gt; STACK ........ <b>REACT · TS · NODE · AGENTS</b></span>
+        <span>&gt; PROOF ........ <a href="#proof">2 LIVE SYSTEMS — BELOW ↓</a></span>
+      </div>
       <p class="hero-sub">
-        I'm <b>ShawTim</b> — frontend architecture, <b>AI-native systems</b>, and the judgement
-        to ship them, end to end, solo when it counts. The proof is
-        <b>live, linked, and inspectable</b> — this page included.
+        Multi-agent sims and solo-built SaaS, shipped and running — the proof is
+        <b>live, linked, and inspectable</b>. This page included:
+        <b>one file, no frameworks, no images.</b>
       </p>
       <div class="hero-cta">
         <a href="#proof" class="btn btn-acid magnetic">Open the proof <span class="ar">↓</span></a>
@@ -607,7 +614,7 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
       <div class="shead"><span class="sidx">04 — Judgement in the Loop</span><span class="shint">Caught in review — fixed in writing</span></div>
       <p class="judge-intro">AI generates most of the code. The work that matters is <b>catching what it gets wrong — and knowing why.</b></p>
       <div class="artifact">
-        <div class="art-head"><span>werewolf/agent-loop.ts</span><span class="art-badge">Specimen 01</span></div>
+        <div class="art-head"><span>werewolf/agent-loop.ts</span><span class="art-badge">Review log #01</span></div>
         <div class="art-body">
           <p class="art-tag">// Agent generated — race condition</p>
           <pre>async function runNightCycle(agents) {
@@ -630,58 +637,11 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
     </div>
   </section>
 
-  <!-- 05 MOTION -->
-  <section id="motion">
+  <!-- 05 NUMBERS -->
+  <section id="numbers">
     <div class="ghost" aria-hidden="true">05</div>
     <div class="wrap sec-body">
-      <div class="shead"><span class="sidx">05 — Motion Study</span><span class="shint">Easing is a personality</span></div>
-      <div class="curves" id="curves">
-        <div class="curve" data-ease="expo">
-          <div class="curve-name">EXPO.OUT<b>1 − 2^(−10t)</b></div>
-          <svg viewBox="0 0 300 70" preserveAspectRatio="none" aria-hidden="true">
-            <path class="curve-path" d="M8 64 C 60 10, 130 6, 292 6"/>
-            <circle class="curve-end" cx="292" cy="6" r="4"/>
-            <circle class="curve-dot" r="5"/>
-          </svg>
-          <div class="curve-cap">The landing</div>
-        </div>
-        <div class="curve" data-ease="inout">
-          <div class="curve-name">POWER.INOUT<b>4t³ / mirror</b></div>
-          <svg viewBox="0 0 300 70" preserveAspectRatio="none" aria-hidden="true">
-            <path class="curve-path" d="M8 64 C 100 64, 200 6, 292 6"/>
-            <circle class="curve-end" cx="292" cy="6" r="4"/>
-            <circle class="curve-dot" r="5"/>
-          </svg>
-          <div class="curve-cap">The door</div>
-        </div>
-        <div class="curve" data-ease="steps">
-          <div class="curve-name">STEPS(6)<b>floor(6t) / 6</b></div>
-          <svg viewBox="0 0 300 70" preserveAspectRatio="none" aria-hidden="true">
-            <path class="curve-path" d="M8 64 h47.33 v-9.67 h47.33 v-9.67 h47.33 v-9.66 h47.33 v-9.67 h47.33 v-9.67 h47.34 v-9.66"/>
-            <circle class="curve-end" cx="292" cy="6" r="4"/>
-            <circle class="curve-dot" r="5"/>
-          </svg>
-          <div class="curve-cap">The machine</div>
-        </div>
-        <div class="curve" data-ease="spring">
-          <div class="curve-name">SPRING<b>1 − e^(−5.5t)·cos(7t)</b></div>
-          <svg viewBox="0 0 300 70" preserveAspectRatio="none" aria-hidden="true">
-            <path class="curve-path" d="M8 64 C 70 -16, 170 34, 292 6"/>
-            <circle class="curve-end" cx="292" cy="6" r="4"/>
-            <circle class="curve-dot" r="5"/>
-          </svg>
-          <div class="curve-cap">The handshake</div>
-        </div>
-      </div>
-      <p class="motion-note">Four curves, four personalities. Choose the personality before the property — then ship it at 60fps, on a mid-range phone, with reduced-motion respected.</p>
-    </div>
-  </section>
-
-  <!-- 06 NUMBERS -->
-  <section id="numbers">
-    <div class="ghost" aria-hidden="true">06</div>
-    <div class="wrap sec-body">
-      <div class="shead"><span class="sidx">06 — Numbers</span><span class="shint">Measured, not claimed</span></div>
+      <div class="shead"><span class="sidx">05 — Numbers</span><span class="shint">Measured, not claimed</span></div>
       <p class="nums-head">The human, measured</p>
       <div class="nums">
         <div class="num"><div class="v">06</div><div class="l">LLM agents — live in one sim</div></div>
@@ -701,11 +661,11 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
     </div>
   </section>
 
-  <!-- 07 JOURNEY -->
+  <!-- 06 JOURNEY -->
   <section id="journey">
-    <div class="ghost" aria-hidden="true">07</div>
+    <div class="ghost" aria-hidden="true">06</div>
     <div class="wrap sec-body">
-      <div class="shead"><span class="sidx">07 — The Road</span><span class="shint">History, compressed</span></div>
+      <div class="shead"><span class="sidx">06 — The Road</span><span class="shint">History, compressed</span></div>
       <div class="jrows">
         <div class="jrow">
           <span class="jera">Now</span>
@@ -732,11 +692,11 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
     </div>
   </section>
 
-  <!-- 08 CONTACT -->
+  <!-- 07 CONTACT -->
   <section id="contact">
-    <div class="ghost" aria-hidden="true">08</div>
+    <div class="ghost" aria-hidden="true">07</div>
     <div class="wrap sec-body">
-      <div class="shead"><span class="sidx">08 — Contact</span><span class="shint">No forms. Just email.</span></div>
+      <div class="shead"><span class="sidx">07 — Contact</span><span class="shint">No forms. Just email.</span></div>
       <h2 class="contact-h">
         <span class="ln">Got a system</span>
         <span class="ln outline">that needs</span>
@@ -769,6 +729,7 @@ footer{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px) 32px}
         <span>CONNECTION</span><b id="tConn">—</b>
         <span>REDUCED-MOTION</span><b id="tRm">—</b>
         <span>ACCENTS</span><b>1</b>
+        <span>MOTION</span><b>HAND-ROLLED</b>
         <span>THEME</span><b id="tTheme">DARK</b>
         <span>TIME</span><b id="tClock">—</b>
       </div>
@@ -932,46 +893,6 @@ function onScroll(){
 window.addEventListener('scroll', onScroll, { passive:true });
 onScroll();
 
-/* ============ SCRAMBLE ROTATOR ============ */
-var rotEl = $('#rot');
-var WORDS = ['SHIP.', 'THINK.', 'RENDER.', 'SCALE.', 'BEHAVE.'];
-if (rotEl && !reduceMotion) {
-  var CHARS = '!<>-_\\/[]{}=+*^?#';
-  var queue = [], raf = null, frame = 0, resolveFn = null;
-  function setText(next){
-    var old = rotEl.textContent;
-    var len = Math.max(old.length, next.length);
-    queue = [];
-    for (var i = 0; i < len; i++) {
-      var start = Math.floor(Math.random() * 18);
-      queue.push({ from: old[i] || '', to: next[i] || '', start: start, end: start + 4 + Math.floor(Math.random() * 18), char: '' });
-    }
-    frame = 0;
-    if (raf) cancelAnimationFrame(raf);
-    step();
-  }
-  function step(){
-    var out = '', done = 0;
-    for (var i = 0; i < queue.length; i++) {
-      var q = queue[i];
-      if (frame >= q.end) { done++; out += q.to; }
-      else if (frame >= q.start) {
-        if (!q.char || Math.random() < 0.28) q.char = CHARS[Math.floor(Math.random() * CHARS.length)];
-        out += q.char;
-      } else out += q.from;
-    }
-    rotEl.textContent = out;
-    if (done === queue.length) { raf = null; return; }
-    frame++;
-    raf = requestAnimationFrame(step);
-  }
-  var wi = 0;
-  setInterval(function(){
-    wi = (wi + 1) % WORDS.length;
-    if (!raf) setText(WORDS[wi]);
-  }, 2400);
-}
-
 /* ============ CUSTOM CURSOR ============ */
 if (finePointer && !reduceMotion) {
   document.body.classList.add('cursor-on');
@@ -1025,7 +946,7 @@ if (cv && hero) {
       for (var x = GAP / 2; x < W; x += GAP)
         pts.push({ ox:x, oy:y, x:x, y:y, vx:0, vy:0 });
   }
-  function inkDots(){ return document.body.dataset.theme === 'light' ? 'rgba(0,0,0,0.13)' : 'rgba(255,255,255,0.11)'; }
+  function inkDots(){ return document.body.dataset.theme === 'light' ? 'rgba(11,77,40,0.14)' : 'rgba(51,255,136,0.10)'; }
   function drawStatic(){
     ctx.clearRect(0, 0, W, H);
     ctx.fillStyle = inkDots();
@@ -1053,7 +974,7 @@ if (cv && hero) {
       var pd = Math.sqrt((p.x - pmx) * (p.x - pmx) + (p.y - pmy) * (p.y - pmy));
       if (pd < R) {
         var a = (1 - pd / R);
-        ctx.fillStyle = 'rgba(216,255,58,' + (a * 0.85).toFixed(3) + ')';
+        ctx.fillStyle = 'rgba(51,255,136,' + (a * 0.85).toFixed(3) + ')';
         ctx.fillRect(p.x - 1, p.y - 1, 2.4, 2.4);
       } else {
         ctx.fillStyle = base;
@@ -1083,54 +1004,6 @@ if (cv && hero) {
     rsT = setTimeout(function(){ buildGrid(); if (reduceMotion) drawStatic(); }, 180);
   });
   document.addEventListener('themechange', function(){ if (reduceMotion) drawStatic(); });
-}
-
-/* ============ EASING CURVES ============ */
-var EASE = {
-  expo:   function(t){ return t >= 1 ? 1 : 1 - Math.pow(2, -10 * t); },
-  inout:  function(t){ return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; },
-  steps:  function(t){ return Math.min(1, Math.floor(t * 6) / 6); },
-  spring: function(t){ return clamp(1 - Math.exp(-5.5 * t) * Math.cos(7 * t), 0, 1); }
-};
-var curvesWrap = $('#curves');
-if (curvesWrap) {
-  var curves = $$('.curve', curvesWrap).map(function(el, i){
-    var path = $('.curve-path', el), dotEl = $('.curve-dot', el);
-    var len = 0;
-    try { len = path.getTotalLength(); } catch(e){}
-    return { path:path, dot:dotEl, len:len, fn:EASE[el.dataset.ease] || EASE.expo, off:i * 0.23 };
-  });
-  var curvesVisible = false, curvesRaf = null, cStart = null;
-  var CDUR = 2600;
-  function curvesLoop(ts){
-    curvesRaf = null;
-    if (!curvesVisible) return;
-    if (cStart === null) cStart = ts;
-    var tGlobal = (ts - cStart) / CDUR;
-    curves.forEach(function(c){
-      if (!c.len) { try { c.len = c.path.getTotalLength(); } catch(e){} if (!c.len) return; }
-      var t = (tGlobal + c.off) % 1;
-      var e = c.fn(t);
-      var pt = c.path.getPointAtLength(e * c.len);
-      c.dot.setAttribute('transform', 'translate(' + pt.x + ' ' + pt.y + ')');
-    });
-    curvesRaf = requestAnimationFrame(curvesLoop);
-  }
-  function parkDots(){
-    curves.forEach(function(c){
-      if (!c.len) { try { c.len = c.path.getTotalLength(); } catch(e){} }
-      if (!c.len) return;
-      var pt = c.path.getPointAtLength(c.len);
-      c.dot.setAttribute('transform', 'translate(' + pt.x + ' ' + pt.y + ')');
-    });
-  }
-  if (reduceMotion) { parkDots(); }
-  else {
-    new IntersectionObserver(function(en){
-      curvesVisible = en[0].isIntersecting;
-      if (curvesVisible && !curvesRaf) { cStart = null; curvesRaf = requestAnimationFrame(curvesLoop); }
-    }, { threshold: 0.1 }).observe(curvesWrap);
-  }
 }
 
 /* ============ INSTRUMENTS: VIEWPORT / CONNECTION / RM ============ */
