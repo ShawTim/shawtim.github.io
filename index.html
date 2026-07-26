@@ -328,6 +328,138 @@
             to { transform: translateY(0); }
         }
 
+        /* reveal-3d perspective projections can exceed viewport width (scrollable
+           overflow on mobile). clip (not hidden): blocks all h-scroll, keeps sticky. */
+        body{overflow-x:clip}
+
+        /* ============ SHOWROOM MODE — same DOM, different CSS ============ */
+        /* Skin segmented control (self-documenting: both states named) */
+        .skinseg{display:inline-flex;align-items:stretch;border:1px solid rgba(6,182,212,.35);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em}
+        .skinseg-label{display:none;align-items:center;padding:0 8px;color:#64748b;border-right:1px solid rgba(6,182,212,.2)}
+        @media(min-width:640px){.skinseg-label{display:inline-flex}}
+        .skinseg button{padding:6px 10px;background:transparent;border:0;cursor:pointer;font:inherit;letter-spacing:inherit;color:#22d3ee;transition:background .25s,color .25s}
+        .skinseg button[aria-pressed="true"]{background:rgba(6,182,212,.16);color:#a5f3fc}
+        .skinseg button:hover{background:rgba(6,182,212,.1)}
+        @keyframes segPulse{0%,100%{box-shadow:0 0 0 rgba(6,182,212,0)}50%{box-shadow:0 0 20px rgba(6,182,212,.55)}}
+        @keyframes segPulseSr{0%,100%{box-shadow:0 0 0 rgba(51,255,136,0)}50%{box-shadow:0 0 20px rgba(51,255,136,.55)}}
+        .skinseg.hint{animation:segPulse 1.6s ease-in-out 3}
+        body.showroom .skinseg{border-color:rgba(51,255,136,.4)}
+        body.showroom .skinseg-label{border-color:rgba(51,255,136,.2);color:#5f7267}
+        body.showroom .skinseg button{color:#33ff88}
+        body.showroom .skinseg button[aria-pressed="true"]{background:rgba(51,255,136,.16);color:#b9ffd9}
+        body.showroom .skinseg button:hover{background:rgba(51,255,136,.1)}
+        body.showroom .skinseg.hint{animation-name:segPulseSr}
+
+        /* Hero skin command entry — a second, self-explanatory door */
+        .hero-skin-cmd{margin-top:28px;background:none;border:0;padding:0;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:#6b7280;transition:color .25s}
+        .hero-skin-cmd:hover{color:#22d3ee}
+        .hero-skin-cmd .type-caret{height:.95em}
+        body.showroom .hero-skin-cmd{color:#5f7267}
+        body.showroom .hero-skin-cmd:hover{color:#33ff88}
+
+        /* Bottom status bar (showroom skin chrome) */
+        #srStatus{position:fixed;left:0;right:0;bottom:0;z-index:80;display:none;align-items:center;justify-content:space-between;gap:16px;padding:6px 14px;background:#060706;border-top:1px solid rgba(51,255,136,.22);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:#5f7267;white-space:nowrap}
+        #srStatus .sr-st-l{overflow:hidden;text-overflow:ellipsis}
+        #srStatus .sr-st-r{color:#33ff88;flex:none}
+        body.showroom #srStatus{display:flex}
+        body.showroom{padding-bottom:30px}
+
+        /* Console chrome overlays */
+        .sr-noise,.sr-scan{position:fixed;inset:0;pointer-events:none;display:none;z-index:90}
+        .sr-noise{opacity:.04;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}
+        .sr-scan{opacity:.3;background:repeating-linear-gradient(to bottom,transparent 0 2px,rgba(0,0,0,.18) 2px 3px)}
+        body.showroom .sr-noise,body.showroom .sr-scan{display:block}
+
+        /* Mode transition overlay */
+        #modeSwap{position:fixed;inset:0;z-index:200;background:#060706;color:#33ff88;font-family:'JetBrains Mono',monospace;font-size:clamp(14px,2.4vw,20px);letter-spacing:.06em;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .28s ease}
+        #modeSwap.on{opacity:1;pointer-events:auto}
+        #modeSwap .type-caret{background:#33ff88;height:1.1em}
+
+        /* Console skin */
+        body.showroom{background-color:#060706;background-image:none;animation:none;color:#c9e4cf}
+        body.showroom::selection{background:#33ff88;color:#041007}
+        body.showroom,body.showroom *{font-family:'JetBrains Mono',monospace !important}
+        body.showroom *,body.showroom *::before,body.showroom *::after{border-radius:0 !important}
+        body.showroom .bg-cyber-card{background-color:#0a0d0b !important}
+        body.showroom .bg-black\/30{background-color:rgba(6,7,6,.4) !important}
+        body.showroom .bg-black\/40{background-color:rgba(6,7,6,.6) !important}
+        body.showroom .bg-black\/60{background-color:rgba(6,7,6,.85) !important}
+        body.showroom .bg-black\/80{background-color:rgba(6,7,6,.88) !important}
+        body.showroom .bg-black\/90{background-color:rgba(6,7,6,.92) !important}
+        body.showroom .hover\:bg-gray-800:hover{background-color:#0f1411 !important}
+        body.showroom .text-gray-100,body.showroom .text-gray-200,body.showroom .text-gray-300{color:#c9e4cf !important}
+        body.showroom .text-gray-400{color:#8fae97 !important}
+        body.showroom .text-gray-500,body.showroom .text-gray-600,body.showroom .text-gray-700{color:#5f7267 !important}
+        body.showroom .text-cyan-400,body.showroom .text-cyan-500,
+        body.showroom .text-fuchsia-400,body.showroom .text-fuchsia-500,body.showroom .text-fuchsia-600,
+        body.showroom .text-emerald-400,body.showroom .text-emerald-500,
+        body.showroom .text-purple-400{color:#33ff88 !important}
+        body.showroom .bg-cyan-400,body.showroom .bg-fuchsia-500,body.showroom .bg-emerald-400{background-color:#33ff88 !important}
+        body.showroom .border-gray-800,body.showroom .border-gray-900{border-color:rgba(51,255,136,.14) !important}
+        body.showroom .border-cyan-500\/30,body.showroom .border-cyan-500\/40,
+        body.showroom .border-emerald-500\/30,body.showroom .border-emerald-500\/40,
+        body.showroom .border-fuchsia-500\/30,body.showroom .border-fuchsia-500\/40{border-color:rgba(51,255,136,.32) !important}
+        body.showroom .hover\:border-cyan-500\/40:hover,body.showroom .hover\:border-emerald-500\/40:hover,body.showroom .hover\:border-fuchsia-500\/40:hover{border-color:rgba(51,255,136,.6) !important}
+        body.showroom .bg-cyan-500\/5,body.showroom .bg-cyan-500\/10,body.showroom .bg-emerald-500\/10,body.showroom .bg-fuchsia-500\/10{background-color:rgba(51,255,136,.08) !important}
+        body.showroom .hover\:bg-cyan-500\/20:hover,body.showroom .hover\:bg-emerald-500\/20:hover,body.showroom .hover\:bg-fuchsia-500\/20:hover{background-color:rgba(51,255,136,.16) !important}
+        body.showroom .text-transparent{color:#33ff88 !important;background-image:none !important;-webkit-text-fill-color:#33ff88 !important}
+        body.showroom .shimmer-btn{background-image:none !important;background-color:#33ff88 !important;color:#041007 !important;text-shadow:none !important;box-shadow:none !important}
+        body.showroom .shimmer-btn::after{content:none}
+        body.showroom .text-glow{text-shadow:0 0 10px rgba(51,255,136,.45);animation:none}
+        body.showroom .border-glow:hover{box-shadow:0 0 24px rgba(51,255,136,.22);border-color:rgba(51,255,136,.55);transform:translateY(-4px)}
+        body.showroom [class*="shadow"]{box-shadow:0 0 18px rgba(51,255,136,.14) !important}
+        body.showroom .glitch::before{color:#33ff88}
+        body.showroom .glitch::after{color:#0ba14b}
+        body.showroom .tilt-card::before{background:radial-gradient(circle 280px at var(--mx,50%) var(--my,50%),rgba(51,255,136,.10),transparent 60%)}
+        body.showroom .tilt-card::after{content:none}
+        body.showroom .hero-logo-ring{background:conic-gradient(from 0deg,#33ff88,rgba(51,255,136,.12),#33ff88);box-shadow:0 0 26px rgba(51,255,136,.3)}
+        body.showroom .hero-logo-ring::after{background:#060706}
+        body.showroom div:has(> picture > #heroImage){display:none}
+        body.showroom .type-caret{background:#33ff88}
+        body.showroom .marquee-track{color:#5f7267}
+        body.showroom #scrollProgress{background:#33ff88;background-image:none;box-shadow:0 0 10px rgba(51,255,136,.55) !important}
+        body.showroom .from-cyber-card{--tw-gradient-from:#0a0d0b !important}
+        body.showroom .border-gray-800\/40,body.showroom .border-gray-800\/60{border-color:rgba(51,255,136,.14) !important}
+        body.showroom .hover\:border-gray-700:hover{border-color:rgba(51,255,136,.4) !important}
+
+        /* --- deep skin: console document, not a recolor --- */
+        /* header: no glass, no gradient ring */
+        body.showroom header{backdrop-filter:none;background-color:#060706}
+        body.showroom header .bg-gradient-to-tr{background:none !important}
+        body.showroom .backdrop-blur-md{backdrop-filter:none}
+        body.showroom .hover\:text-cyan-400:hover{color:#33ff88 !important}
+
+        /* terminal prompts on every section eyebrow; display headings as log headers */
+        body.showroom .tracking-widest::before{content:"> "}
+        body.showroom p.text-3xl::before{content:"## ";color:#5f7267}
+
+        /* left-aligned document rhythm */
+        body.showroom section.justify-center{justify-content:flex-start}
+        body.showroom section .justify-center{justify-content:flex-start}
+        body.showroom .mb-16.text-center,
+        body.showroom #contact .text-center,
+        body.showroom section.relative .text-center,
+        body.showroom .mt-8.text-center{text-align:left}
+        body.showroom #heroType,
+        body.showroom section.relative .max-w-2xl.mx-auto{margin-left:0}
+
+        /* whoami hero: no floating logo, giant mono h1, block cursor, typed line gets a prompt */
+        body.showroom section.relative .hero-logo-wrap{display:none}
+        body.showroom h1.text-4xl{font-size:clamp(2.5rem,7.5vw,5rem);font-weight:700;letter-spacing:-.02em;line-height:1.08}
+        body.showroom h1 .mask-inner.delay::after{content:"";display:inline-block;width:.55em;height:.95em;margin-left:.1em;background:#33ff88;vertical-align:-.08em;animation:caretBlink 1s steps(1) infinite}
+        body.showroom #heroType::before{content:"> ";color:#5f7267}
+
+        /* console panels: flat, no tilt, bracketed status tags */
+        body.showroom .tilt-card{transform:none !important;border-color:rgba(51,255,136,.18) !important}
+        body.showroom .tilt-card:hover{border-color:rgba(51,255,136,.5) !important}
+        body.showroom .tilt-card .justify-between > span:first-child::before{content:"[ "}
+        body.showroom .tilt-card .justify-between > span:first-child::after{content:" ]"}
+
+        /* command-style primary buttons */
+        body.showroom .shimmer-btn{text-transform:uppercase;letter-spacing:.08em}
+
+        @media (prefers-reduced-motion: reduce){.sr-scan{display:none !important}}
+
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto !important; }
             *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -336,6 +468,12 @@
 </head>
 <body class="text-gray-100 min-h-screen selection:bg-cyan-500 selection:text-black">
     <div id="scrollProgress" class="fixed top-0 left-0 h-[3px] z-[60] bg-gradient-to-r from-fuchsia-500 via-purple-500 to-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.6)]" style="width:0%"></div>
+
+    <!-- Showroom chrome (inert unless showroom mode) -->
+    <div class="sr-noise" aria-hidden="true"></div>
+    <div class="sr-scan" aria-hidden="true"></div>
+    <div id="modeSwap" aria-hidden="true"><span class="mr-2">&gt;</span><span id="modeSwapText"></span><span class="type-caret"></span></div>
+    <div id="srStatus" aria-hidden="true"><span class="sr-st-l">&gt; MODE: SHOWROOM — SAME DOM, DIFFERENT CSS</span><span class="sr-st-r"><span id="srStatusTime">--:--:--</span> · SKIN: CONSOLE</span></div>
 
     <!-- Header / Nav -->
     <header class="border-b border-gray-800 bg-black/60 backdrop-blur-md sticky top-0 z-50">
@@ -354,6 +492,11 @@
                 <a href="#contact" class="hover:text-cyan-400 transition-colors">Contact</a>
             </nav>
             <div class="flex items-center gap-3">
+                <div id="skinSeg" class="skinseg" role="group" aria-label="Page skin — same content, different CSS">
+                    <span class="skinseg-label">SKIN</span>
+                    <button type="button" data-skin="portfolio" aria-pressed="true">IDENTITY</button>
+                    <button type="button" data-skin="showroom" aria-pressed="false" title="Showroom — same content, console CSS">SHOWROOM</button>
+                </div>
                 <span class="hidden md:inline-flex items-center px-4 py-2 border border-cyan-500/30 rounded-full text-xs font-mono text-cyan-400 bg-cyan-500/5">
                     <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse mr-2 floating-dot"></span>
                     Frontend · Full-Stack · AI
@@ -396,7 +539,7 @@
                 <div class="hero-logo-ring"></div>
                 <img src="./img/logo-256.webp" alt="Logo" class="hero-logo-img">
             </div>
-            <p class="text-xs font-mono uppercase tracking-widest text-cyan-400 mb-4">// SENIOR FRONTEND / FULL-STACK ENGINEER</p>
+            <p class="text-xs font-mono uppercase tracking-widest text-cyan-400 mb-4">// ENGINEER OF RECORD</p>
             <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-6">
                 <span class="block text-gray-300 mask-line"><span class="mask-inner">Turning Complex Systems Into</span></span>
                 <span class="block mt-2 mask-line">
@@ -415,6 +558,7 @@
                     Read engineering notes &gt;
                 </a>
             </div>
+            <button type="button" id="heroSkinCmd" class="hero-skin-cmd" title="Same page, different skin — pure CSS">&gt; ./shawtim --skin console<span class="type-caret" aria-hidden="true"></span></button>
         </div>
     </section>
 
@@ -886,6 +1030,54 @@
                     if (last) lcpEl.textContent = Math.round(last.startTime) + ' ms';
                 }).observe({ type: 'largest-contentful-paint', buffered: true });
             }
+        })();
+
+        // Showroom mode — same DOM, different CSS. The toggle IS the demo.
+        (function () {
+            var seg = document.getElementById('skinSeg');
+            var segBtns = seg ? Array.prototype.slice.call(seg.querySelectorAll('button[data-skin]')) : [];
+            var heroCmd = document.getElementById('heroSkinCmd');
+            var swap = document.getElementById('modeSwap');
+            var swapText = document.getElementById('modeSwapText');
+            var statusTime = document.getElementById('srStatusTime');
+            var KEY = 'ui-mode';
+            function saveMode(v){ try { localStorage.setItem(KEY, v); } catch(e){} }
+            function readMode(){ try { return localStorage.getItem(KEY); } catch(e){ return null; } }
+            function setMode(on){
+                document.body.classList.toggle('showroom', on);
+                segBtns.forEach(function (b) {
+                    b.setAttribute('aria-pressed', String((b.getAttribute('data-skin') === 'showroom') === on));
+                });
+                if (heroCmd) heroCmd.innerHTML = '&gt; ' + (on ? './shawtim --skin identity' : './shawtim --skin console') + '<span class="type-caret" aria-hidden="true"></span>';
+                saveMode(on ? 'showroom' : 'portfolio');
+            }
+            function typeSwap(on){
+                if (seg) seg.classList.remove('hint');
+                if (!swap || !swapText || prefersReducedMotion) { setMode(on); return; }
+                var line = on ? './showroom --style-only --same-content' : './portfolio --identity';
+                swap.classList.add('on');
+                swapText.textContent = '';
+                var i = 0;
+                var t = setInterval(function(){
+                    swapText.textContent = line.slice(0, ++i);
+                    if (i >= line.length) {
+                        clearInterval(t);
+                        setTimeout(function(){
+                            setMode(on);
+                            setTimeout(function(){ swap.classList.remove('on'); }, 280);
+                        }, 420);
+                    }
+                }, 16);
+            }
+            segBtns.forEach(function (b) {
+                b.addEventListener('click', function(){ typeSwap(b.getAttribute('data-skin') === 'showroom'); });
+            });
+            if (heroCmd) heroCmd.addEventListener('click', function(){ typeSwap(!document.body.classList.contains('showroom')); });
+            // First visit: pulse the control so people notice it (3 cycles, then stops)
+            if (seg && readMode() === null) seg.classList.add('hint');
+            // Status-bar clock (skin chrome)
+            if (statusTime) setInterval(function(){ statusTime.textContent = new Date().toTimeString().slice(0, 8); }, 1000);
+            if (readMode() === 'showroom') setMode(true);
         })();
     </script>
 </body>
