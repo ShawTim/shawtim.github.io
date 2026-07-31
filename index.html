@@ -479,8 +479,9 @@
         html.showroom section.relative > div:first-child{display:none} /* identity bg grid */
         html.showroom div:has(> picture > #heroImage){display:none}
         html.showroom section.relative .hero-logo-wrap{display:none}
-        html.showroom section.relative .max-w-5xl{margin-left:0;text-align:left}
-        @media(min-width:901px){html.showroom section.relative .max-w-5xl{padding-left:52px}}
+        html.showroom section.relative .max-w-5xl{max-width:80rem;text-align:left}
+        @media(min-width:640px){html.showroom section.relative .max-w-5xl{padding-left:1.5rem;padding-right:1.5rem}}
+        @media(min-width:1024px){html.showroom section.relative .max-w-5xl{padding-left:2rem;padding-right:2rem}}
         html.showroom section.relative .tracking-widest.mb-4{font-size:0;letter-spacing:0;margin-bottom:clamp(20px,2.6vw,34px)}
         html.showroom section.relative .tracking-widest.mb-4::before{content:none}
         html.showroom section.relative .tracking-widest.mb-4::after{content:"guest@shawt.im:~$ whoami";font-size:clamp(11px,1.2vw,13px);letter-spacing:.06em;color:var(--sr-mut);text-transform:none}
@@ -550,7 +551,10 @@
 
         /* --- contact / footer --- */
         html.showroom #contact .text-center{text-align:left}
-        html.showroom #contact .max-w-3xl{margin-left:0}
+        html.showroom #contact .max-w-3xl{max-width:80rem}
+        @media(min-width:640px){html.showroom #contact .max-w-3xl{padding-left:1.5rem;padding-right:1.5rem}}
+        @media(min-width:1024px){html.showroom #contact .max-w-3xl{padding-left:2rem;padding-right:2rem}}
+        html.showroom #contact .justify-center{justify-content:flex-start}
         html.showroom #contact p.text-gray-400::before{content:"> ";color:var(--sr-mut)}
         html.showroom #telemetry > :nth-child(odd)::before{content:"> ";color:var(--sr-mut)}
         html.showroom footer span.font-mono.font-bold::after{content:"®";font-size:.55em;vertical-align:super;color:var(--sr-acid);margin-left:1px}
